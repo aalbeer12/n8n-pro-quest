@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
 import { useNavigate } from 'react-router-dom'
+import { useAuthNotifications } from './use-auth-notifications'
 
 interface AuthContextType {
   user: User | null
@@ -18,14 +19,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const { sendWelcomeEmail } = useAuthNotifications()
 
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         setSession(session)
         setUser(session?.user ?? null)
         setLoading(false)
+        
+        // Send welcome email for new signups  
+        if (event === 'SIGNED_IN' && session?.user?.email) {
+          // Check if this is a new user by checking if they have a profile
+          setTimeout(async () => {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('id')
+              .eq('id', session.user.id)
+              .single();
+            
+            if (!profile) {
+              sendWelcomeEmail(session.user.email!);
+            }
+          }, 1000);
+        }
         
         // Handle redirect after successful authentication
         if (event === 'SIGNED_IN' && session) {
