@@ -47,7 +47,7 @@ const categoryLabels = {
   'optimization': 'Optimización'
 }
 
-export const TodayChhallengeSection = ({ challenge, submission, loading }: TodayChallengeSectionProps) => {
+export const TodayChallenge = ({ challenge, submission, loading }: TodayChallengeSectionProps) => {
   if (loading) {
     return (
       <Card className="p-8 bg-surface/50 backdrop-blur-sm border-border">

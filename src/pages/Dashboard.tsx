@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 
 // Dashboard components
-import { TodayChhallengeSection } from '@/components/dashboard/today-challenge-section'
+import { TodayChallenge } from '@/components/dashboard/today-challenge-section'
 import { StreakSection } from '@/components/dashboard/streak-section'
 import { StatsGrid } from '@/components/dashboard/stats-grid'
 import { RecentActivity } from '@/components/dashboard/recent-activity'
@@ -140,7 +140,7 @@ const Dashboard = () => {
           {/* Center - Main Challenge + Stats */}
           <div className="lg:col-span-6 space-y-8 order-1 lg:order-2">
             {/* Today's Challenge */}
-            <TodayChhallengeSection
+            <TodayChallenge
               challenge={todayChallenge}
               submission={todaySubmission}
               loading={loading}

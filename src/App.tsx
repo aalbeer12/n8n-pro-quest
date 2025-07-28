@@ -10,6 +10,8 @@ import AuthCallback from "./pages/AuthCallback";
 import AuthWelcome from "./pages/AuthWelcome";
 import Dashboard from "./pages/Dashboard";
 import Challenges from "./pages/Challenges";
+import ChallengePage from "./pages/ChallengePage";
+import ChallengeResult from "./pages/ChallengeResult";
 import Leaderboard from "./pages/Leaderboard";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/auth/welcome" element={<AuthWelcome />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/challenges" element={<Challenges />} />
+            <Route path="/challenge/:slug" element={<ChallengePage />} />
+            <Route path="/challenge/:slug/result" element={<ChallengeResult />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
