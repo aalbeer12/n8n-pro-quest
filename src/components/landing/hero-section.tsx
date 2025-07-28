@@ -1,15 +1,34 @@
 "use client";
 
+import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Play, Zap, Bot, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LanguageSwitcher } from '@/components/ui/language-switcher';
 
 export const HeroSection = () => {
+  const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Navigation */}
+      <nav className="absolute top-0 left-0 right-0 z-20 p-6">
+        <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center space-x-2">
+            <Zap className="w-8 h-8 text-white" />
+            <span className="text-xl font-bold text-white">AutomationChallenge</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Link to="/auth">{t('nav.signIn')}</Link>
+            </Button>
+          </div>
+        </div>
+      </nav>
+
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-primary" />
       
@@ -85,15 +104,12 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg">
-            Master{" "}
-            <span className="gradient-text">n8n Automation</span>{" "}
-            Through Practice
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg text-white">
+            {t('landing.hero.title')}
           </h1>
           
-          <p className="text-xl md:text-2xl text-foreground-secondary mb-8 max-w-2xl mx-auto leading-relaxed">
-            Daily challenges, AI-powered feedback, and a community of automation experts.
-            Level up your skills with gamified learning.
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+            {t('landing.hero.subtitle')}
           </p>
 
           {/* Social proof */}
@@ -128,7 +144,7 @@ export const HeroSection = () => {
           >
             <Button asChild className="h-12 px-8 bg-gradient-primary hover:scale-105 transition-transform">
               <Link to="/auth">
-                Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
+                {t('landing.hero.cta')} <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
           </motion.div>
@@ -148,9 +164,11 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Button variant="outline" className="glass border-white/20 hover:bg-white/10">
-              <Play className="w-4 h-4 mr-2" />
-              Watch Demo
+            <Button asChild variant="outline" className="glass border-white/20 hover:bg-white/10 text-white">
+              <Link to="/challenges">
+                <Play className="w-4 h-4 mr-2" />
+                {t('landing.hero.demo')}
+              </Link>
             </Button>
           </motion.div>
         </motion.div>
