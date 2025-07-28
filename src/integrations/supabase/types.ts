@@ -125,11 +125,15 @@ export type Database = {
           id: string
           is_public: boolean | null
           last_activity_date: string | null
+          last_weekly_reset: string | null
           linkedin_url: string | null
           longest_streak: number | null
+          subscription_end: string | null
+          subscription_tier: string | null
           updated_at: string | null
           username: string
           website_url: string | null
+          weekly_free_challenges_used: number | null
           xp_total: number | null
         }
         Insert: {
@@ -143,11 +147,15 @@ export type Database = {
           id: string
           is_public?: boolean | null
           last_activity_date?: string | null
+          last_weekly_reset?: string | null
           linkedin_url?: string | null
           longest_streak?: number | null
+          subscription_end?: string | null
+          subscription_tier?: string | null
           updated_at?: string | null
           username: string
           website_url?: string | null
+          weekly_free_challenges_used?: number | null
           xp_total?: number | null
         }
         Update: {
@@ -161,11 +169,15 @@ export type Database = {
           id?: string
           is_public?: boolean | null
           last_activity_date?: string | null
+          last_weekly_reset?: string | null
           linkedin_url?: string | null
           longest_streak?: number | null
+          subscription_end?: string | null
+          subscription_tier?: string | null
           updated_at?: string | null
           username?: string
           website_url?: string | null
+          weekly_free_challenges_used?: number | null
           xp_total?: number | null
         }
         Relationships: []
@@ -247,8 +259,10 @@ export type Database = {
           attempt_number: number | null
           challenge_id: string | null
           created_at: string | null
+          difficulty_level: string | null
           evaluated_at: string | null
           id: string
+          points_earned: number | null
           score: number | null
           score_breakdown: Json | null
           status: string | null
@@ -262,8 +276,10 @@ export type Database = {
           attempt_number?: number | null
           challenge_id?: string | null
           created_at?: string | null
+          difficulty_level?: string | null
           evaluated_at?: string | null
           id?: string
+          points_earned?: number | null
           score?: number | null
           score_breakdown?: Json | null
           status?: string | null
@@ -277,8 +293,10 @@ export type Database = {
           attempt_number?: number | null
           challenge_id?: string | null
           created_at?: string | null
+          difficulty_level?: string | null
           evaluated_at?: string | null
           id?: string
+          points_earned?: number | null
           score?: number | null
           score_breakdown?: Json | null
           status?: string | null
@@ -297,6 +315,50 @@ export type Database = {
           },
           {
             foreignKeyName: "submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          stripe_customer_id: string | null
+          subscribed: boolean
+          subscription_end: string | null
+          subscription_tier: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          stripe_customer_id?: string | null
+          subscribed?: boolean
+          subscription_end?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          stripe_customer_id?: string | null
+          subscribed?: boolean
+          subscription_end?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscribers_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -337,12 +399,56 @@ export type Database = {
           },
         ]
       }
+      user_stats: {
+        Row: {
+          average_score_last_7: number | null
+          created_at: string
+          current_difficulty: string | null
+          rank_position: number | null
+          total_challenges_completed: number | null
+          total_points: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          average_score_last_7?: number | null
+          created_at?: string
+          current_difficulty?: string | null
+          rank_position?: number | null
+          total_challenges_completed?: number | null
+          total_points?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          average_score_last_7?: number | null
+          created_at?: string
+          current_difficulty?: string | null
+          rank_position?: number | null
+          total_challenges_completed?: number | null
+          total_points?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_stats_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      reset_weekly_challenges: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
