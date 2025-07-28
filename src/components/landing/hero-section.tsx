@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
 
 export const HeroSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -23,7 +23,7 @@ export const HeroSection = () => {
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-              <Link to="/auth">{t('nav.signIn')}</Link>
+              <Link to={`/auth?lang=${i18n.language}`}>{t('nav.signIn')}</Link>
             </Button>
           </div>
         </div>
@@ -143,7 +143,7 @@ export const HeroSection = () => {
             className="mb-6"
           >
             <Button asChild className="h-12 px-8 bg-gradient-primary hover:scale-105 transition-transform">
-              <Link to="/auth">
+              <Link to={`/auth?lang=${i18n.language}`}>
                 {t('landing.hero.cta')} <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>

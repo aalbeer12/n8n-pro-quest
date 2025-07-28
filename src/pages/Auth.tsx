@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/use-auth'
 import { useToast } from '@/hooks/use-toast'
 import { Loader2, Mail, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
@@ -15,6 +16,16 @@ const Auth = () => {
   const [emailSent, setEmailSent] = useState(false)
   const { signIn } = useAuth()
   const { toast } = useToast()
+  const { t, i18n } = useTranslation()
+
+  // Set language from URL parameter on mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const langParam = urlParams.get('lang')
+    if (langParam && (langParam === 'en' || langParam === 'es')) {
+      i18n.changeLanguage(langParam)
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,21 +38,21 @@ const Auth = () => {
       
       if (error) {
         toast({
-          title: "Error",
+          title: t('common.error'),
           description: error.message,
           variant: "destructive"
         })
       } else {
         setEmailSent(true)
         toast({
-          title: "Magic link sent!",
-          description: "Check your email for the login link.",
+          title: "¡Enlace mágico enviado!",
+          description: t('auth.checkEmailDesc'),
         })
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        title: t('common.error'),
+        description: "Algo salió mal. Por favor, inténtalo de nuevo.",
         variant: "destructive"
       })
     } finally {
@@ -64,15 +75,15 @@ const Auth = () => {
               </div>
               
               <div className="space-y-2">
-                <h1 className="text-2xl font-bold text-primary">Check your email</h1>
+                <h1 className="text-2xl font-bold text-primary">{t('auth.checkEmail')}</h1>
                 <p className="text-muted-foreground">
-                  We've sent a magic link to <span className="font-medium text-primary">{email}</span>
+                  {t('auth.checkEmailDesc')} <span className="font-medium text-primary">{email}</span>
                 </p>
               </div>
 
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Click the link in your email to sign in. The link will expire in 60 minutes.
+                  Haz clic en el enlace de tu email para iniciar sesión. El enlace expira en 60 minutos.
                 </p>
                 
                 <Button
@@ -83,7 +94,7 @@ const Auth = () => {
                   }}
                   className="w-full"
                 >
-                  Try different email
+                  {t('auth.backToEmail')}
                 </Button>
               </div>
             </div>
@@ -105,20 +116,20 @@ const Auth = () => {
             <Sparkles className="w-6 h-6" />
             Hack-Your-Flows
           </Link>
-          <h1 className="text-3xl font-bold text-primary mb-2">Welcome back</h1>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t('auth.title')}</h1>
           <p className="text-muted-foreground">
-            Sign in to continue your automation journey
+            {t('auth.subtitle')}
           </p>
         </div>
 
         <Card className="p-8 bg-surface/50 backdrop-blur-sm border-border">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email">Email address</Label>
+              <Label htmlFor="email">{t('auth.email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('auth.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -134,18 +145,18 @@ const Auth = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Sending magic link...
+                  Enviando enlace mágico...
                 </>
               ) : (
                 <>
                   <Mail className="mr-2 h-4 w-4" />
-                  Send magic link
+                  {t('auth.continue')}
                 </>
               )}
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              No passwords required. We'll send you a secure link to sign in.
+              No se requieren contraseñas. Te enviaremos un enlace seguro para iniciar sesión.
             </div>
           </form>
         </Card>
@@ -155,7 +166,7 @@ const Auth = () => {
             to="/" 
             className="text-sm text-muted-foreground hover:text-primary transition-colors"
           >
-            ← Back to home
+            ← Volver al inicio
           </Link>
         </div>
       </motion.div>

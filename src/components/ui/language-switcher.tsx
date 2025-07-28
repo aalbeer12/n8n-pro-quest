@@ -9,10 +9,19 @@ export const LanguageSwitcher = () => {
     const newLang = i18n.language === 'en' ? 'es' : 'en';
     i18n.changeLanguage(newLang);
     
-    // Update URL path for SEO
+    // Update URL path for SEO - Spanish is default (no prefix)
     const currentPath = window.location.pathname;
     const pathWithoutLang = currentPath.replace(/^\/(en|es)/, '');
-    const newPath = `/${newLang}${pathWithoutLang}`;
+    
+    let newPath;
+    if (newLang === 'es') {
+      // Spanish is default, no prefix needed
+      newPath = pathWithoutLang || '/';
+    } else {
+      // English gets /en prefix
+      newPath = `/en${pathWithoutLang}`;
+    }
+    
     window.history.pushState({}, '', newPath);
   };
 
