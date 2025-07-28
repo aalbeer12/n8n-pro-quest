@@ -15,6 +15,10 @@ import ChallengePage from "./pages/ChallengePage";
 import ChallengeResult from "./pages/ChallengeResult";
 import ProfilePage from "./pages/ProfilePage";
 import Leaderboard from "./pages/Leaderboard";
+import Settings from "./pages/Settings";
+import HowItWorks from "./pages/HowItWorks";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +42,10 @@ const App = () => (
             <Route path="/challenge/:slug/result" element={<ChallengeResult />} />
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
             </Routes>

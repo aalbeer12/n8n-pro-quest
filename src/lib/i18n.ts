@@ -11,6 +11,7 @@ const resources = {
       "nav.challenges": "Challenges", 
       "nav.leaderboard": "Leaderboard",
       "nav.profile": "Profile",
+      "nav.settings": "Settings",
       "nav.signOut": "Sign Out",
       "nav.signIn": "Sign In",
       
@@ -231,7 +232,248 @@ const resources = {
       "result.nextSteps": "Next Steps",
       "result.shareResult": "Share Result",
       "result.tryAgain": "Try Again",
-      "result.nextChallenge": "Next Challenge"
+      "result.nextChallenge": "Next Challenge",
+      
+      // Settings
+      "settings.title": "Settings",
+      "settings.description": "Manage your account and preferences",
+      "settings.success": "Success",
+      "settings.error": "Error",
+      "settings.profileUpdated": "Profile updated successfully",
+      "settings.updateError": "Failed to update profile",
+      "settings.subscriptionError": "Failed to open subscription management",
+      
+      "settings.profile.title": "Profile Information",
+      "settings.profile.description": "Update your profile information and social links",
+      "settings.profile.username": "Username",
+      "settings.profile.usernameHelp": "Username cannot be changed",
+      "settings.profile.displayName": "Display Name",
+      "settings.profile.displayNamePlaceholder": "Enter your display name",
+      "settings.profile.bio": "Bio",
+      "settings.profile.bioPlaceholder": "Tell us about yourself...",
+      "settings.profile.github": "GitHub URL",
+      "settings.profile.linkedin": "LinkedIn URL",
+      "settings.profile.website": "Website URL",
+      "settings.profile.publicProfile": "Public Profile",
+      "settings.profile.publicProfileHelp": "Allow others to view your profile and activity",
+      
+      "settings.subscription.title": "Subscription",
+      "settings.subscription.description": "Manage your subscription and billing",
+      "settings.subscription.currentPlan": "Current Plan",
+      "settings.subscription.active": "Active",
+      "settings.subscription.inactive": "Inactive",
+      "settings.subscription.renewsOn": "Renews on",
+      "settings.subscription.manage": "Manage Subscription",
+      
+      "settings.language.title": "Language & Region",
+      "settings.language.description": "Choose your preferred language and region",
+      "settings.language.current": "Current Language",
+      
+      "settings.notifications.title": "Notifications",
+      "settings.notifications.description": "Manage your notification preferences",
+      "settings.notifications.dailyChallenge": "Daily Challenge Reminders",
+      "settings.notifications.dailyChallengeHelp": "Get notified about new daily challenges",
+      "settings.notifications.achievements": "Achievement Notifications",
+      "settings.notifications.achievementsHelp": "Get notified when you unlock achievements",
+      "settings.notifications.streakReminders": "Streak Reminders",
+      "settings.notifications.streakRemindersHelp": "Get reminded to maintain your streak",
+      
+      "settings.privacy.title": "Privacy & Security",
+      "settings.privacy.description": "Manage your privacy and data settings",
+      "settings.privacy.exportData": "Export My Data",
+      "settings.privacy.downloadData": "Download Account Data",
+      "settings.privacy.dangerZone": "Danger Zone",
+      "settings.privacy.deleteAccount": "Delete Account",
+      
+      // How It Works
+      "howItWorks.title": "How It Works",
+      "howItWorks.description": "Learn how to master n8n automation with our platform",
+      "howItWorks.badge": "Learn More",
+      "howItWorks.subtitle": "From complete beginner to automation expert in just a few minutes per day",
+      "howItWorks.getStarted": "Get Started",
+      "howItWorks.viewChallenges": "View Challenges",
+      "howItWorks.stepsTitle": "Four Simple Steps to Mastery",
+      "howItWorks.stepsSubtitle": "Our proven methodology helps you learn automation skills effectively",
+      
+      "howItWorks.steps.choose.title": "Choose Your Challenge",
+      "howItWorks.steps.choose.description": "Select from hundreds of real-world automation scenarios",
+      "howItWorks.steps.choose.detail1": "Multiple difficulty levels",
+      "howItWorks.steps.choose.detail2": "Real business scenarios",
+      "howItWorks.steps.choose.detail3": "Story-driven contexts",
+      
+      "howItWorks.steps.build.title": "Build Your Solution",
+      "howItWorks.steps.build.description": "Create n8n workflows using our browser-based editor",
+      "howItWorks.steps.build.detail1": "Monaco code editor",
+      "howItWorks.steps.build.detail2": "Real-time validation",
+      "howItWorks.steps.build.detail3": "Smart hint system",
+      
+      "howItWorks.steps.feedback.title": "Get AI Feedback",
+      "howItWorks.steps.feedback.description": "Receive detailed analysis and improvement suggestions",
+      "howItWorks.steps.feedback.detail1": "Detailed score breakdown",
+      "howItWorks.steps.feedback.detail2": "Best practice recommendations",
+      "howItWorks.steps.feedback.detail3": "Code quality analysis",
+      
+      "howItWorks.steps.improve.title": "Improve & Compete",
+      "howItWorks.steps.improve.description": "Track progress and climb the global leaderboard",
+      "howItWorks.steps.improve.detail1": "XP and achievement system",
+      "howItWorks.steps.improve.detail2": "Global rankings",
+      "howItWorks.steps.improve.detail3": "Portfolio building",
+      
+      "howItWorks.featuresTitle": "Why Choose Our Platform",
+      "howItWorks.featuresSubtitle": "The most effective way to learn automation skills",
+      
+      "howItWorks.features.realWorld.title": "Real-World Scenarios",
+      "howItWorks.features.realWorld.description": "Practice with actual business automation challenges you'll face in production",
+      
+      "howItWorks.features.timeEfficient.title": "Time-Efficient Learning",
+      "howItWorks.features.timeEfficient.description": "Master complex concepts in just 15-30 minutes per day",
+      
+      "howItWorks.features.community.title": "Active Community",
+      "howItWorks.features.community.description": "Learn alongside thousands of automation engineers worldwide",
+      
+      "howItWorks.features.instant.title": "Instant Feedback",
+      "howItWorks.features.instant.description": "Get immediate AI-powered feedback on your solutions",
+      
+      "howItWorks.exampleTitle": "Example Challenge",
+      "howItWorks.exampleSubtitle": "See what a typical challenge looks like",
+      
+      "howItWorks.example.difficulty": "Intermediate",
+      "howItWorks.example.category": "API Integration",
+      "howItWorks.example.time": "25 minutes",
+      "howItWorks.example.title": "Customer Data Sync",
+      "howItWorks.example.description": "Build a workflow that automatically syncs customer data between your CRM and email marketing platform, handling data transformation and error cases.",
+      "howItWorks.example.requirementsTitle": "Requirements",
+      "howItWorks.example.requirement1": "Fetch customer data from CRM API",
+      "howItWorks.example.requirement2": "Transform data to match email platform format",
+      "howItWorks.example.requirement3": "Handle API rate limits and errors gracefully",
+      "howItWorks.example.points": "150 XP available",
+      
+      "howItWorks.cta.title": "Ready to Start Your Automation Journey?",
+      "howItWorks.cta.subtitle": "Join thousands of engineers who are already mastering n8n automation",
+      "howItWorks.cta.primary": "Start Learning Now",
+      "howItWorks.cta.secondary": "Explore More",
+      
+      // Terms
+      "terms.title": "Terms of Service",
+      "terms.description": "Terms and conditions for using our platform",
+      "terms.lastUpdated": "Last Updated",
+      "terms.effectiveDate": "Effective Date",
+      "terms.intro": "These terms and conditions outline the rules and regulations for the use of Hack-Your-Flows's platform.",
+      "terms.tableOfContents": "Table of Contents",
+      
+      "terms.acceptance.title": "Acceptance of Terms",
+      "terms.acceptance.content": "By accessing and using this platform, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.",
+      
+      "terms.description.title": "Service Description",
+      "terms.description.content": "Hack-Your-Flows provides a platform for learning n8n automation through practical challenges, AI feedback, and community features. We reserve the right to modify or discontinue the service at any time.",
+      
+      "terms.registration.title": "User Registration",
+      "terms.registration.content": "To access certain features, you must register for an account. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account.",
+      
+      "terms.userContent.title": "User Content",
+      "terms.userContent.content": "You retain ownership of any content you submit to our platform. By submitting content, you grant us a worldwide, royalty-free license to use, display, and distribute your content in connection with the service.",
+      
+      "terms.subscription.title": "Subscription and Payment",
+      "terms.subscription.content": "Paid subscriptions are billed in advance on a monthly or annual basis. Subscriptions automatically renew unless cancelled. Refunds are not provided for partial months or unused portions of the service.",
+      
+      "terms.intellectualProperty.title": "Intellectual Property",
+      "terms.intellectualProperty.content": "The service and its original content, features, and functionality are owned by Hack-Your-Flows and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.",
+      
+      "terms.prohibited.title": "Prohibited Uses",
+      "terms.prohibited.content": "You may not use our service for any unlawful purpose, to transmit malicious code, to attempt to gain unauthorized access to our systems, or to interfere with the proper functioning of the service.",
+      
+      "terms.termination.title": "Termination",
+      "terms.termination.content": "We may terminate or suspend your account and access to the service immediately, without prior notice, for conduct that we believe violates these terms or is harmful to other users.",
+      
+      "terms.disclaimer.title": "Disclaimer",
+      "terms.disclaimer.content": "The information on this platform is provided on an 'as is' basis. We disclaim all warranties, whether express or implied, including warranties of merchantability and fitness for a particular purpose.",
+      
+      "terms.limitation.title": "Limitation of Liability",
+      "terms.limitation.content": "In no event shall Hack-Your-Flows be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or other intangible losses.",
+      
+      "terms.governing.title": "Governing Law",
+      "terms.governing.content": "These terms shall be governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.",
+      
+      "terms.changes.title": "Changes to Terms",
+      "terms.changes.content": "We reserve the right to modify these terms at any time. We will notify users of significant changes via email or through our platform. Continued use constitutes acceptance of modified terms.",
+      
+      "terms.contact.title": "Contact Information",
+      "terms.contact.content": "If you have any questions about these terms, please contact us at the information provided below.",
+      
+      "terms.questions.title": "Questions About These Terms?",
+      "terms.questions.content": "If you have any questions about these Terms of Service, please contact us using the information below:",
+      "terms.questions.email": "Email",
+      "terms.questions.address": "Address",
+      
+      // Privacy
+      "privacy.title": "Privacy Policy",
+      "privacy.description": "How we collect, use, and protect your personal information",
+      "privacy.lastUpdated": "Last Updated",
+      "privacy.gdprCompliant": "GDPR Compliant",
+      "privacy.intro": "This Privacy Policy describes how Hack-Your-Flows collects, uses, and protects your personal information when you use our platform.",
+      "privacy.tableOfContents": "Table of Contents",
+      
+      "privacy.summary.title": "Privacy at a Glance",
+      "privacy.summary.weDoTitle": "What We DO",
+      "privacy.summary.weDo1": "Encrypt all data in transit and at rest",
+      "privacy.summary.weDo2": "Give you full control over your data",
+      "privacy.summary.weDo3": "Comply with GDPR and privacy regulations",
+      "privacy.summary.weDo4": "Use data only to improve your experience",
+      "privacy.summary.weDontTitle": "What We DON'T Do",
+      "privacy.summary.weDont1": "Sell your personal data to third parties",
+      "privacy.summary.weDont2": "Track you across other websites",
+      "privacy.summary.weDont3": "Store unnecessary personal information",
+      "privacy.summary.weDont4": "Share data without your consent",
+      
+      "privacy.information.title": "Information We Collect",
+      "privacy.information.content": "We collect information you provide directly to us, such as when you create an account, complete challenges, or contact us for support. This includes your email address, username, and any content you submit through our platform.",
+      
+      "privacy.usage.title": "How We Use Your Information",
+      "privacy.usage.content": "We use the information we collect to provide, maintain, and improve our service, to communicate with you, to monitor and analyze trends, and to detect and prevent fraud and abuse.",
+      
+      "privacy.sharing.title": "Information Sharing",
+      "privacy.sharing.content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy. We may share information with service providers who assist us in operating our platform.",
+      
+      "privacy.security.title": "Data Security",
+      "privacy.security.content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. All data is encrypted in transit and at rest.",
+      
+      "privacy.cookies.title": "Cookies and Tracking",
+      "privacy.cookies.content": "We use cookies and similar technologies to enhance your experience, analyze usage patterns, and provide personalized content. You can control cookie preferences through your browser settings.",
+      
+      "privacy.rights.title": "Your Privacy Rights",
+      "privacy.rights.content": "Depending on your location, you may have certain rights regarding your personal information, including the right to access, update, or delete your data. Contact us to exercise these rights.",
+      
+      "privacy.retention.title": "Data Retention",
+      "privacy.retention.content": "We retain your personal information for as long as necessary to provide our services and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      
+      "privacy.international.title": "International Transfers",
+      "privacy.international.content": "Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your information during such transfers.",
+      
+      "privacy.children.title": "Children's Privacy",
+      "privacy.children.content": "Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware of such collection, we will delete the information immediately.",
+      
+      "privacy.thirdParty.title": "Third-Party Services",
+      "privacy.thirdParty.content": "Our platform may contain links to third-party websites or services. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies.",
+      
+      "privacy.changes.title": "Changes to This Policy",
+      "privacy.changes.content": "We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the 'Last Updated' date.",
+      
+      "privacy.contact.title": "Contact Us",
+      "privacy.contact.content": "If you have any questions about this Privacy Policy or our privacy practices, please contact us using the information provided below.",
+      "privacy.contact.intro": "If you have any questions about this Privacy Policy or how we handle your personal information, please don't hesitate to contact us:",
+      "privacy.contact.dpo": "Data Protection Officer",
+      "privacy.contact.email": "Email",
+      "privacy.contact.address": "Address",
+      
+      "privacy.gdprRights.title": "Your GDPR Rights",
+      "privacy.gdprRights.intro": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
+      "privacy.gdprRights.access": "Access your personal data",
+      "privacy.gdprRights.rectification": "Correct inaccurate data",
+      "privacy.gdprRights.erasure": "Request data deletion",
+      "privacy.gdprRights.restrict": "Restrict data processing",
+      "privacy.gdprRights.portability": "Data portability",
+      "privacy.gdprRights.object": "Object to processing",
+      "privacy.gdprRights.exercise": "To exercise these rights, contact us at"
     }
   },
   es: {
