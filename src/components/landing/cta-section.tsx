@@ -5,18 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { useState } from "react";
-
-const benefits = [
-  "7-day free trial",
-  "No credit card required",
-  "Cancel anytime",
-  "Access to all challenges",
-  "AI feedback included"
-];
+import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 export const CTASection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const benefits = [
+    t('landing.cta.benefit1'),
+    t('landing.cta.benefit2'),
+    t('landing.cta.benefit3'),
+    t('landing.cta.benefit4'),
+    t('landing.cta.benefit5')
+  ];
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,13 +69,12 @@ export const CTASection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg">
-            Start Your Automation
-            <span className="gradient-text block">Journey Today</span>
+            {t('landing.cta.startAutomation')}
+            <span className="gradient-text block">{t('landing.cta.journeyToday')}</span>
           </h2>
           
           <p className="text-xl text-foreground-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-            Join hundreds of automation engineers who are already mastering n8n 
-            through daily practice and AI-powered feedback.
+            {t('landing.cta.ctaSubtitle')}
           </p>
         </motion.div>
 
@@ -106,7 +108,7 @@ export const CTASection = () => {
         >
           <Input
             type="email"
-            placeholder="Enter your email to get started"
+            placeholder={t('landing.cta.emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -126,7 +128,7 @@ export const CTASection = () => {
               />
             ) : (
               <>
-                Start Learning <ArrowRight className="ml-2 w-5 h-5" />
+                {t('landing.cta.startLearning')} <ArrowRight className="ml-2 w-5 h-5" />
               </>
             )}
           </Button>
@@ -139,7 +141,7 @@ export const CTASection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-sm text-foreground-secondary"
         >
-          Trusted by automation engineers at top companies worldwide
+          {t('landing.cta.trustedBy')}
         </motion.p>
 
         {/* Company logos placeholder */}

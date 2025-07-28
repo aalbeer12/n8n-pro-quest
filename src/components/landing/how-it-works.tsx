@@ -2,39 +2,42 @@
 
 import { motion } from "framer-motion";
 import { Calendar, Code2, Lightbulb, Trophy } from "lucide-react";
-
-const steps = [
-  {
-    icon: Calendar,
-    number: "01",
-    title: "Daily Challenge Delivered",
-    description: "Every day, get a new real-world automation scenario with clear requirements and context.",
-    features: ["Story-driven challenges", "Multiple difficulty levels", "Real business scenarios"]
-  },
-  {
-    icon: Code2,
-    number: "02",
-    title: "Build Your Solution",
-    description: "Create n8n workflows using our browser-based editor with live validation and hints.",
-    features: ["Monaco code editor", "Real-time JSON validation", "Smart hint system"]
-  },
-  {
-    icon: Lightbulb,
-    number: "03",
-    title: "Get Instant Feedback",
-    description: "Our AI evaluates your solution and provides detailed feedback on functionality and best practices.",
-    features: ["Detailed score breakdown", "Improvement suggestions", "Code quality analysis"]
-  },
-  {
-    icon: Trophy,
-    number: "04",
-    title: "Climb the Leaderboard",
-    description: "Earn XP, maintain streaks, unlock achievements, and compete with other automation engineers.",
-    features: ["Global rankings", "Achievement system", "Portfolio building"]
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 export const HowItWorks = () => {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      icon: Calendar,
+      number: "01",
+      title: t('landing.howItWorks.step1'),
+      description: t('landing.howItWorks.step1Desc'),
+      features: [t('landing.howItWorks.step1Features1'), t('landing.howItWorks.step1Features2'), t('landing.howItWorks.step1Features3')]
+    },
+    {
+      icon: Code2,
+      number: "02", 
+      title: t('landing.howItWorks.step2'),
+      description: t('landing.howItWorks.step2Desc'),
+      features: [t('landing.howItWorks.step2Features1'), t('landing.howItWorks.step2Features2'), t('landing.howItWorks.step2Features3')]
+    },
+    {
+      icon: Lightbulb,
+      number: "03",
+      title: t('landing.howItWorks.step3'),
+      description: t('landing.howItWorks.step3Desc'),
+      features: [t('landing.howItWorks.step3Features1'), t('landing.howItWorks.step3Features2'), t('landing.howItWorks.step3Features3')]
+    },
+    {
+      icon: Trophy,
+      number: "04",
+      title: t('landing.howItWorks.step4'),
+      description: t('landing.howItWorks.step4Desc'),
+      features: [t('landing.howItWorks.step4Features1'), t('landing.howItWorks.step4Features2'), t('landing.howItWorks.step4Features3')]
+    }
+  ];
+
   return (
     <section className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -47,10 +50,10 @@ export const HowItWorks = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            How It <span className="gradient-text">Works</span>
+            {t('landing.howItWorks.title')} <span className="gradient-text">Works</span>
           </h2>
           <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
-            From complete beginner to automation expert in just a few minutes per day.
+            {t('landing.howItWorks.subtitle')}
           </p>
         </motion.div>
 

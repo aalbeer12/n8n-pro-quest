@@ -2,35 +2,38 @@
 
 import { motion } from "framer-motion";
 import { Code, Bot, TrendingUp, Users } from "lucide-react";
-
-const features = [
-  {
-    icon: Code,
-    title: "Learn by Doing",
-    description: "Real-world automation scenarios that mirror what you'll face in production environments.",
-    gradient: "from-primary to-blue-600",
-  },
-  {
-    icon: Bot,
-    title: "AI-Powered Feedback",
-    description: "Get instant, detailed feedback on your solutions with actionable improvement suggestions.",
-    gradient: "from-secondary to-green-600",
-  },
-  {
-    icon: TrendingUp,
-    title: "Track Progress",
-    description: "Gamified learning with XP, streaks, and achievements to keep you motivated.",
-    gradient: "from-warning to-orange-600",
-  },
-  {
-    icon: Users,
-    title: "Build Portfolio",
-    description: "Showcase your automation skills with a public profile that stands out to employers.",
-    gradient: "from-purple-500 to-pink-600",
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 export const FeatureCards = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Code,
+      title: t('landing.features.learnByDoing'),
+      description: t('landing.features.learnByDoingDesc'),
+      gradient: "from-primary to-blue-600",
+    },
+    {
+      icon: Bot,
+      title: t('landing.features.aiFeedback'),
+      description: t('landing.features.aiFeedbackDesc'),
+      gradient: "from-secondary to-green-600",
+    },
+    {
+      icon: TrendingUp,
+      title: t('landing.features.trackProgress'),
+      description: t('landing.features.trackProgressDesc'),
+      gradient: "from-warning to-orange-600",
+    },
+    {
+      icon: Users,
+      title: t('landing.features.buildPortfolio'),
+      description: t('landing.features.buildPortfolioDesc'),
+      gradient: "from-purple-500 to-pink-600",
+    },
+  ];
+
   return (
     <section className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -42,11 +45,10 @@ export const FeatureCards = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Why <span className="gradient-text">Hack-Your-Flows</span>?
+            {t('landing.features.whyTitle')} <span className="gradient-text">Hack-Your-Flows</span>?
           </h2>
           <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
-            Traditional tutorials leave you with theory. We give you practical skills through 
-            hands-on challenges that mirror real automation work.
+            {t('landing.features.whySubtitle')}
           </p>
         </motion.div>
 

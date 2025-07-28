@@ -2,31 +2,34 @@
 
 import { motion } from "framer-motion";
 import { AlertCircle, Clock, BookOpen, Zap } from "lucide-react";
-
-const problems = [
-  {
-    icon: BookOpen,
-    title: "Tutorial Hell",
-    description: "Endless videos that teach theory but leave you stuck when it's time to build real automations."
-  },
-  {
-    icon: Clock,
-    title: "No Practice",
-    description: "Learning platforms that focus on concepts but don't give you hands-on experience with real scenarios."
-  },
-  {
-    icon: AlertCircle,
-    title: "No Feedback",
-    description: "Building automations in isolation without knowing if you're following best practices or making mistakes."
-  },
-  {
-    icon: Zap,
-    title: "Skill Gaps",
-    description: "Knowing the basics but struggling with complex real-world automation challenges in your job."
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 export const ProblemSection = () => {
+  const { t } = useTranslation();
+
+  const problems = [
+    {
+      icon: BookOpen,
+      title: t('landing.problem.tutorialHell'),
+      description: t('landing.problem.tutorialHellDesc')
+    },
+    {
+      icon: Clock,
+      title: t('landing.problem.noPractice'),
+      description: t('landing.problem.noPracticeDesc')
+    },
+    {
+      icon: AlertCircle,
+      title: t('landing.problem.noFeedback'),
+      description: t('landing.problem.noFeedbackDesc')
+    },
+    {
+      icon: Zap,
+      title: t('landing.problem.skillGaps'),
+      description: t('landing.problem.skillGapsDesc')
+    }
+  ];
+
   return (
     <section className="py-24 px-6 bg-surface/30">
       <div className="max-w-6xl mx-auto">
@@ -39,11 +42,10 @@ export const ProblemSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Tired of <span className="text-destructive">Learning Without Doing</span>?
+            {t('landing.problem.title')}
           </h2>
           <p className="text-xl text-foreground-secondary max-w-3xl mx-auto leading-relaxed">
-            Most automation education is broken. You watch tutorials, read docs, 
-            but when it's time to build something real, you're lost.
+            {t('landing.problem.subtitle')}
           </p>
         </motion.div>
 
@@ -83,15 +85,13 @@ export const ProblemSection = () => {
         >
           <div className="max-w-4xl mx-auto p-8 glass-elevated rounded-xl">
             <blockquote className="text-xl md:text-2xl text-foreground-secondary italic mb-6 leading-relaxed">
-              "I watched 47 YouTube videos about n8n, read the entire documentation twice, 
-              but when my manager asked me to automate our customer onboarding process, 
-              I had no idea where to start."
+              "{t('landing.problem.testimonial')}"
             </blockquote>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 rounded-full bg-gradient-primary" />
               <div className="text-left">
-                <p className="font-semibold text-foreground">Sarah Chen</p>
-                <p className="text-sm text-foreground-secondary">Operations Manager</p>
+                <p className="font-semibold text-foreground">{t('landing.problem.testimonialAuthor')}</p>
+                <p className="text-sm text-foreground-secondary">{t('landing.problem.testimonialRole')}</p>
               </div>
             </div>
           </div>
