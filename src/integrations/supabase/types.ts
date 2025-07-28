@@ -14,7 +14,329 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      achievements: {
+        Row: {
+          category: string
+          created_at: string | null
+          criteria: Json
+          description: string
+          icon_name: string
+          id: string
+          name: string
+          rarity: string | null
+          slug: string
+          xp_reward: number
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          criteria: Json
+          description: string
+          icon_name: string
+          id?: string
+          name: string
+          rarity?: string | null
+          slug: string
+          xp_reward: number
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          criteria?: Json
+          description?: string
+          icon_name?: string
+          id?: string
+          name?: string
+          rarity?: string | null
+          slug?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
+      challenges: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string
+          difficulty: string
+          evaluation_criteria: Json
+          hints: Json | null
+          id: string
+          is_active: boolean | null
+          is_daily_challenge: boolean | null
+          points: number
+          published_at: string | null
+          requirements: Json
+          sample_solution: Json | null
+          slug: string
+          story_context: string
+          time_estimate_minutes: number | null
+          title: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          description: string
+          difficulty: string
+          evaluation_criteria: Json
+          hints?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_daily_challenge?: boolean | null
+          points: number
+          published_at?: string | null
+          requirements: Json
+          sample_solution?: Json | null
+          slug: string
+          story_context: string
+          time_estimate_minutes?: number | null
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string
+          difficulty?: string
+          evaluation_criteria?: Json
+          hints?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_daily_challenge?: boolean | null
+          points?: number
+          published_at?: string | null
+          requirements?: Json
+          sample_solution?: Json | null
+          slug?: string
+          story_context?: string
+          time_estimate_minutes?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          current_level: string | null
+          current_streak: number | null
+          display_name: string | null
+          github_url: string | null
+          id: string
+          is_public: boolean | null
+          last_activity_date: string | null
+          linkedin_url: string | null
+          longest_streak: number | null
+          updated_at: string | null
+          username: string
+          website_url: string | null
+          xp_total: number | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          current_level?: string | null
+          current_streak?: number | null
+          display_name?: string | null
+          github_url?: string | null
+          id: string
+          is_public?: boolean | null
+          last_activity_date?: string | null
+          linkedin_url?: string | null
+          longest_streak?: number | null
+          updated_at?: string | null
+          username: string
+          website_url?: string | null
+          xp_total?: number | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          current_level?: string | null
+          current_streak?: number | null
+          display_name?: string | null
+          github_url?: string | null
+          id?: string
+          is_public?: boolean | null
+          last_activity_date?: string | null
+          linkedin_url?: string | null
+          longest_streak?: number | null
+          updated_at?: string | null
+          username?: string
+          website_url?: string | null
+          xp_total?: number | null
+        }
+        Relationships: []
+      }
+      streak_freezes: {
+        Row: {
+          created_at: string | null
+          id: string
+          used_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          used_at: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          used_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "streak_freezes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      submission_comments: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          is_helpful: boolean | null
+          submission_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          is_helpful?: boolean | null
+          submission_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_helpful?: boolean | null
+          submission_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submission_comments_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submission_comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      submissions: {
+        Row: {
+          ai_feedback: Json | null
+          attempt_number: number | null
+          challenge_id: string | null
+          created_at: string | null
+          evaluated_at: string | null
+          id: string
+          score: number | null
+          score_breakdown: Json | null
+          status: string | null
+          time_taken_seconds: number | null
+          user_id: string | null
+          workflow_description: string | null
+          workflow_json: Json
+        }
+        Insert: {
+          ai_feedback?: Json | null
+          attempt_number?: number | null
+          challenge_id?: string | null
+          created_at?: string | null
+          evaluated_at?: string | null
+          id?: string
+          score?: number | null
+          score_breakdown?: Json | null
+          status?: string | null
+          time_taken_seconds?: number | null
+          user_id?: string | null
+          workflow_description?: string | null
+          workflow_json: Json
+        }
+        Update: {
+          ai_feedback?: Json | null
+          attempt_number?: number | null
+          challenge_id?: string | null
+          created_at?: string | null
+          evaluated_at?: string | null
+          id?: string
+          score?: number | null
+          score_breakdown?: Json | null
+          status?: string | null
+          time_taken_seconds?: number | null
+          user_id?: string | null
+          workflow_description?: string | null
+          workflow_json?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_achievements: {
+        Row: {
+          achievement_id: string
+          unlocked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          achievement_id: string
+          unlocked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          achievement_id?: string
+          unlocked_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_achievements_achievement_id_fkey"
+            columns: ["achievement_id"]
+            isOneToOne: false
+            referencedRelation: "achievements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_achievements_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
