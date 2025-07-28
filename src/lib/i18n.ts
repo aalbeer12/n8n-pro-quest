@@ -144,14 +144,46 @@ const resources = {
       // Common
       "common.loading": "Loading...",
       "common.back": "Back",
-      "common.next": "Next",
+      "common.next": "Next", 
       "common.previous": "Previous",
       "common.finish": "Finish",
       "common.cancel": "Cancel",
       "common.save": "Save",
       "common.error": "Error",
       "common.success": "Success",
-      "common.backToDashboard": "Back to Dashboard"
+      "common.backToDashboard": "Back to Dashboard",
+      "common.backToHome": "Back to home",
+      
+      // Profile
+      "profile.title": "My Profile",
+      "profile.stats": "Statistics",
+      "profile.achievements": "Achievements",
+      "profile.recentChallenges": "Recent Challenges",
+      "profile.skillsRadar": "Skills Radar",
+      "profile.activityHeatmap": "Activity Heatmap",
+      "profile.portfolio": "Portfolio",
+      
+      // Challenge Page
+      "challenge.title": "Challenge",
+      "challenge.requirements": "Requirements",
+      "challenge.hints": "Hints",
+      "challenge.submitSolution": "Submit Solution",
+      "challenge.timer": "Time",
+      "challenge.difficulty": "Difficulty",
+      "challenge.category": "Category",
+      "challenge.description": "Description",
+      "challenge.examples": "Examples",
+      "challenge.testCases": "Test Cases",
+      
+      // Results
+      "result.title": "Challenge Results",
+      "result.score": "Score",
+      "result.feedback": "AI Feedback",
+      "result.improvements": "Improvements",
+      "result.nextSteps": "Next Steps",
+      "result.shareResult": "Share Result",
+      "result.tryAgain": "Try Again",
+      "result.nextChallenge": "Next Challenge"
     }
   },
   es: {
@@ -295,13 +327,45 @@ const resources = {
       "common.loading": "Cargando...",
       "common.back": "Atrás",
       "common.next": "Siguiente",
-      "common.previous": "Anterior",
+      "common.previous": "Anterior", 
       "common.finish": "Finalizar",
       "common.cancel": "Cancelar",
       "common.save": "Guardar",
       "common.error": "Error",
       "common.success": "Éxito",
-      "common.backToDashboard": "Volver al Panel"
+      "common.backToDashboard": "Volver al Panel",
+      "common.backToHome": "Volver al inicio",
+      
+      // Profile
+      "profile.title": "Mi Perfil",
+      "profile.stats": "Estadísticas",
+      "profile.achievements": "Logros",
+      "profile.recentChallenges": "Retos Recientes",
+      "profile.skillsRadar": "Radar de Habilidades",
+      "profile.activityHeatmap": "Mapa de Actividad",
+      "profile.portfolio": "Portafolio",
+      
+      // Challenge Page
+      "challenge.title": "Reto",
+      "challenge.requirements": "Requisitos",
+      "challenge.hints": "Pistas",
+      "challenge.submitSolution": "Enviar Solución",
+      "challenge.timer": "Tiempo",
+      "challenge.difficulty": "Dificultad",
+      "challenge.category": "Categoría",
+      "challenge.description": "Descripción",
+      "challenge.examples": "Ejemplos",
+      "challenge.testCases": "Casos de Prueba",
+      
+      // Results
+      "result.title": "Resultados del Reto",
+      "result.score": "Puntuación",
+      "result.feedback": "Feedback IA",
+      "result.improvements": "Mejoras",
+      "result.nextSteps": "Próximos Pasos",
+      "result.shareResult": "Compartir Resultado",
+      "result.tryAgain": "Intentar de Nuevo",
+      "result.nextChallenge": "Siguiente Reto"
     }
   }
 };
