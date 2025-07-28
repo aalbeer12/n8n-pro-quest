@@ -3,6 +3,9 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import { Clock, Star, Zap } from 'lucide-react'
+import { TranslationBadge } from '@/components/ui/translation-badge'
+import { useAutoTranslate } from '@/hooks/use-auto-translate'
+import { useState } from 'react'
 
 interface ChallengeCardProps {
   id: string
@@ -47,6 +50,7 @@ const getCategoryColor = (category: string) => {
 }
 
 export const ChallengeCard = ({
+  id,
   title,
   description,
   difficulty,
@@ -56,6 +60,23 @@ export const ChallengeCard = ({
   slug,
   isDailyChallenge
 }: ChallengeCardProps) => {
+  const { translateText } = useAutoTranslate();
+  const [translatedTitle, setTranslatedTitle] = useState(title);
+  const [translatedDescription, setTranslatedDescription] = useState(description);
+  const [isTranslated, setIsTranslated] = useState(false);
+
+  const handleTranslate = async () => {
+    try {
+      const newTitle = await translateText(title, { contentType: 'challenge', contentId: id });
+      const newDescription = await translateText(description, { contentType: 'challenge', contentId: id });
+      
+      setTranslatedTitle(newTitle);
+      setTranslatedDescription(newDescription);
+      setIsTranslated(true);
+    } catch (error) {
+      console.error('Translation failed:', error);
+    }
+  };
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
       <CardHeader className="pb-3">
@@ -69,9 +90,16 @@ export const ChallengeCard = ({
                 </Badge>
               )}
             </div>
-            <CardTitle className="text-lg group-hover:text-primary transition-colors">
-              {title}
-            </CardTitle>
+            <div className="flex items-center justify-between gap-2">
+              <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                {translatedTitle}
+              </CardTitle>
+              <TranslationBadge 
+                onTranslate={handleTranslate}
+                isTranslated={isTranslated}
+                compact
+              />
+            </div>
           </div>
           <div className="text-right">
             <div className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
@@ -105,7 +133,7 @@ export const ChallengeCard = ({
       
       <CardContent className="pt-0">
         <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-          {description}
+          {translatedDescription}
         </p>
         
         <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">

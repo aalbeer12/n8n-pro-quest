@@ -200,6 +200,10 @@ const resources = {
       "common.save": "Save",
       "common.error": "Error",
       "common.success": "Success",
+      "common.translate": "Translate",
+      "common.translated": "Translated",
+      "common.autoTranslated": "Auto-translated",
+      "common.translateTo": "Translate to {{language}}",
       "common.backToDashboard": "Back to Dashboard",
       "common.backToHome": "Back to home",
       
@@ -671,6 +675,10 @@ const resources = {
       "common.save": "Guardar",
       "common.error": "Error",
       "common.success": "Éxito",
+      "common.translate": "Traducir",
+      "common.translated": "Traducido",
+      "common.autoTranslated": "Auto-traducido",
+      "common.translateTo": "Traducir a {{language}}",
       "common.backToDashboard": "Volver al Panel",
       "common.backToHome": "Volver al inicio",
       

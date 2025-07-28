@@ -407,6 +407,42 @@ export type Database = {
           },
         ]
       }
+      translations: {
+        Row: {
+          content_id: string | null
+          content_type: string
+          created_at: string
+          id: string
+          source_content: string
+          source_language: string
+          target_language: string
+          translated_content: string
+          updated_at: string
+        }
+        Insert: {
+          content_id?: string | null
+          content_type: string
+          created_at?: string
+          id?: string
+          source_content: string
+          source_language?: string
+          target_language: string
+          translated_content: string
+          updated_at?: string
+        }
+        Update: {
+          content_id?: string | null
+          content_type?: string
+          created_at?: string
+          id?: string
+          source_content?: string
+          source_language?: string
+          target_language?: string
+          translated_content?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_achievements: {
         Row: {
           achievement_id: string

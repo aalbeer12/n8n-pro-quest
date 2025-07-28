@@ -30,6 +30,9 @@ verify_jwt = true
 [functions.send-auth-email]
 verify_jwt = false
 
+[functions.translate-content]
+verify_jwt = true
+
 [studio]
 enabled = true
 port = 54323
