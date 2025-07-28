@@ -1,0 +1,119 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
+import { Clock, Star, Zap } from 'lucide-react'
+
+interface ChallengeCardProps {
+  id: string
+  title: string
+  description: string
+  difficulty: string
+  category: string
+  points: number
+  timeEstimate: number | null
+  slug: string
+  isDailyChallenge: boolean
+}
+
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty.toLowerCase()) {
+    case 'beginner':
+      return 'bg-green-500/10 text-green-600 border-green-500/20'
+    case 'intermediate':
+      return 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20'
+    case 'advanced':
+      return 'bg-red-500/10 text-red-600 border-red-500/20'
+    case 'expert':
+      return 'bg-purple-500/10 text-purple-600 border-purple-500/20'
+    default:
+      return 'bg-gray-500/10 text-gray-600 border-gray-500/20'
+  }
+}
+
+const getCategoryColor = (category: string) => {
+  switch (category.toLowerCase()) {
+    case 'automation':
+      return 'bg-blue-500/10 text-blue-600 border-blue-500/20'
+    case 'integration':
+      return 'bg-indigo-500/10 text-indigo-600 border-indigo-500/20'
+    case 'data-processing':
+      return 'bg-teal-500/10 text-teal-600 border-teal-500/20'
+    case 'api':
+      return 'bg-orange-500/10 text-orange-600 border-orange-500/20'
+    default:
+      return 'bg-gray-500/10 text-gray-600 border-gray-500/20'
+  }
+}
+
+export const ChallengeCard = ({
+  title,
+  description,
+  difficulty,
+  category,
+  points,
+  timeEstimate,
+  slug,
+  isDailyChallenge
+}: ChallengeCardProps) => {
+  return (
+    <Card className="group hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              {isDailyChallenge && (
+                <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
+                  <Zap className="w-3 h-3 mr-1" />
+                  Reto Diario
+                </Badge>
+              )}
+            </div>
+            <CardTitle className="text-lg group-hover:text-primary transition-colors">
+              {title}
+            </CardTitle>
+          </div>
+          <div className="text-right">
+            <div className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
+              <Star className="w-3 h-3" />
+              <span>{points} pts</span>
+            </div>
+            {timeEstimate && (
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="w-3 h-3" />
+                <span>{timeEstimate}m</span>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        <div className="flex gap-2">
+          <Badge 
+            variant="outline" 
+            className={getDifficultyColor(difficulty)}
+          >
+            {difficulty}
+          </Badge>
+          <Badge 
+            variant="outline" 
+            className={getCategoryColor(category)}
+          >
+            {category}
+          </Badge>
+        </div>
+      </CardHeader>
+      
+      <CardContent className="pt-0">
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+          {description}
+        </p>
+        
+        <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
+          <Link to={`/challenge/${slug}`}>
+            Comenzar Reto
+          </Link>
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
