@@ -4,20 +4,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Play, Zap, Bot, Trophy } from "lucide-react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // TODO: Implement email capture with Supabase
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Mock delay
-    setIsSubmitting(false);
-    setEmail("");
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -130,40 +119,19 @@ export const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Email capture form */}
-          <motion.form
-            onSubmit={handleEmailSubmit}
+          {/* Get Started Button */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6"
+            className="mb-6"
           >
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-1 h-12 bg-surface/50 border-white/20 text-foreground placeholder:text-foreground-secondary"
-            />
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="h-12 px-8 bg-gradient-primary hover:scale-105 transition-transform"
-            >
-              {isSubmitting ? (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                />
-              ) : (
-                <>
-                  Start Learning <ArrowRight className="ml-2 w-5 h-5" />
-                </>
-              )}
+            <Button asChild className="h-12 px-8 bg-gradient-primary hover:scale-105 transition-transform">
+              <Link to="/auth">
+                Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </Button>
-          </motion.form>
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
