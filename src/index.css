@@ -2,41 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Hack-Your-Flows Design System - Dark-first gamified automation platform */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark mode colors (default) */
+    --background: 0 0% 4%; /* True black for OLED */
+    --surface: 0 0% 7%; /* Slightly elevated */
+    --surface-elevated: 0 0% 10%;
+    --foreground: 0 0% 100%; /* White text */
+    --foreground-secondary: 0 0% 64%; /* Secondary text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%; /* Electric blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 91% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 160 84% 39%; /* Emerald for success */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --warning: 43 96% 56%; /* Amber */
+    --warning-foreground: 0 0% 7%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84% 60%; /* Red */
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 64%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 0 0% 16%; /* Subtle borders */
+    --input: 0 0% 10%;
+    --ring: 217 91% 60%;
 
     --radius: 0.5rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(260 91% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(160 84% 39%), hsl(120 84% 39%));
+    --gradient-surface: linear-gradient(135deg, hsl(0 0% 7% / 0.9), hsl(217 91% 60% / 0.1));
+    --gradient-glow: radial-gradient(circle at center, hsl(217 91% 60% / 0.3), transparent 70%);
+
+    /* Shadows with color tints */
+    --shadow-primary: 0 10px 30px -10px hsl(217 91% 60% / 0.3);
+    --shadow-surface: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 40px hsl(217 91% 70% / 0.4);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -54,43 +75,56 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+@layer components {
+  /* Glassmorphism effect */
+  .glass {
+    @apply backdrop-blur-xl bg-surface/50 border border-white/10;
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  .glass-elevated {
+    @apply backdrop-blur-xl bg-surface-elevated/80 border border-white/20;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent;
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  /* Interactive elements */
+  .interactive {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98];
+  }
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+  .glow {
+    @apply shadow-lg;
+    box-shadow: var(--shadow-glow);
+  }
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -2s;
+  }
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+  .float-delayed-2 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -4s;
+  }
+}
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 }
 
