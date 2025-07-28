@@ -113,8 +113,41 @@ export type Database = {
         }
         Relationships: []
       }
+      level_assessments: {
+        Row: {
+          answers: Json
+          calculated_level: string
+          created_at: string
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          answers: Json
+          calculated_level: string
+          created_at?: string
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          answers?: Json
+          calculated_level?: string
+          created_at?: string
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "level_assessments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
+          assessment_answers: Json | null
           avatar_url: string | null
           bio: string | null
           created_at: string | null
@@ -123,11 +156,13 @@ export type Database = {
           display_name: string | null
           github_url: string | null
           id: string
+          initial_level_assigned: boolean | null
           is_public: boolean | null
           last_activity_date: string | null
           last_weekly_reset: string | null
           linkedin_url: string | null
           longest_streak: number | null
+          onboarding_completed: boolean | null
           subscription_end: string | null
           subscription_tier: string | null
           updated_at: string | null
@@ -137,6 +172,7 @@ export type Database = {
           xp_total: number | null
         }
         Insert: {
+          assessment_answers?: Json | null
           avatar_url?: string | null
           bio?: string | null
           created_at?: string | null
@@ -145,11 +181,13 @@ export type Database = {
           display_name?: string | null
           github_url?: string | null
           id: string
+          initial_level_assigned?: boolean | null
           is_public?: boolean | null
           last_activity_date?: string | null
           last_weekly_reset?: string | null
           linkedin_url?: string | null
           longest_streak?: number | null
+          onboarding_completed?: boolean | null
           subscription_end?: string | null
           subscription_tier?: string | null
           updated_at?: string | null
@@ -159,6 +197,7 @@ export type Database = {
           xp_total?: number | null
         }
         Update: {
+          assessment_answers?: Json | null
           avatar_url?: string | null
           bio?: string | null
           created_at?: string | null
@@ -167,11 +206,13 @@ export type Database = {
           display_name?: string | null
           github_url?: string | null
           id?: string
+          initial_level_assigned?: boolean | null
           is_public?: boolean | null
           last_activity_date?: string | null
           last_weekly_reset?: string | null
           linkedin_url?: string | null
           longest_streak?: number | null
+          onboarding_completed?: boolean | null
           subscription_end?: string | null
           subscription_tier?: string | null
           updated_at?: string | null

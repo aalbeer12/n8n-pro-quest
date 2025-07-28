@@ -27,9 +27,6 @@ verify_jwt = true
 [functions.check-subscription]
 verify_jwt = true
 
-[functions.evaluate-workflow]
-verify_jwt = true
-
 [studio]
 enabled = true
 port = 54323
