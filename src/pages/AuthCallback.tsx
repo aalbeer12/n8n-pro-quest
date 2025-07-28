@@ -9,38 +9,64 @@ const AuthCallback = () => {
 
   useEffect(() => {
     const handleAuthCallback = async () => {
+      console.log('AuthCallback: Iniciando manejo del callback')
+      console.log('AuthCallback: URL actual:', window.location.href)
+      console.log('AuthCallback: Hash:', window.location.hash)
+      
       try {
+        // Primero intentar procesar el hash si existe
+        if (window.location.hash) {
+          console.log('AuthCallback: Procesando hash de la URL')
+          const { data, error } = await supabase.auth.getSession()
+          console.log('AuthCallback: Resultado después del hash', { data, error })
+        }
+        
+        // Obtener la sesión actual
         const { data, error } = await supabase.auth.getSession()
         
+        console.log('AuthCallback: Sesión obtenida', { data, error })
+        
         if (error) {
-          console.error('Auth callback error:', error)
+          console.error('AuthCallback: Error en callback:', error)
           navigate('/auth?error=callback_error')
           return
         }
 
         if (data.session) {
-          // Check if user has completed profile setup
+          console.log('AuthCallback: Sesión válida, verificando perfil')
+          
+          // Verificar si el usuario ha completado la configuración del perfil
           const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select('username')
             .eq('id', data.session.user.id)
-            .single()
+            .maybeSingle()
 
-          if (profileError || !profile?.username) {
+          console.log('AuthCallback: Resultado de perfil', { profile, profileError })
+
+          if (profileError) {
+            console.error('AuthCallback: Error al obtener perfil:', profileError)
+            navigate('/auth/welcome')
+          } else if (!profile || !profile.username) {
+            console.log('AuthCallback: Perfil no encontrado o sin username, redirigiendo a welcome')
             navigate('/auth/welcome')
           } else {
+            console.log('AuthCallback: Perfil completo, redirigiendo a dashboard')
             navigate('/dashboard')
           }
         } else {
+          console.log('AuthCallback: No hay sesión, redirigiendo a auth')
           navigate('/auth')
         }
       } catch (error) {
-        console.error('Unexpected error in auth callback:', error)
+        console.error('AuthCallback: Error inesperado:', error)
         navigate('/auth?error=unexpected_error')
       }
     }
 
-    handleAuthCallback()
+    // Agregar un pequeño delay para asegurar que Supabase procese el hash
+    const timer = setTimeout(handleAuthCallback, 100)
+    return () => clearTimeout(timer)
   }, [navigate])
 
   return (
