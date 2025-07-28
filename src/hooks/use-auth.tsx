@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
 import { useNavigate } from 'react-router-dom'
-import { useAuthNotifications } from './use-auth-notifications'
 
 interface AuthContextType {
   user: User | null
@@ -19,7 +18,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
-  const { sendWelcomeEmail } = useAuthNotifications()
+
+  const sendWelcomeEmail = async (email: string) => {
+    try {
+      await supabase.functions.invoke('send-auth-email', {
+        body: {
+          to: email,
+          type: 'welcome',
+          data: { appUrl: window.location.origin }
+        }
+      });
+    } catch (error) {
+      console.error('Error sending welcome email:', error);
+    }
+  };
 
   useEffect(() => {
     // Set up auth state listener
