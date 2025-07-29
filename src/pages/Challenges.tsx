@@ -6,9 +6,14 @@ import { useChallenges } from '@/hooks/use-challenges'
 import { ChallengeCard } from '@/components/challenges/challenge-card'
 import { ChallengeFilters } from '@/components/challenges/challenge-filters'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/hooks/use-auth'
+import { useDashboardData } from '@/hooks/use-dashboard-data'
 
 const Challenges = () => {
-  const { challenges, loading, error } = useChallenges()
+  const { user } = useAuth()
+  const { profile } = useDashboardData()
+  const userLevel = profile?.current_level || 'beginner'
+  const { challenges, loading, error } = useChallenges(userLevel)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState('all')
   const [selectedCategory, setSelectedCategory] = useState('all')

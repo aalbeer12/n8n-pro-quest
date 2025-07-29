@@ -58,6 +58,7 @@ const Dashboard = () => {
 
   const getTimeBasedGreeting = () => {
     const hour = new Date().getHours()
+    // Use display_name first, then username, and finally fallback to "Usuario" (not email)
     const username = profile?.display_name || profile?.username || 'Usuario'
     
     if (hour < 12) {

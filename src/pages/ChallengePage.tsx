@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '@/hooks/use-auth'
 import { supabase } from '@/integrations/supabase/client'
+import { AccessGuard } from '@/components/challenge/access-guard'
 import { Challenge, Submission } from '@/types/database'
 import { useToast } from '@/hooks/use-toast'
 
@@ -346,7 +347,8 @@ const ChallengePage = () => {
   const difficultyStyle = difficultyConfig[challenge.difficulty]
 
   return (
-    <div className="min-h-screen bg-background">
+    <AccessGuard requiresSubscription={true}>
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -509,7 +511,8 @@ const ChallengePage = () => {
         onConfirm={confirmSubmission}
         submitting={submitting}
       />
-    </div>
+      </div>
+    </AccessGuard>
   )
 }
 
