@@ -100,14 +100,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (email: string, firstName?: string, redirectPath?: string) => {
     console.log('🚀 signIn called with:', { email, firstName, redirectPath });
     
-    // Guardar el intent de redirect en localStorage antes del signIn
-    if (redirectPath) {
-      localStorage.setItem('auth_redirect_intent', redirectPath);
-      console.log('💾 Saved redirect intent:', redirectPath);
-    }
+    // Usar el redirectPath correcto o callback por defecto
+    const redirectUrl = redirectPath ? 
+      `${window.location.origin}${redirectPath}` : 
+      `${window.location.origin}/auth/callback`;
     
-    // Usar una URL de callback simple que siempre funciona
-    const redirectUrl = `${window.location.origin}/auth/callback`;
     console.log('📧 Email redirect URL:', redirectUrl);
     
     const { error } = await supabase.auth.signInWithOtp({

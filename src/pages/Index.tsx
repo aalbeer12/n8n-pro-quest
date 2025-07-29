@@ -18,27 +18,9 @@ const Index = () => {
   useEffect(() => {
     // Check if there's a hash with auth tokens (magic link redirect)
     if (window.location.hash && window.location.hash.includes('access_token')) {
-      console.log('🔗 Magic link detected on homepage, processing...');
-      
-      // Check localStorage for redirect intent
-      const redirectIntent = localStorage.getItem('auth_redirect_intent');
-      
-      if (redirectIntent) {
-        console.log('💾 Found redirect intent in localStorage:', redirectIntent);
-        localStorage.removeItem('auth_redirect_intent'); // Clean up
-        
-        // Let Supabase process the hash, then navigate to intended destination
-        setTimeout(() => {
-          console.log('📍 Navigating to intended destination:', redirectIntent);
-          navigate(redirectIntent);
-        }, 500);
-      } else {
-        // No redirect intent, go to regular auth callback
-        console.log('📍 No redirect intent, going to auth callback');
-        setTimeout(() => {
-          navigate('/auth/callback');
-        }, 500);
-      }
+      console.log('🔗 Magic link detected on homepage, redirecting to auth callback');
+      // Clean redirect - let AuthCallback handle everything
+      navigate('/auth/callback');
     }
   }, [navigate]);
   return (
