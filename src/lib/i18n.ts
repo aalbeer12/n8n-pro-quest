@@ -20,6 +20,8 @@ const resources = {
       "landing.hero.subtitle": "The definitive platform to learn automation through practical challenges and real business cases. Improve your skills and compete with other developers.",
       "landing.hero.cta": "Start Free",
       "landing.hero.demo": "View Demo",
+      "landing.hero.social_proof": "Join 500+ automation engineers improving their skills",
+      "landing.hero.trial_info": "7-day free trial, no credit card required",
       
       "landing.problem.title": "Tired of Learning Without Doing?",
       "landing.problem.subtitle": "Most automation education is broken. You watch tutorials, read docs, but when it's time to build something real, you're lost.",
@@ -85,31 +87,101 @@ const resources = {
       "landing.cta.emailPlaceholder": "Enter your email to get started",
       "landing.cta.startLearning": "Start Learning",
       "landing.cta.trustedBy": "Trusted by automation engineers at top companies worldwide",
-      
-      "landing.footer.product": "Product",
-      "landing.footer.challenges": "Challenges",
-      "landing.footer.pricing": "Pricing", 
-      "landing.footer.community": "Community",
-      "landing.footer.company": "Company",
-      "landing.footer.about": "About",
-      "landing.footer.contact": "Contact",
-      "landing.footer.support": "Support",
-      "landing.footer.legal": "Legal",
-      "landing.footer.privacy": "Privacy",
-      "landing.footer.terms": "Terms",
-      "landing.footer.brand": "Hack-Your-Flows",
-      "landing.footer.brandDesc": "Master n8n automation through daily challenges, AI feedback, and a community of automation experts.",
-      "landing.footer.features": "Features",
-      "landing.footer.leaderboard": "Leaderboard",
-      "landing.footer.resources": "Resources",
-      "landing.footer.documentation": "Documentation",
-      "landing.footer.blog": "Blog",
-      "landing.footer.helpCenter": "Help Center",
-      "landing.footer.careers": "Careers",
-      "landing.footer.copyright": "© 2024 Hack-Your-Flows. All rights reserved.",
-      "landing.footer.privacyPolicy": "Privacy Policy",
-      "landing.footer.termsOfService": "Terms of Service",
-      "landing.footer.cookiePolicy": "Cookie Policy",
+
+      // Footer
+      footer: {
+        description: "Master n8n automation through daily challenges, AI feedback, and a community of automation experts.",
+        sections: {
+          product: "Product",
+          resources: "Resources", 
+          company: "Company"
+        },
+        product: {
+          challenges: "Challenges",
+          leaderboard: "Leaderboard",
+          pricing: "Pricing"
+        },
+        resources: {
+          community: "Community",
+          help: "Help Center",
+          blog: "Blog"
+        },
+        company: {
+          about: "About",
+          privacy: "Privacy Policy",
+          terms: "Terms of Service"
+        },
+        legal: {
+          privacy: "Privacy Policy",
+          terms: "Terms of Service"
+        },
+        copyright: "© 2024 Hack-Your-Flows. All rights reserved."
+      },
+
+      // Pages
+      pages: {
+        about: {
+          title: "About Us",
+          description: "Learn more about Hack-Your-Flows and our mission",
+          intro: "We believe in the power of automation to transform how we work.",
+          mission: "Our mission is to make n8n automation accessible to everyone through practical challenges and AI-powered feedback.",
+          team: "We're a team of automation enthusiasts dedicated to helping you master workflow automation skills."
+        },
+        community: {
+          title: "Join Our Community",
+          description: "Connect with automation experts and learners worldwide",
+          subtitle: "Connect with thousands of automation experts, share knowledge, and grow together.",
+          discord: {
+            title: "Discord Community",
+            description: "Join real-time discussions, get help, and share your automation wins.",
+            cta: "Join Discord"
+          },
+          forum: {
+            title: "Community Forum",
+            description: "Browse discussions, ask questions, and share your knowledge.",
+            cta: "Visit Forum"
+          },
+          events: {
+            title: "Community Events",
+            description: "Participate in workshops, webinars, and automation challenges.",
+            cta: "View Events"
+          }
+        },
+        help: {
+          title: "Help Center",
+          description: "Find answers to common questions and get support",
+          subtitle: "Find answers to your questions and get the help you need.",
+          getting_started: {
+            title: "Getting Started",
+            description: "Learn the basics and start your automation journey.",
+            cta: "Start Learning"
+          },
+          contact: {
+            title: "Contact Support",
+            description: "Get personalized help from our support team.",
+            cta: "Contact Us"
+          },
+          faq: {
+            title: "Frequently Asked Questions",
+            q1: {
+              question: "How do I get started with Hack-Your-Flows?",
+              answer: "Simply sign up for a free account and start with our beginner challenges. We'll guide you through the basics of n8n automation."
+            },
+            q2: {
+              question: "What is included in the subscription?",
+              answer: "Our subscription includes unlimited access to all challenges, AI feedback, progress tracking, and community features."
+            },
+            q3: {
+              question: "Can I cancel my subscription anytime?",
+              answer: "Yes, you can cancel your subscription at any time from your account settings. Your access will continue until the end of your billing period."
+            },
+            q4: {
+              question: "Do you offer refunds?",
+              answer: "We offer a 7-day free trial. If you're not satisfied within the first 7 days of your paid subscription, contact us for a full refund."
+            }
+          }
+        }
+      },
       
       // Auth
       "auth.title": "Welcome to AutomationChallenge",
@@ -121,74 +193,6 @@ const resources = {
       "auth.checkEmailDesc": "We've sent you a magic link to sign in",
       "auth.resend": "Resend email",
       "auth.backToEmail": "Back to email",
-      
-      // Welcome
-      "welcome.title": "Welcome to AutomationChallenge!",
-      "welcome.subtitle": "The definitive platform to master n8n automation. Improve your skills with practical challenges and real cases.",
-      "welcome.practicalTitle": "Practical Challenges",
-      "welcome.practicalDesc": "Solve real automation cases with personalized AI feedback",
-      "welcome.rankingTitle": "Ranking System", 
-      "welcome.rankingDesc": "Compete with others and level up based on your performance",
-      "welcome.communityTitle": "Community",
-      "welcome.communityDesc": "Connect with other automatizers and share your progress",
-      "welcome.assessmentTitle": "Initial Level Assessment",
-      "welcome.assessmentDesc": "Answer a few quick questions so we can personalize your experience",
-      "welcome.assessmentFeature1": "Only 5 questions",
-      "welcome.assessmentFeature2": "Challenges adapted to your level",
-      "welcome.assessmentFeature3": "You can change level later",
-      "welcome.assessmentFeature4": "Completely optional",
-      "welcome.startAssessment": "Start Assessment",
-      "welcome.skipAssessment": "Skip (Start as Beginner)",
-      
-      // Dashboard
-      "dashboard.welcome": "Welcome back",
-      "dashboard.todayChallenge": "Today's Challenge",
-      "dashboard.stats": "Your Stats",
-      "dashboard.achievements": "Recent Achievements",
-      "dashboard.activity": "Recent Activity",
-      "dashboard.streak": "Current Streak",
-      
-      // Challenges
-      "challenges.title": "Automation Challenges",
-      "challenges.subtitle": "Practical challenges to master n8n",
-      "challenges.all": "All",
-      "challenges.dataProcessing": "Data Processing",
-      "challenges.apiIntegration": "API Integration", 
-      "challenges.workflowLogic": "Workflow Logic",
-      "challenges.errorHandling": "Error Handling",
-      "challenges.optimization": "Optimization",
-      "challenges.difficulty.easy": "Easy",
-      "challenges.difficulty.medium": "Medium",
-      "challenges.difficulty.hard": "Hard",
-      "challenges.difficulty.expert": "Expert",
-      "challenges.points": "points",
-      "challenges.minutes": "min",
-      "challenges.startChallenge": "Start Challenge",
-      
-      // Subscription
-      "subscription.planActive": "Active Plan",
-      "subscription.planActiveDesc": "Full access to all daily challenges",
-      "subscription.weeklyUsed": "Weekly challenge used",
-      "subscription.subscribeUnlimited": "Subscribe for unlimited access to daily challenges",
-      "subscription.freePlan": "Free Plan",
-      "subscription.subscribeDaily": "Subscribe for unlimited daily challenges",
-      "subscription.monthly": "€12/month",
-      "subscription.annual": "€120/year",
-      
-      // Leaderboard
-      "leaderboard.title": "Global Ranking",
-      "leaderboard.subtitle": "Compete with other automation developers",
-      "leaderboard.topPerformers": "Top Global Performers",
-      "leaderboard.rankingsByLevel": "Rankings by Level",
-      "leaderboard.beginner": "Beginner",
-      "leaderboard.intermediate": "Intermediate", 
-      "leaderboard.advanced": "Advanced",
-      "leaderboard.expert": "Expert",
-      "leaderboard.points": "Points",
-      "leaderboard.challenges": "Challenges",
-      "leaderboard.average": "Average",
-      "leaderboard.noUsers": "No users at {{level}} level yet.",
-      "leaderboard.beFirst": "Be the first to appear here!",
       
       // Common
       "common.loading": "Loading...",
@@ -206,278 +210,6 @@ const resources = {
       "common.translateTo": "Translate to {{language}}",
       "common.backToDashboard": "Back to Dashboard",
       "common.backToHome": "Back to home",
-      
-      // Profile
-      "profile.title": "My Profile",
-      "profile.stats": "Statistics",
-      "profile.achievements": "Achievements",
-      "profile.recentChallenges": "Recent Challenges",
-      "profile.skillsRadar": "Skills Radar",
-      "profile.activityHeatmap": "Activity Heatmap",
-      "profile.portfolio": "Portfolio",
-      
-      // Challenge Page
-      "challenge.title": "Challenge",
-      "challenge.requirements": "Requirements",
-      "challenge.hints": "Hints",
-      "challenge.submitSolution": "Submit Solution",
-      "challenge.timer": "Time",
-      "challenge.difficulty": "Difficulty",
-      "challenge.category": "Category",
-      "challenge.description": "Description",
-      "challenge.examples": "Examples",
-      "challenge.testCases": "Test Cases",
-      
-      // Results
-      "result.title": "Challenge Results",
-      "result.score": "Score",
-      "result.feedback": "AI Feedback",
-      "result.improvements": "Improvements",
-      "result.nextSteps": "Next Steps",
-      "result.shareResult": "Share Result",
-      "result.tryAgain": "Try Again",
-      "result.nextChallenge": "Next Challenge",
-      
-      // Settings
-      "settings.title": "Settings",
-      "settings.description": "Manage your account and preferences",
-      "settings.success": "Success",
-      "settings.error": "Error",
-      "settings.profileUpdated": "Profile updated successfully",
-      "settings.updateError": "Failed to update profile",
-      "settings.subscriptionError": "Failed to open subscription management",
-      
-      "settings.profile.title": "Profile Information",
-      "settings.profile.description": "Update your profile information and social links",
-      "settings.profile.username": "Username",
-      "settings.profile.usernameHelp": "Username cannot be changed",
-      "settings.profile.displayName": "Display Name",
-      "settings.profile.displayNamePlaceholder": "Enter your display name",
-      "settings.profile.bio": "Bio",
-      "settings.profile.bioPlaceholder": "Tell us about yourself...",
-      "settings.profile.github": "GitHub URL",
-      "settings.profile.linkedin": "LinkedIn URL",
-      "settings.profile.website": "Website URL",
-      "settings.profile.publicProfile": "Public Profile",
-      "settings.profile.publicProfileHelp": "Allow others to view your profile and activity",
-      
-      "settings.subscription.title": "Subscription",
-      "settings.subscription.description": "Manage your subscription and billing",
-      "settings.subscription.currentPlan": "Current Plan",
-      "settings.subscription.active": "Active",
-      "settings.subscription.inactive": "Inactive",
-      "settings.subscription.renewsOn": "Renews on",
-      "settings.subscription.manage": "Manage Subscription",
-      
-      "settings.language.title": "Language & Region",
-      "settings.language.description": "Choose your preferred language and region",
-      "settings.language.current": "Current Language",
-      
-      "settings.notifications.title": "Notifications",
-      "settings.notifications.description": "Manage your notification preferences",
-      "settings.notifications.dailyChallenge": "Daily Challenge Reminders",
-      "settings.notifications.dailyChallengeHelp": "Get notified about new daily challenges",
-      "settings.notifications.achievements": "Achievement Notifications",
-      "settings.notifications.achievementsHelp": "Get notified when you unlock achievements",
-      "settings.notifications.streakReminders": "Streak Reminders",
-      "settings.notifications.streakRemindersHelp": "Get reminded to maintain your streak",
-      
-      "settings.privacy.title": "Privacy & Security",
-      "settings.privacy.description": "Manage your privacy and data settings",
-      "settings.privacy.exportData": "Export My Data",
-      "settings.privacy.downloadData": "Download Account Data",
-      "settings.privacy.dangerZone": "Danger Zone",
-      "settings.privacy.deleteAccount": "Delete Account",
-      
-      // How It Works
-      "howItWorks.title": "How It Works",
-      "howItWorks.description": "Learn how to master n8n automation with our platform",
-      "howItWorks.badge": "Learn More",
-      "howItWorks.subtitle": "From complete beginner to automation expert in just a few minutes per day",
-      "howItWorks.getStarted": "Get Started",
-      "howItWorks.viewChallenges": "View Challenges",
-      "howItWorks.stepsTitle": "Four Simple Steps to Mastery",
-      "howItWorks.stepsSubtitle": "Our proven methodology helps you learn automation skills effectively",
-      
-      "howItWorks.steps.choose.title": "Choose Your Challenge",
-      "howItWorks.steps.choose.description": "Select from hundreds of real-world automation scenarios",
-      "howItWorks.steps.choose.detail1": "Multiple difficulty levels",
-      "howItWorks.steps.choose.detail2": "Real business scenarios",
-      "howItWorks.steps.choose.detail3": "Story-driven contexts",
-      
-      "howItWorks.steps.build.title": "Build Your Solution",
-      "howItWorks.steps.build.description": "Create n8n workflows using our browser-based editor",
-      "howItWorks.steps.build.detail1": "Monaco code editor",
-      "howItWorks.steps.build.detail2": "Real-time validation",
-      "howItWorks.steps.build.detail3": "Smart hint system",
-      
-      "howItWorks.steps.feedback.title": "Get AI Feedback",
-      "howItWorks.steps.feedback.description": "Receive detailed analysis and improvement suggestions",
-      "howItWorks.steps.feedback.detail1": "Detailed score breakdown",
-      "howItWorks.steps.feedback.detail2": "Best practice recommendations",
-      "howItWorks.steps.feedback.detail3": "Code quality analysis",
-      
-      "howItWorks.steps.improve.title": "Improve & Compete",
-      "howItWorks.steps.improve.description": "Track progress and climb the global leaderboard",
-      "howItWorks.steps.improve.detail1": "XP and achievement system",
-      "howItWorks.steps.improve.detail2": "Global rankings",
-      "howItWorks.steps.improve.detail3": "Portfolio building",
-      
-      "howItWorks.featuresTitle": "Why Choose Our Platform",
-      "howItWorks.featuresSubtitle": "The most effective way to learn automation skills",
-      
-      "howItWorks.features.realWorld.title": "Real-World Scenarios",
-      "howItWorks.features.realWorld.description": "Practice with actual business automation challenges you'll face in production",
-      
-      "howItWorks.features.timeEfficient.title": "Time-Efficient Learning",
-      "howItWorks.features.timeEfficient.description": "Master complex concepts in just 15-30 minutes per day",
-      
-      "howItWorks.features.community.title": "Active Community",
-      "howItWorks.features.community.description": "Learn alongside thousands of automation engineers worldwide",
-      
-      "howItWorks.features.instant.title": "Instant Feedback",
-      "howItWorks.features.instant.description": "Get immediate AI-powered feedback on your solutions",
-      
-      "howItWorks.exampleTitle": "Example Challenge",
-      "howItWorks.exampleSubtitle": "See what a typical challenge looks like",
-      
-      "howItWorks.example.difficulty": "Intermediate",
-      "howItWorks.example.category": "API Integration",
-      "howItWorks.example.time": "25 minutes",
-      "howItWorks.example.title": "Customer Data Sync",
-      "howItWorks.example.description": "Build a workflow that automatically syncs customer data between your CRM and email marketing platform, handling data transformation and error cases.",
-      "howItWorks.example.requirementsTitle": "Requirements",
-      "howItWorks.example.requirement1": "Fetch customer data from CRM API",
-      "howItWorks.example.requirement2": "Transform data to match email platform format",
-      "howItWorks.example.requirement3": "Handle API rate limits and errors gracefully",
-      "howItWorks.example.points": "150 XP available",
-      
-      "howItWorks.cta.title": "Ready to Start Your Automation Journey?",
-      "howItWorks.cta.subtitle": "Join thousands of engineers who are already mastering n8n automation",
-      "howItWorks.cta.primary": "Start Learning Now",
-      "howItWorks.cta.secondary": "Explore More",
-      
-      // Terms
-      "terms.title": "Terms of Service",
-      "terms.description": "Terms and conditions for using our platform",
-      "terms.lastUpdated": "Last Updated",
-      "terms.effectiveDate": "Effective Date",
-      "terms.intro": "These terms and conditions outline the rules and regulations for the use of Hack-Your-Flows's platform.",
-      "terms.tableOfContents": "Table of Contents",
-      
-      "terms.acceptance.title": "Acceptance of Terms",
-      "terms.acceptance.content": "By accessing and using this platform, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.",
-      
-      "terms.description.title": "Service Description",
-      "terms.description.content": "Hack-Your-Flows provides a platform for learning n8n automation through practical challenges, AI feedback, and community features. We reserve the right to modify or discontinue the service at any time.",
-      
-      "terms.registration.title": "User Registration",
-      "terms.registration.content": "To access certain features, you must register for an account. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account.",
-      
-      "terms.userContent.title": "User Content",
-      "terms.userContent.content": "You retain ownership of any content you submit to our platform. By submitting content, you grant us a worldwide, royalty-free license to use, display, and distribute your content in connection with the service.",
-      
-      "terms.subscription.title": "Subscription and Payment",
-      "terms.subscription.content": "Paid subscriptions are billed in advance on a monthly or annual basis. Subscriptions automatically renew unless cancelled. Refunds are not provided for partial months or unused portions of the service.",
-      
-      "terms.intellectualProperty.title": "Intellectual Property",
-      "terms.intellectualProperty.content": "The service and its original content, features, and functionality are owned by Hack-Your-Flows and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.",
-      
-      "terms.prohibited.title": "Prohibited Uses",
-      "terms.prohibited.content": "You may not use our service for any unlawful purpose, to transmit malicious code, to attempt to gain unauthorized access to our systems, or to interfere with the proper functioning of the service.",
-      
-      "terms.termination.title": "Termination",
-      "terms.termination.content": "We may terminate or suspend your account and access to the service immediately, without prior notice, for conduct that we believe violates these terms or is harmful to other users.",
-      
-      "terms.disclaimer.title": "Disclaimer",
-      "terms.disclaimer.content": "The information on this platform is provided on an 'as is' basis. We disclaim all warranties, whether express or implied, including warranties of merchantability and fitness for a particular purpose.",
-      
-      "terms.limitation.title": "Limitation of Liability",
-      "terms.limitation.content": "In no event shall Hack-Your-Flows be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or other intangible losses.",
-      
-      "terms.governing.title": "Governing Law",
-      "terms.governing.content": "These terms shall be governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.",
-      
-      "terms.changes.title": "Changes to Terms",
-      "terms.changes.content": "We reserve the right to modify these terms at any time. We will notify users of significant changes via email or through our platform. Continued use constitutes acceptance of modified terms.",
-      
-      "terms.contact.title": "Contact Information",
-      "terms.contact.content": "If you have any questions about these terms, please contact us at the information provided below.",
-      
-      "terms.questions.title": "Questions About These Terms?",
-      "terms.questions.content": "If you have any questions about these Terms of Service, please contact us using the information below:",
-      "terms.questions.email": "Email",
-      "terms.questions.address": "Address",
-      
-      // Privacy
-      "privacy.title": "Privacy Policy",
-      "privacy.description": "How we collect, use, and protect your personal information",
-      "privacy.lastUpdated": "Last Updated",
-      "privacy.gdprCompliant": "GDPR Compliant",
-      "privacy.intro": "This Privacy Policy describes how Hack-Your-Flows collects, uses, and protects your personal information when you use our platform.",
-      "privacy.tableOfContents": "Table of Contents",
-      
-      "privacy.summary.title": "Privacy at a Glance",
-      "privacy.summary.weDoTitle": "What We DO",
-      "privacy.summary.weDo1": "Encrypt all data in transit and at rest",
-      "privacy.summary.weDo2": "Give you full control over your data",
-      "privacy.summary.weDo3": "Comply with GDPR and privacy regulations",
-      "privacy.summary.weDo4": "Use data only to improve your experience",
-      "privacy.summary.weDontTitle": "What We DON'T Do",
-      "privacy.summary.weDont1": "Sell your personal data to third parties",
-      "privacy.summary.weDont2": "Track you across other websites",
-      "privacy.summary.weDont3": "Store unnecessary personal information",
-      "privacy.summary.weDont4": "Share data without your consent",
-      
-      "privacy.information.title": "Information We Collect",
-      "privacy.information.content": "We collect information you provide directly to us, such as when you create an account, complete challenges, or contact us for support. This includes your email address, username, and any content you submit through our platform.",
-      
-      "privacy.usage.title": "How We Use Your Information",
-      "privacy.usage.content": "We use the information we collect to provide, maintain, and improve our service, to communicate with you, to monitor and analyze trends, and to detect and prevent fraud and abuse.",
-      
-      "privacy.sharing.title": "Information Sharing",
-      "privacy.sharing.content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy. We may share information with service providers who assist us in operating our platform.",
-      
-      "privacy.security.title": "Data Security",
-      "privacy.security.content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. All data is encrypted in transit and at rest.",
-      
-      "privacy.cookies.title": "Cookies and Tracking",
-      "privacy.cookies.content": "We use cookies and similar technologies to enhance your experience, analyze usage patterns, and provide personalized content. You can control cookie preferences through your browser settings.",
-      
-      "privacy.rights.title": "Your Privacy Rights",
-      "privacy.rights.content": "Depending on your location, you may have certain rights regarding your personal information, including the right to access, update, or delete your data. Contact us to exercise these rights.",
-      
-      "privacy.retention.title": "Data Retention",
-      "privacy.retention.content": "We retain your personal information for as long as necessary to provide our services and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
-      
-      "privacy.international.title": "International Transfers",
-      "privacy.international.content": "Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your information during such transfers.",
-      
-      "privacy.children.title": "Children's Privacy",
-      "privacy.children.content": "Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware of such collection, we will delete the information immediately.",
-      
-      "privacy.thirdParty.title": "Third-Party Services",
-      "privacy.thirdParty.content": "Our platform may contain links to third-party websites or services. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies.",
-      
-      "privacy.changes.title": "Changes to This Policy",
-      "privacy.changes.content": "We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the 'Last Updated' date.",
-      
-      "privacy.contact.title": "Contact Us",
-      "privacy.contact.content": "If you have any questions about this Privacy Policy or our privacy practices, please contact us using the information provided below.",
-      "privacy.contact.intro": "If you have any questions about this Privacy Policy or how we handle your personal information, please don't hesitate to contact us:",
-      "privacy.contact.dpo": "Data Protection Officer",
-      "privacy.contact.email": "Email",
-      "privacy.contact.address": "Address",
-      
-      "privacy.gdprRights.title": "Your GDPR Rights",
-      "privacy.gdprRights.intro": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
-      "privacy.gdprRights.access": "Access your personal data",
-      "privacy.gdprRights.rectification": "Correct inaccurate data",
-      "privacy.gdprRights.erasure": "Request data deletion",
-      "privacy.gdprRights.restrict": "Restrict data processing",
-      "privacy.gdprRights.portability": "Data portability",
-      "privacy.gdprRights.object": "Object to processing",
-      "privacy.gdprRights.exercise": "To exercise these rights, contact us at"
     }
   },
   es: {
@@ -495,100 +227,107 @@ const resources = {
       "landing.hero.subtitle": "La plataforma definitiva para aprender automatización mediante retos prácticos y casos de negocio reales. Mejora tus habilidades y compite con otros desarrolladores.",
       "landing.hero.cta": "Empezar Gratis",
       "landing.hero.demo": "Ver Demo",
-      
-      "landing.problem.title": "¿Cansado de Aprender Sin Hacer?",
-      "landing.problem.subtitle": "La mayoría de la educación en automatización está rota. Ves tutoriales, lees documentos, pero cuando es hora de construir algo real, estás perdido.",
-      "landing.problem.tutorialHell": "Infierno de Tutoriales",
-      "landing.problem.tutorialHellDesc": "Videos interminables que enseñan teoría pero te dejan atascado cuando es hora de construir automatizaciones reales.",
-      "landing.problem.noPractice": "Sin Práctica",
-      "landing.problem.noPracticeDesc": "Plataformas de aprendizaje que se enfocan en conceptos pero no te dan experiencia práctica con escenarios reales.",
-      "landing.problem.noFeedback": "Sin Feedback",
-      "landing.problem.noFeedbackDesc": "Construir automatizaciones en aislamiento sin saber si estás siguiendo mejores prácticas o cometiendo errores.",
-      "landing.problem.skillGaps": "Brechas de Habilidades",
-      "landing.problem.skillGapsDesc": "Conocer lo básico pero luchar con desafíos complejos de automatización del mundo real en tu trabajo.",
-      "landing.problem.testimonial": "Vi 47 videos de YouTube sobre n8n, leí toda la documentación dos veces, pero cuando mi gerente me pidió automatizar nuestro proceso de incorporación de clientes, no tenía idea de por dónde empezar.",
-      "landing.problem.testimonialAuthor": "Sarah Chen",
-      "landing.problem.testimonialRole": "Gerente de Operaciones",
-      
-      "landing.features.title": "Aprende Automatización de la Forma Correcta",
-      "landing.features.subtitle": "Practica con casos reales, obtén feedback IA y compite con la comunidad",
-      "landing.features.whyTitle": "¿Por qué Hack-Your-Flows?",
-      "landing.features.whySubtitle": "Los tutoriales tradicionales te dejan con teoría. Nosotros te damos habilidades prácticas a través de retos que reflejan el trabajo real de automatización.",
-      "landing.features.learnByDoing": "Aprende Haciendo",
-      "landing.features.learnByDoingDesc": "Escenarios de automatización del mundo real que reflejan lo que enfrentarás en entornos de producción.",
-      "landing.features.aiFeedback": "Feedback Potenciado por IA",
-      "landing.features.aiFeedbackDesc": "Obtén feedback instantáneo y detallado sobre tus soluciones con sugerencias de mejora accionables.",
-      "landing.features.trackProgress": "Seguimiento de Progreso",
-      "landing.features.trackProgressDesc": "Aprendizaje gamificado con XP, rachas y logros para mantenerte motivado.",
-      "landing.features.buildPortfolio": "Construye Portafolio",
-      "landing.features.buildPortfolioDesc": "Muestra tus habilidades de automatización con un perfil público que destaque ante empleadores.",
-      
-      "landing.howItWorks.title": "Cómo Funciona",
-      "landing.howItWorks.subtitle": "De principiante completo a experto en automatización en solo unos minutos por día.",
-      "landing.howItWorks.step1": "Reto Diario Entregado",
-      "landing.howItWorks.step1Desc": "Cada día, obtén un nuevo escenario de automatización del mundo real con requisitos y contexto claros.",
-      "landing.howItWorks.step1Features1": "Retos impulsados por historias",
-      "landing.howItWorks.step1Features2": "Múltiples niveles de dificultad",
-      "landing.howItWorks.step1Features3": "Escenarios de negocio reales",
-      "landing.howItWorks.step2": "Construye Tu Solución",
-      "landing.howItWorks.step2Desc": "Crea workflows de n8n usando nuestro editor basado en navegador con validación en vivo y pistas.",
-      "landing.howItWorks.step2Features1": "Editor de código Monaco",
-      "landing.howItWorks.step2Features2": "Validación JSON en tiempo real",
-      "landing.howItWorks.step2Features3": "Sistema de pistas inteligente",
-      "landing.howItWorks.step3": "Obtén Feedback Instantáneo",
-      "landing.howItWorks.step3Desc": "Nuestra IA evalúa tu solución y proporciona feedback detallado sobre funcionalidad y mejores prácticas.",
-      "landing.howItWorks.step3Features1": "Desglose detallado de puntuación",
-      "landing.howItWorks.step3Features2": "Sugerencias de mejora",
-      "landing.howItWorks.step3Features3": "Análisis de calidad de código",
-      "landing.howItWorks.step4": "Escala el Ranking",
-      "landing.howItWorks.step4Desc": "Gana XP, mantén rachas, desbloquea logros y compite con otros ingenieros de automatización.",
-      "landing.howItWorks.step4Features1": "Rankings globales",
-      "landing.howItWorks.step4Features2": "Sistema de logros",
-      "landing.howItWorks.step4Features3": "Construcción de portafolio",
-      
-      "landing.cta.title": "Empieza a Mejorar tus Habilidades de Automatización Hoy",
-      "landing.cta.subtitle": "Únete a cientos de desarrolladores que ya están dominando n8n",
-      "landing.cta.button": "Empezar Reto Gratis",
-      "landing.cta.startAutomation": "Comienza Tu Automatización",
-      "landing.cta.journeyToday": "Viaje Hoy",
-      "landing.cta.ctaSubtitle": "Únete a cientos de ingenieros de automatización que ya están dominando n8n a través de práctica diaria y feedback potenciado por IA.",
-      "landing.cta.benefit1": "Prueba gratuita de 7 días",
-      "landing.cta.benefit2": "No se requiere tarjeta de crédito",
-      "landing.cta.benefit3": "Cancela en cualquier momento",
-      "landing.cta.benefit4": "Acceso a todos los retos",
-      "landing.cta.benefit5": "Feedback IA incluido",
-      "landing.cta.emailPlaceholder": "Introduce tu email para empezar",
-      "landing.cta.startLearning": "Empezar a Aprender",
-      "landing.cta.trustedBy": "Confiado por ingenieros de automatización en las mejores empresas del mundo",
-      
-      "landing.footer.product": "Producto",
-      "landing.footer.challenges": "Retos",
-      "landing.footer.pricing": "Precios",
-      "landing.footer.community": "Comunidad",
-      "landing.footer.company": "Empresa",
-      "landing.footer.about": "Acerca de",
-      "landing.footer.contact": "Contacto",
-      "landing.footer.support": "Soporte",
-      "landing.footer.legal": "Legal",
-      "landing.footer.privacy": "Privacidad",
-      "landing.footer.terms": "Términos",
-      "landing.footer.brand": "Hack-Your-Flows",
-      "landing.footer.brandDesc": "Domina la automatización n8n a través de retos diarios, feedback IA y una comunidad de expertos en automatización.",
-      "landing.footer.features": "Características",
-      "landing.footer.leaderboard": "Ranking",
-      "landing.footer.resources": "Recursos",
-      "landing.footer.documentation": "Documentación",
-      "landing.footer.blog": "Blog",
-      "landing.footer.helpCenter": "Centro de Ayuda",
-      "landing.footer.careers": "Carreras",
-      "landing.footer.copyright": "© 2024 Hack-Your-Flows. Todos los derechos reservados.",
-      "landing.footer.privacyPolicy": "Política de Privacidad",
-      "landing.footer.termsOfService": "Términos de Servicio",
-      "landing.footer.cookiePolicy": "Política de Cookies",
+      "landing.hero.social_proof": "Únete a más de 500 ingenieros de automatización mejorando sus habilidades",
+      "landing.hero.trial_info": "Prueba gratuita de 7 días, sin tarjeta de crédito requerida",
+
+      // Footer
+      footer: {
+        description: "Domina la automatización n8n a través de desafíos diarios, retroalimentación de IA y una comunidad de expertos en automatización.",
+        sections: {
+          product: "Producto",
+          resources: "Recursos",
+          company: "Empresa"
+        },
+        product: {
+          challenges: "Desafíos",
+          leaderboard: "Clasificación",
+          pricing: "Precios"
+        },
+        resources: {
+          community: "Comunidad",
+          help: "Centro de Ayuda",
+          blog: "Blog"
+        },
+        company: {
+          about: "Acerca de",
+          privacy: "Política de Privacidad",
+          terms: "Términos de Servicio"
+        },
+        legal: {
+          privacy: "Política de Privacidad",
+          terms: "Términos de Servicio"
+        },
+        copyright: "© 2024 Hack-Your-Flows. Todos los derechos reservados."
+      },
+
+      // Pages
+      pages: {
+        about: {
+          title: "Acerca de Nosotros",
+          description: "Conoce más sobre Hack-Your-Flows y nuestra misión",
+          intro: "Creemos en el poder de la automatización para transformar cómo trabajamos.",
+          mission: "Nuestra misión es hacer la automatización n8n accesible para todos a través de desafíos prácticos y retroalimentación impulsada por IA.",
+          team: "Somos un equipo de entusiastas de la automatización dedicados a ayudarte a dominar las habilidades de automatización de flujos de trabajo."
+        },
+        community: {
+          title: "Únete a Nuestra Comunidad",
+          description: "Conéctate con expertos en automatización y estudiantes de todo el mundo",
+          subtitle: "Conéctate con miles de expertos en automatización, comparte conocimiento y crece juntos.",
+          discord: {
+            title: "Comunidad Discord",
+            description: "Únete a discusiones en tiempo real, obtén ayuda y comparte tus logros de automatización.",
+            cta: "Unirse a Discord"
+          },
+          forum: {
+            title: "Foro de la Comunidad",
+            description: "Explora discusiones, haz preguntas y comparte tu conocimiento.",
+            cta: "Visitar Foro"
+          },
+          events: {
+            title: "Eventos de la Comunidad",
+            description: "Participa en talleres, webinarios y desafíos de automatización.",
+            cta: "Ver Eventos"
+          }
+        },
+        help: {
+          title: "Centro de Ayuda",
+          description: "Encuentra respuestas a preguntas comunes y obtén soporte",
+          subtitle: "Encuentra respuestas a tus preguntas y obtén la ayuda que necesitas.",
+          getting_started: {
+            title: "Comenzando",
+            description: "Aprende lo básico y comienza tu viaje de automatización.",
+            cta: "Comenzar a Aprender"
+          },
+          contact: {
+            title: "Contactar Soporte",
+            description: "Obtén ayuda personalizada de nuestro equipo de soporte.",
+            cta: "Contáctanos"
+          },
+          faq: {
+            title: "Preguntas Frecuentes",
+            q1: {
+              question: "¿Cómo empiezo con Hack-Your-Flows?",
+              answer: "Simplemente regístrate para una cuenta gratuita y comienza con nuestros desafíos para principiantes. Te guiaremos a través de los conceptos básicos de automatización n8n."
+            },
+            q2: {
+              question: "¿Qué incluye la suscripción?",
+              answer: "Nuestra suscripción incluye acceso ilimitado a todos los desafíos, retroalimentación de IA, seguimiento de progreso y características de la comunidad."
+            },
+            q3: {
+              question: "¿Puedo cancelar mi suscripción en cualquier momento?",
+              answer: "Sí, puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta. Tu acceso continuará hasta el final de tu período de facturación."
+            },
+            q4: {
+              question: "¿Ofrecen reembolsos?",
+              answer: "Ofrecemos una prueba gratuita de 7 días. Si no estás satisfecho dentro de los primeros 7 días de tu suscripción paga, contáctanos para un reembolso completo."
+            }
+          }
+        }
+      },
       
       // Auth
       "auth.title": "Bienvenido a AutomationChallenge",
-      "auth.subtitle": "Introduce tu email para empezar",
+      "auth.subtitle": "Ingresa tu email para comenzar",
       "auth.email": "Email",
       "auth.emailPlaceholder": "tu@email.com",
       "auth.continue": "Continuar con Email",
@@ -596,74 +335,6 @@ const resources = {
       "auth.checkEmailDesc": "Te hemos enviado un enlace mágico para iniciar sesión",
       "auth.resend": "Reenviar email",
       "auth.backToEmail": "Volver al email",
-      
-      // Welcome
-      "welcome.title": "¡Bienvenido a AutomationChallenge!",
-      "welcome.subtitle": "La plataforma definitiva para dominar la automatización con n8n. Mejora tus habilidades con retos prácticos y casos reales.",
-      "welcome.practicalTitle": "Retos Prácticos",
-      "welcome.practicalDesc": "Resuelve casos reales de automatización con feedback IA personalizado",
-      "welcome.rankingTitle": "Sistema de Ranking",
-      "welcome.rankingDesc": "Compite con otros y sube de nivel según tu rendimiento",
-      "welcome.communityTitle": "Comunidad",
-      "welcome.communityDesc": "Conecta con otros automatizadores y comparte tu progreso",
-      "welcome.assessmentTitle": "Evaluación de Nivel Inicial",
-      "welcome.assessmentDesc": "Responde unas preguntas rápidas para que podamos personalizar tu experiencia",
-      "welcome.assessmentFeature1": "Solo 5 preguntas",
-      "welcome.assessmentFeature2": "Retos adaptados a tu nivel",
-      "welcome.assessmentFeature3": "Puedes cambiar nivel después",
-      "welcome.assessmentFeature4": "Completamente opcional",
-      "welcome.startAssessment": "Comenzar Evaluación",
-      "welcome.skipAssessment": "Saltar (Empezar como Principiante)",
-      
-      // Dashboard
-      "dashboard.welcome": "Bienvenido de nuevo",
-      "dashboard.todayChallenge": "Reto de Hoy",
-      "dashboard.stats": "Tus Estadísticas",
-      "dashboard.achievements": "Logros Recientes",
-      "dashboard.activity": "Actividad Reciente",
-      "dashboard.streak": "Racha Actual",
-      
-      // Challenges
-      "challenges.title": "Retos de Automatización",
-      "challenges.subtitle": "Retos prácticos para dominar n8n",
-      "challenges.all": "Todos",
-      "challenges.dataProcessing": "Procesamiento de Datos",
-      "challenges.apiIntegration": "Integración API",
-      "challenges.workflowLogic": "Lógica de Workflow",
-      "challenges.errorHandling": "Manejo de Errores",
-      "challenges.optimization": "Optimización",
-      "challenges.difficulty.easy": "Fácil",
-      "challenges.difficulty.medium": "Medio",
-      "challenges.difficulty.hard": "Difícil",
-      "challenges.difficulty.expert": "Experto",
-      "challenges.points": "puntos",
-      "challenges.minutes": "min",
-      "challenges.startChallenge": "Empezar Reto",
-      
-      // Subscription
-      "subscription.planActive": "Plan Activo",
-      "subscription.planActiveDesc": "Acceso completo a todos los retos diarios",
-      "subscription.weeklyUsed": "Reto semanal usado",
-      "subscription.subscribeUnlimited": "Suscríbete para acceso ilimitado a retos diarios",
-      "subscription.freePlan": "Plan Gratuito",
-      "subscription.subscribeDaily": "Suscríbete para retos diarios ilimitados",
-      "subscription.monthly": "€12/mes",
-      "subscription.annual": "€120/año",
-      
-      // Leaderboard
-      "leaderboard.title": "Ranking Global",
-      "leaderboard.subtitle": "Compite con otros desarrolladores de automatización",
-      "leaderboard.topPerformers": "Top Performers Global",
-      "leaderboard.rankingsByLevel": "Rankings por Nivel",
-      "leaderboard.beginner": "Principiante",
-      "leaderboard.intermediate": "Intermedio",
-      "leaderboard.advanced": "Avanzado",
-      "leaderboard.expert": "Experto",
-      "leaderboard.points": "Puntos",
-      "leaderboard.challenges": "Retos",
-      "leaderboard.average": "Promedio",
-      "leaderboard.noUsers": "No hay usuarios en el nivel {{level}} aún.",
-      "leaderboard.beFirst": "¡Sé el primero en aparecer aquí!",
       
       // Common
       "common.loading": "Cargando...",
@@ -681,37 +352,6 @@ const resources = {
       "common.translateTo": "Traducir a {{language}}",
       "common.backToDashboard": "Volver al Panel",
       "common.backToHome": "Volver al inicio",
-      
-      // Profile
-      "profile.title": "Mi Perfil",
-      "profile.stats": "Estadísticas",
-      "profile.achievements": "Logros",
-      "profile.recentChallenges": "Retos Recientes",
-      "profile.skillsRadar": "Radar de Habilidades",
-      "profile.activityHeatmap": "Mapa de Actividad",
-      "profile.portfolio": "Portafolio",
-      
-      // Challenge Page
-      "challenge.title": "Reto",
-      "challenge.requirements": "Requisitos",
-      "challenge.hints": "Pistas",
-      "challenge.submitSolution": "Enviar Solución",
-      "challenge.timer": "Tiempo",
-      "challenge.difficulty": "Dificultad",
-      "challenge.category": "Categoría",
-      "challenge.description": "Descripción",
-      "challenge.examples": "Ejemplos",
-      "challenge.testCases": "Casos de Prueba",
-      
-      // Results
-      "result.title": "Resultados del Reto",
-      "result.score": "Puntuación",
-      "result.feedback": "Feedback IA",
-      "result.improvements": "Mejoras",
-      "result.nextSteps": "Próximos Pasos",
-      "result.shareResult": "Compartir Resultado",
-      "result.tryAgain": "Intentar de Nuevo",
-      "result.nextChallenge": "Siguiente Reto"
     }
   }
 };
@@ -721,15 +361,15 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: 'es',
     debug: false,
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     detection: {
       order: ['path', 'localStorage', 'navigator'],
       lookupFromPathIndex: 0,
-      lookupFromSubdomainIndex: 0
+      lookupFromSubdomainIndex: 0,
     }
   });
 

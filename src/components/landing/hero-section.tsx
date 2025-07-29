@@ -14,15 +14,15 @@ export const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-20 p-6">
+      <nav className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
-            <Zap className="w-8 h-8 text-white" />
-            <span className="text-xl font-bold text-white">AutomationChallenge</span>
+            <Zap className="w-6 md:w-8 h-6 md:h-8 text-white" />
+            <span className="text-lg md:text-xl font-bold text-white">AutomationChallenge</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <LanguageSwitcher />
-            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button asChild variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10 text-sm">
               <Link to={`/auth?lang=${i18n.language}`}>{t('nav.signIn')}</Link>
             </Button>
           </div>
@@ -98,17 +98,17 @@ export const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg text-white">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-shadow-lg text-white leading-tight">
             {t('landing.hero.title')}
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
             {t('landing.hero.subtitle')}
           </p>
 
@@ -117,17 +117,17 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-6 md:mb-8"
           >
-            <p className="text-sm text-foreground-secondary mb-4">
-              Join 500+ automation engineers improving their skills
+            <p className="text-sm text-white/70 mb-3 md:mb-4">
+              {t('landing.hero.social_proof')}
             </p>
             <div className="flex items-center justify-center gap-2">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-primary border-2 border-background"
+                    className="w-6 md:w-8 h-6 md:h-8 rounded-full bg-gradient-primary border-2 border-background"
                   />
                 ))}
               </div>
@@ -140,11 +140,11 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-6"
+            className="mb-4 md:mb-6"
           >
-            <Button asChild className="h-12 px-8 bg-gradient-primary hover:scale-105 transition-transform">
+            <Button asChild className="h-10 md:h-12 px-6 md:px-8 bg-gradient-primary hover:scale-105 transition-transform text-sm md:text-base">
               <Link to={`/auth?lang=${i18n.language}`}>
-                {t('landing.hero.cta')} <ArrowRight className="ml-2 w-5 h-5" />
+                {t('landing.hero.cta')} <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
               </Link>
             </Button>
           </motion.div>
@@ -153,9 +153,9 @@ export const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-sm text-foreground-secondary mb-8"
+            className="text-xs md:text-sm text-white/70 mb-6 md:mb-8"
           >
-            7-day free trial, no credit card required
+            {t('landing.hero.trial_info')}
           </motion.p>
 
           {/* Demo button */}
@@ -164,7 +164,7 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Button asChild variant="outline" className="glass border-white/20 hover:bg-white/10 text-white">
+            <Button asChild variant="outline" size="sm" className="glass border-white/20 hover:bg-white/10 text-white text-sm">
               <Link to="/challenges">
                 <Play className="w-4 h-4 mr-2" />
                 {t('landing.hero.demo')}
