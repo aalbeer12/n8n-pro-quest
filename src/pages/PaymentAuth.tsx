@@ -19,16 +19,17 @@ export const PaymentAuth = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const planType = searchParams.get('plan') as 'monthly' | 'annual' || 'monthly'
+  const authComplete = searchParams.get('auth') === 'complete'
   const { signIn, user } = useAuth()
   const { toast } = useToast()
   const { createCheckout } = useSubscription()
 
   useEffect(() => {
-    // Si el usuario ya está autenticado, proceder con el checkout
-    if (user) {
+    // Si el usuario ya está autenticado y viene del proceso de auth, proceder con el checkout
+    if (user && authComplete) {
       handleProceedToPayment()
     }
-  }, [user])
+  }, [user, authComplete])
 
   const handleProceedToPayment = async () => {
     try {
@@ -52,7 +53,9 @@ export const PaymentAuth = () => {
     setIsLoading(true)
 
     try {
-      const { error } = await signIn(email, firstName)
+      // Crear una URL de callback que incluye el plan como parámetro
+      const callbackUrl = `/payment-auth?plan=${planType}&auth=complete`;
+      const { error } = await signIn(email, firstName, callbackUrl);
       
       if (error) {
         toast({
@@ -125,7 +128,7 @@ export const PaymentAuth = () => {
                 Hemos enviado un enlace de acceso a <strong>{email}</strong>
               </p>
               <p className="text-sm text-muted-foreground">
-                Una vez que confirmes tu cuenta, serás redirigido automáticamente al pago seguro de Stripe para completar tu suscripción.
+                Una vez que confirmes tu cuenta desde el email, regresarás aquí y serás redirigido automáticamente al pago seguro de Stripe para completar tu suscripción al plan {planType === 'monthly' ? 'mensual' : 'anual'}.
               </p>
               <Button 
                 variant="outline" 

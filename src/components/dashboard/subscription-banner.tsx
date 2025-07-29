@@ -48,13 +48,13 @@ export const SubscriptionBanner = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button 
-              onClick={() => createCheckout('monthly')}
+              onClick={() => window.location.href = '/payment-auth?plan=monthly'}
               className="min-w-[140px]"
             >
               Plan Mensual
             </Button>
             <Button 
-              onClick={() => createCheckout('annual')}
+              onClick={() => window.location.href = '/payment-auth?plan=annual'}
               variant="outline"
               className="min-w-[140px]"
             >
@@ -83,7 +83,7 @@ export const SubscriptionBanner = () => {
         </div>
         <div className="flex gap-2">
           <Button 
-            onClick={() => createCheckout('monthly')}
+            onClick={() => window.location.href = '/payment-auth?plan=monthly'}
             size="sm"
             className="bg-gradient-to-r from-primary to-primary-glow text-white shadow-lg hover:shadow-xl transition-all"
           >
