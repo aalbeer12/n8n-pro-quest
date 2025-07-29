@@ -22,9 +22,7 @@ serve(async (req) => {
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
-    logStep("Stripe key verified");
-
-    // Create Supabase client using anon key for authentication
+    
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_ANON_KEY") ?? ""
@@ -32,56 +30,57 @@ serve(async (req) => {
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
-    logStep("Authorization header found");
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
     if (userError) throw new Error(`Authentication error: ${userError.message}`);
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
-    logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const { priceId, planType = 'monthly' } = await req.json();
-    logStep("Request body parsed", { priceId, planType });
+    const { priceId, planType } = await req.json();
+    if (!priceId && !planType) throw new Error("Either priceId or planType is required");
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     
-    // Check if customer exists
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
-      logStep("Found existing customer", { customerId });
-    } else {
-      logStep("No existing customer found");
     }
 
-    const origin = req.headers.get("origin") || "http://localhost:3000";
-    
-    // Create checkout session for subscription
+    let lineItems;
+    if (priceId) {
+      lineItems = [{ price: priceId, quantity: 1 }];
+    } else {
+      const pricing = {
+        basic: { amount: 999, name: "FlowForge Basic" },
+        premium: { amount: 1999, name: "FlowForge Premium" },
+        enterprise: { amount: 4999, name: "FlowForge Enterprise" }
+      };
+      
+      const plan = pricing[planType as keyof typeof pricing];
+      if (!plan) throw new Error("Invalid plan type");
+      
+      lineItems = [{
+        price_data: {
+          currency: "usd",
+          product_data: { name: plan.name },
+          unit_amount: plan.amount,
+          recurring: { interval: "month" },
+        },
+        quantity: 1,
+      }];
+    }
+
+    const origin = req.headers.get("origin") || "https://flowforge.app";
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      line_items: [
-        {
-          price_data: {
-            currency: "eur",
-            product_data: { 
-              name: planType === 'monthly' ? "Plan Mensual" : "Plan Anual",
-              description: "Acceso completo a todos los retos diarios"
-            },
-            unit_amount: planType === 'monthly' ? 1200 : 12000, // €12/mes o €120/año
-            recurring: { interval: planType === 'monthly' ? "month" : "year" },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       mode: "subscription",
-      success_url: `${origin}/dashboard?payment=success`,
-      cancel_url: `${origin}/dashboard?payment=cancelled`,
+      success_url: `${origin}/dashboard?success=true`,
+      cancel_url: `${origin}/dashboard?canceled=true`,
     });
-
-    logStep("Checkout session created", { sessionId: session.id, url: session.url });
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -89,7 +88,7 @@ serve(async (req) => {
     });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR in create-checkout", { message: errorMessage });
+    logStep("ERROR", { message: errorMessage });
     return new Response(JSON.stringify({ error: errorMessage }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,

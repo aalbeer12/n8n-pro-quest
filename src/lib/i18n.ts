@@ -242,6 +242,7 @@ const resources = {
       "landing.cta.startLearning": "Comenzar a Aprender",
       "landing.cta.trustedBy": "Confiado por ingenieros de automatización en las mejores empresas del mundo",
 
+
       // Footer
       footer: {
         description: "Domina la automatización n8n a través de desafíos diarios, retroalimentación de IA y una comunidad de expertos en automatización.",
