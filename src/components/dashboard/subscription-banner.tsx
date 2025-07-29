@@ -49,11 +49,14 @@ export const SubscriptionBanner = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button 
               onClick={async () => {
-                console.log('Clicking monthly plan button')
+                console.log('🚀 Clicking monthly plan button')
                 try {
-                  await createCheckout('monthly')
+                  console.log('Attempting monthly checkout...')
+                  const result = await createCheckout('monthly')
+                  console.log('Monthly checkout result:', result)
                 } catch (error) {
-                  console.error('Error creating checkout:', error)
+                  console.error('❌ Error creating monthly checkout:', error)
+                  console.log('📍 Fallback: Redirecting to payment-auth')
                   window.location.href = '/payment-auth?plan=monthly'
                 }
               }}
@@ -63,11 +66,14 @@ export const SubscriptionBanner = () => {
             </Button>
             <Button 
               onClick={async () => {
-                console.log('Clicking annual plan button')
+                console.log('🚀 Clicking annual plan button')
                 try {
-                  await createCheckout('annual')
+                  console.log('Attempting annual checkout...')
+                  const result = await createCheckout('annual')
+                  console.log('Annual checkout result:', result)
                 } catch (error) {
-                  console.error('Error creating checkout:', error)
+                  console.error('❌ Error creating annual checkout:', error)
+                  console.log('📍 Fallback: Redirecting to payment-auth')
                   window.location.href = '/payment-auth?plan=annual'
                 }
               }}
@@ -100,12 +106,14 @@ export const SubscriptionBanner = () => {
         <div className="flex gap-2">
           <Button 
             onClick={async () => {
-              console.log('Clicking premium upgrade button - proceding to checkout')
+              console.log('🚀 Clicking premium upgrade button')
               try {
-                await createCheckout('monthly')
+                console.log('Attempting createCheckout...')
+                const result = await createCheckout('monthly')
+                console.log('Checkout result:', result)
               } catch (error) {
-                console.error('Error creating checkout:', error)
-                // Fallback to payment-auth if checkout fails
+                console.error('❌ Error creating checkout:', error)
+                console.log('📍 Fallback: Redirecting to payment-auth')
                 window.location.href = '/payment-auth?plan=monthly'
               }
             }}
