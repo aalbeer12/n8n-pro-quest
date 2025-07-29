@@ -29,21 +29,30 @@ const Auth = () => {
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('🎯 Auth form submitted!', { email, firstName });
     e.preventDefault()
-    if (!email || !firstName) return
+    if (!email || !firstName) {
+      console.log('❌ Missing email or firstName', { email, firstName });
+      return;
+    }
 
+    console.log('✅ Starting signIn process...');
     setIsLoading(true)
     
     try {
+      console.log('📞 Calling signIn function...');
       const { error } = await signIn(email, firstName)
+      console.log('📞 signIn result:', { error });
       
       if (error) {
+        console.error('❌ signIn error:', error);
         toast({
           title: t('common.error'),
           description: error.message,
           variant: "destructive"
         })
       } else {
+        console.log('✅ signIn successful, setting emailSent to true');
         setEmailSent(true)
         toast({
           title: "¡Enlace mágico enviado!",
@@ -51,12 +60,14 @@ const Auth = () => {
         })
       }
     } catch (error) {
+      console.error('💥 Unexpected error in handleSubmit:', error);
       toast({
         title: t('common.error'),
         description: "Algo salió mal. Por favor, inténtalo de nuevo.",
         variant: "destructive"
       })
     } finally {
+      console.log('🏁 Setting loading to false');
       setIsLoading(false)
     }
   }

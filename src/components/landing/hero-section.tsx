@@ -21,8 +21,16 @@ export const HeroSection = () => {
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <LanguageSwitcher />
-            <Button asChild variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10 text-sm">
-              <Link to={`/auth?lang=${i18n.language}`}>{t('nav.signIn')}</Link>
+            <Button 
+              asChild 
+              variant="outline" 
+              size="sm" 
+              className="border-white/20 text-white hover:bg-white/10 text-sm"
+              onClick={() => console.log('🔗 Hero sign in button clicked!')}
+            >
+              <Link to={`/auth?lang=${i18n.language}`} onClick={() => console.log('🔗 Navigating to auth with lang:', i18n.language)}>
+                {t('nav.signIn')}
+              </Link>
             </Button>
           </div>
         </div>
