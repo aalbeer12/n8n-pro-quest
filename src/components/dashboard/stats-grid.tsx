@@ -186,7 +186,7 @@ export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
       <StatCard
         title="Nivel Actual"
         value={levelInfo.label}
-        subtitle={`${profile?.current_level || 'beginner'}`}
+        subtitle=""
         icon={LevelIcon}
         loading={isLoading}
         delay={0.1}

@@ -35,6 +35,16 @@ const AuthCallback = () => {
         if (data.session) {
           console.log('AuthCallback: Sesión válida, verificando perfil')
           
+          // Verificar si hay un redirect específico en los parámetros
+          const urlParams = new URLSearchParams(window.location.search)
+          const redirectPath = urlParams.get('redirect')
+          
+          if (redirectPath) {
+            console.log('AuthCallback: Redirect específico encontrado:', redirectPath)
+            navigate(redirectPath)
+            return
+          }
+          
           // Verificar si el usuario ha completado la configuración del perfil
           const { data: profile, error: profileError } = await supabase
             .from('profiles')
