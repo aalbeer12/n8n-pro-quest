@@ -75,7 +75,7 @@ export const ProblemSection = () => {
           ))}
         </div>
 
-        {/* Testimonial */}
+        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,45 +83,88 @@ export const ProblemSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center"
         >
-          <div className="max-w-4xl mx-auto p-8 glass-elevated rounded-xl">
-            <blockquote className="text-xl md:text-2xl text-foreground-secondary italic mb-6 leading-relaxed">
-              "{t('landing.problem.testimonial')}"
-            </blockquote>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-primary" />
-              <div className="text-left">
-                <p className="font-semibold text-foreground">{t('landing.problem.testimonialAuthor')}</p>
-                <p className="text-sm text-foreground-secondary">{t('landing.problem.testimonialRole')}</p>
+          <h3 className="text-2xl font-bold mb-8">Lo que dicen nuestros usuarios</h3>
+          
+          {/* Modern testimonials grid */}
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Main testimonial */}
+            <div className="md:col-span-2 bg-gradient-to-br from-primary/10 to-secondary/10 p-8 rounded-2xl border border-primary/20">
+              <div className="flex items-center gap-1 mb-4 justify-center">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-warning text-xl">★</span>
+                ))}
+              </div>
+              <blockquote className="text-lg md:text-xl text-foreground-secondary italic mb-6 leading-relaxed">
+                "{t('landing.problem.testimonial')}"
+              </blockquote>
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold">
+                  SC
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-foreground">{t('landing.problem.testimonialAuthor')}</p>
+                  <p className="text-sm text-foreground-secondary">{t('landing.problem.testimonialRole')}</p>
+                </div>
               </div>
             </div>
             
-            {/* Additional testimonials */}
-            <div className="grid md:grid-cols-2 gap-6 mt-8 pt-8 border-t border-white/10">
-              <div className="text-center">
-                <p className="text-sm italic text-foreground-secondary mb-3">
-                  "Como estudiante, los retos semanales gratuitos me ayudaron a aprender automatización. La actualización a premium valió la pena para la práctica diaria."
+            {/* Side testimonials */}
+            <div className="space-y-6">
+              <div className="bg-surface/50 backdrop-blur-sm p-6 rounded-xl border border-border/50">
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-warning text-sm">★</span>
+                  ))}
+                </div>
+                <p className="text-sm italic text-foreground-secondary mb-4">
+                  "Como estudiante, los retos semanales gratuitos me ayudaron a aprender automatización. La actualización a premium valió la pena."
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-500" />
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+                    AG
+                  </div>
                   <div>
                     <p className="font-medium text-sm">Alex García</p>
-                    <p className="text-xs text-foreground-secondary">Estudiante de Informática</p>
+                    <p className="text-xs text-foreground-secondary">Estudiante</p>
                   </div>
                 </div>
               </div>
               
-              <div className="text-center">
-                <p className="text-sm italic text-foreground-secondary mb-3">
-                  "FlowForge me enseñó a optimizar los procesos de mi negocio. Ahora ahorro 10 horas semanales en tareas manuales."
+              <div className="bg-surface/50 backdrop-blur-sm p-6 rounded-xl border border-border/50">
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-warning text-sm">★</span>
+                  ))}
+                </div>
+                <p className="text-sm italic text-foreground-secondary mb-4">
+                  "FlowForge me enseñó a optimizar mis procesos. Ahorro 10 horas semanales en tareas manuales."
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-500" />
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-sm font-bold">
+                    RS
+                  </div>
                   <div>
                     <p className="font-medium text-sm">Roberto Silva</p>
-                    <p className="text-xs text-foreground-secondary">Propietario de Pequeña Empresa</p>
+                    <p className="text-xs text-foreground-secondary">Empresario</p>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          
+          {/* Stats below testimonials */}
+          <div className="grid grid-cols-3 gap-6 mt-12 max-w-md mx-auto">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">500+</div>
+              <div className="text-sm text-foreground-secondary">Usuarios activos</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-secondary">4.9</div>
+              <div className="text-sm text-foreground-secondary">Puntuación media</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-warning">1000+</div>
+              <div className="text-sm text-foreground-secondary">Retos completados</div>
             </div>
           </div>
         </motion.div>
