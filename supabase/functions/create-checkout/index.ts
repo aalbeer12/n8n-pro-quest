@@ -53,30 +53,28 @@ serve(async (req) => {
     }
     logStep("Stripe customer", { customerId });
 
-    // Set up pricing
-    const prices = {
-      monthly: { amount: 1900, interval: 'month' }, // €19
-      annual: { amount: 19000, interval: 'year' }   // €190
+    // Stripe Price IDs configurados en el dashboard
+    const priceIds = {
+      monthly: 'price_1RqAa9RqBagVE6WGUKxqR5Lk',  // €19
+      annual: 'price_1RqKarRqBagVE6WG70opZJi6'    // €190
     };
 
-    const selectedPrice = prices[planType as keyof typeof prices];
+    const priceId = priceIds[planType as keyof typeof priceIds];
+    if (!priceId) {
+      throw new Error(`Invalid plan type: ${planType}`);
+    }
 
-    const lineItems = [{
-      price_data: {
-        currency: "eur",
-        product_data: { 
-          name: planType === 'monthly' ? "Plan Mensual Premium" : "Plan Anual Premium"
-        },
-        unit_amount: selectedPrice.amount,
-        recurring: { interval: selectedPrice.interval },
-      },
-      quantity: 1,
-    }];
+    logStep("Using Price ID", { planType, priceId });
 
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      line_items: lineItems,
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        }
+      ],
       mode: "subscription",
       success_url: `${req.headers.get("origin")}/dashboard?success=true`,
       cancel_url: `${req.headers.get("origin")}?canceled=true`,
