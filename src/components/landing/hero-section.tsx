@@ -16,9 +16,8 @@ export const HeroSection = () => {
       {/* Navigation */}
       <nav className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             <img src="/src/assets/flowforge-logo-new.png" alt="FlowForge" className="w-8 md:w-10 h-8 md:h-10 object-contain" />
-            <span className="text-lg md:text-xl font-bold text-white">FlowForge</span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <LanguageSwitcher />

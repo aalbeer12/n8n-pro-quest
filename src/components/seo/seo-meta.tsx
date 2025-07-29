@@ -29,6 +29,15 @@ export const SEOMeta = ({ title, description, canonical }: SEOMetaProps) => {
       }
       metaDesc.setAttribute('content', description);
     }
+
+    // Add noindex meta tag
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute('content', 'noindex, nofollow');
     
     // Add/update hreflang tags
     const baseUrl = window.location.origin;
