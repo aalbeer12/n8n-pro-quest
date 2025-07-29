@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/landing/hero-section';
 import { FeatureCards } from '@/components/landing/feature-cards';
 import { ProblemSection } from '@/components/landing/problem-section';
 import { HowItWorks } from '@/components/landing/how-it-works';
+import { PricingSection } from '@/components/pricing/pricing-section';
 import { CTASection } from '@/components/landing/cta-section';
 import { Footer } from '@/components/landing/footer';
 import { SEOMeta } from '@/components/seo/seo-meta';
@@ -20,6 +21,7 @@ const Index = () => {
       <FeatureCards />
       <ProblemSection />
       <HowItWorks />
+      <PricingSection />
       <CTASection />
       <Footer />
     </div>

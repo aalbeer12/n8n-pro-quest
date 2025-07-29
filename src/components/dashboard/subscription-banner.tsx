@@ -85,9 +85,9 @@ export const SubscriptionBanner = () => {
           <Button 
             onClick={() => createCheckout('monthly')}
             size="sm"
-            variant="outline"
+            className="bg-gradient-to-r from-primary to-primary-glow text-white shadow-lg hover:shadow-xl transition-all"
           >
-            Actualizar
+            🚀 Actualizar a Premium
           </Button>
         </div>
       </div>
