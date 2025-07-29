@@ -19,17 +19,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
-  const sendWelcomeEmail = async (email: string) => {
+  const sendWelcomeEmail = async (email: string, isNewUser: boolean = false) => {
     try {
       await supabase.functions.invoke('send-auth-email', {
         body: {
           to: email,
-          type: 'welcome',
+          type: isNewUser ? 'welcome' : 'login',
           data: { appUrl: window.location.origin }
         }
       });
     } catch (error) {
-      console.error('Error sending welcome email:', error);
+      console.error('Error sending email:', error);
     }
   };
 
@@ -41,19 +41,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null)
         setLoading(false)
         
-        // Send welcome email for new signups  
+        // Send email for login/signup  
         if (event === 'SIGNED_IN' && session?.user?.email) {
           // Check if this is a new user by checking if they have a profile
           setTimeout(async () => {
             const { data: profile } = await supabase
               .from('profiles')
-              .select('id')
+              .select('id, created_at')
               .eq('id', session.user.id)
               .single();
             
-            if (!profile) {
-              sendWelcomeEmail(session.user.email!);
-            }
+            // If no profile exists or profile was just created (less than 5 minutes ago), it's a new user
+            const isNewUser = !profile || 
+              (profile.created_at && new Date(profile.created_at) > new Date(Date.now() - 5 * 60 * 1000));
+            
+            sendWelcomeEmail(session.user.email!, isNewUser);
           }, 1000);
         }
         
