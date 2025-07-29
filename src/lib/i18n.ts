@@ -210,6 +210,84 @@ const resources = {
       "common.translateTo": "Translate to {{language}}",
       "common.backToDashboard": "Back to Dashboard",
       "common.backToHome": "Back to home",
+
+      // Settings
+      settings: {
+        title: "Settings",
+        description: "Manage your profile and preferences",
+        success: "Success",
+        error: "Error",
+        profileUpdated: "Profile updated successfully",
+        updateError: "Error updating profile",
+        subscriptionError: "Error managing subscription",
+        profile: {
+          title: "Profile",
+          description: "Update your personal information",
+          username: "Username",
+          usernameHelp: "Only letters, numbers and underscores",
+          displayName: "Display name",
+          displayNamePlaceholder: "Your display name",
+          bio: "Bio",
+          bioPlaceholder: "Tell us about yourself (max 160 characters)",
+          github: "GitHub",
+          linkedin: "LinkedIn",
+          website: "Website",
+          publicProfile: "Public profile",
+          publicProfileHelp: "Allow other users to view your profile",
+          avatar: "Avatar",
+          uploadAvatar: "Upload avatar",
+          changeAvatar: "Change avatar"
+        },
+        subscription: {
+          title: "Subscription",
+          description: "Manage your subscription plan",
+          currentPlan: "Current plan",
+          active: "Active",
+          inactive: "Free",
+          renewsOn: "Renews on",
+          manage: "Manage subscription",
+          upgrade: "Upgrade to Premium"
+        },
+        language: {
+          title: "Language & Region",
+          description: "Choose your preferred language",
+          current: "Current language"
+        },
+        notifications: {
+          title: "Notifications",
+          description: "Configure your notification preferences",
+          dailyChallenge: "Daily challenge",
+          dailyChallengeHelp: "Receive notifications for new challenges",
+          achievements: "Achievements",
+          achievementsHelp: "Notifications when you unlock achievements",
+          streakReminders: "Streak reminders",
+          streakRemindersHelp: "Remind to complete your daily challenge"
+        },
+        privacy: {
+          title: "Privacy & Security",
+          description: "Manage your data and security settings",
+          exportData: "Export data",
+          downloadData: "Download my data",
+          dangerZone: "Danger zone",
+          deleteAccount: "Delete account"
+        }
+      },
+
+      // Toast notifications
+      notifications: {
+        challengeSubmitted: "Challenge submitted successfully!",
+        levelUp: "Level up! You're now {{level}}",
+        achievementUnlocked: "New achievement unlocked!",
+        streakSaved: "Streak saved!",
+        newDailyChallenge: "New daily challenge available!",
+        streakReminder: "Don't lose your streak - complete today's challenge",
+        invalidWorkflow: "Invalid workflow JSON",
+        networkError: "Network error - please retry",
+        subscriptionSuccess: "Subscription updated successfully!",
+        profileSaved: "Profile saved successfully",
+        avatarUploaded: "Avatar uploaded successfully",
+        dataExported: "Data exported successfully"
+      }
     }
   },
   es: {
@@ -418,6 +496,84 @@ const resources = {
       "common.translateTo": "Traducir a {{language}}",
       "common.backToDashboard": "Volver al Panel",
       "common.backToHome": "Volver al inicio",
+
+      // Settings
+      settings: {
+        title: "Configuración",
+        description: "Gestiona tu perfil y preferencias",
+        success: "Éxito",
+        error: "Error",
+        profileUpdated: "Perfil actualizado correctamente",
+        updateError: "Error al actualizar el perfil",
+        subscriptionError: "Error al gestionar la suscripción",
+        profile: {
+          title: "Perfil",
+          description: "Actualiza tu información personal",
+          username: "Nombre de usuario",
+          usernameHelp: "Solo letras, números y guiones bajos",
+          displayName: "Nombre a mostrar",
+          displayNamePlaceholder: "Tu nombre para mostrar",
+          bio: "Bio",
+          bioPlaceholder: "Cuéntanos sobre ti (máximo 160 caracteres)",
+          github: "GitHub",
+          linkedin: "LinkedIn",
+          website: "Sitio web",
+          publicProfile: "Perfil público",
+          publicProfileHelp: "Permite que otros usuarios vean tu perfil",
+          avatar: "Avatar",
+          uploadAvatar: "Subir avatar",
+          changeAvatar: "Cambiar avatar"
+        },
+        subscription: {
+          title: "Suscripción",
+          description: "Gestiona tu plan de suscripción",
+          currentPlan: "Plan actual",
+          active: "Activo",
+          inactive: "Free",
+          renewsOn: "Se renueva el",
+          manage: "Gestionar suscripción",
+          upgrade: "Actualizar a Premium"
+        },
+        language: {
+          title: "Idioma y Región",
+          description: "Elige tu idioma preferido",
+          current: "Idioma actual"
+        },
+        notifications: {
+          title: "Notificaciones",
+          description: "Configura tus preferencias de notificación",
+          dailyChallenge: "Desafío diario",
+          dailyChallengeHelp: "Recibe notificaciones de nuevos desafíos",
+          achievements: "Logros",
+          achievementsHelp: "Notificaciones cuando desbloquees logros",
+          streakReminders: "Recordatorios de racha",
+          streakRemindersHelp: "Recuerda completar tu desafío diario"
+        },
+        privacy: {
+          title: "Privacidad y Seguridad",
+          description: "Gestiona tus datos y configuración de seguridad",
+          exportData: "Exportar datos",
+          downloadData: "Descargar mis datos",
+          dangerZone: "Zona de peligro",
+          deleteAccount: "Eliminar cuenta"
+        }
+      },
+
+      // Toast notifications
+      notifications: {
+        challengeSubmitted: "¡Desafío enviado exitosamente!",
+        levelUp: "¡Subiste de nivel! Ahora eres {{level}}",
+        achievementUnlocked: "¡Nuevo logro desbloqueado!",
+        streakSaved: "¡Racha guardada!",
+        newDailyChallenge: "¡Nuevo desafío diario disponible!",
+        streakReminder: "No pierdas tu racha - completa el desafío de hoy",
+        invalidWorkflow: "JSON de workflow inválido",
+        networkError: "Error de red - por favor reintenta",
+        subscriptionSuccess: "¡Suscripción actualizada exitosamente!",
+        profileSaved: "Perfil guardado correctamente",
+        avatarUploaded: "Avatar subido correctamente",
+        dataExported: "Datos exportados correctamente"
+      }
     }
   }
 };

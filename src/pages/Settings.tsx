@@ -14,7 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { SEOMeta } from '@/components/seo/seo-meta';
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
-import { Settings as SettingsIcon, User, CreditCard, Bell, Globe, Shield, Trash2 } from 'lucide-react';
+import { Settings as SettingsIcon, User, CreditCard, Bell, Globe, Shield, Trash2, Upload, Camera } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Profile {
@@ -24,6 +24,7 @@ interface Profile {
   github_url: string | null;
   linkedin_url: string | null;
   website_url: string | null;
+  avatar_url: string | null;
   is_public: boolean;
 }
 
@@ -41,6 +42,7 @@ const Settings = () => {
     github_url: '',
     linkedin_url: '',
     website_url: '',
+    avatar_url: '',
     is_public: true
   });
 
@@ -75,6 +77,7 @@ const Settings = () => {
           github_url: data.github_url || '',
           linkedin_url: data.linkedin_url || '',
           website_url: data.website_url || '',
+          avatar_url: data.avatar_url || '',
           is_public: data.is_public !== false
         });
       }
@@ -83,22 +86,24 @@ const Settings = () => {
     }
   };
 
-  const updateProfile = async () => {
+  const updateProfile = async (data?: Partial<Profile>) => {
     if (!user) return;
 
     setLoading(true);
     try {
+      const updateData = data || {
+        display_name: profile.display_name || null,
+        bio: profile.bio || null,
+        github_url: profile.github_url || null,
+        linkedin_url: profile.linkedin_url || null,
+        website_url: profile.website_url || null,
+        is_public: profile.is_public,
+        updated_at: new Date().toISOString()
+      };
+
       const { error } = await supabase
         .from('profiles')
-        .update({
-          display_name: profile.display_name || null,
-          bio: profile.bio || null,
-          github_url: profile.github_url || null,
-          linkedin_url: profile.linkedin_url || null,
-          website_url: profile.website_url || null,
-          is_public: profile.is_public,
-          updated_at: new Date().toISOString()
-        })
+        .update(updateData)
         .eq('id', user.id);
 
       if (error) throw error;
@@ -116,6 +121,40 @@ const Settings = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !user) return;
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(fileName);
+
+      await updateProfile({ avatar_url: data.publicUrl });
+
+      toast({
+        title: t('settings.success'),
+        description: t('notifications.avatarUploaded'),
+      });
+    } catch (error) {
+      console.error('Error uploading avatar:', error);
+      toast({
+        title: t('settings.error'),
+        description: t('settings.updateError'),
+        variant: 'destructive',
+      });
     }
   };
 
@@ -171,6 +210,33 @@ const Settings = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              {/* Avatar Upload */}
+              <div className="flex items-center space-x-4">
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center overflow-hidden">
+                    {profile?.avatar_url ? (
+                      <img src={profile.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      <User className="w-8 h-8 text-muted-foreground" />
+                    )}
+                  </div>
+                  <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 w-6 h-6 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primary/90">
+                    <Camera className="w-3 h-3 text-primary-foreground" />
+                  </label>
+                  <input
+                    id="avatar-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-medium">{t('settings.profile.avatar')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('settings.profile.changeAvatar')}</p>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="username">{t('settings.profile.username')}</Label>
@@ -250,8 +316,8 @@ const Settings = () => {
                 />
               </div>
 
-              <Button onClick={updateProfile} disabled={loading}>
-                {loading ? t('common.saving') : t('common.save')}
+              <Button onClick={() => updateProfile()} disabled={loading}>
+                {loading ? t('common.loading') : t('common.save')}
               </Button>
             </CardContent>
           </Card>

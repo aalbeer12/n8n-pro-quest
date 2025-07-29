@@ -15,6 +15,7 @@ import ChallengeResult from "./pages/ChallengeResult";
 import ProfilePage from "./pages/ProfilePage";
 import Leaderboard from "./pages/Leaderboard";
 import Settings from "./pages/Settings";
+import StripeTest from "./pages/StripeTest";
 import HowItWorks from "./pages/HowItWorks";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/stripe-test" element={<StripeTest />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
