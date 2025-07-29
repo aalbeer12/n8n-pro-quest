@@ -31,32 +31,35 @@ const App = () => (
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>
-        <AuthProvider>
-          <SubscriptionProvider>
-            <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/auth/callback" element={<AuthCallback />} />
-            <Route path="/auth/welcome" element={<AuthWelcome />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/challenges" element={<Challenges />} />
-            <Route path="/challenge/:slug" element={<ChallengePage />} />
-            <Route path="/challenge/:slug/result" element={<ChallengeResult />} />
-            <Route path="/profile/:username" element={<ProfilePage />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/stripe-test" element={<StripeTest />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/help" element={<Help />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-            </Routes>
-          </SubscriptionProvider>
-        </AuthProvider>
+        <Routes>
+          <Route path="/*" element={
+            <AuthProvider>
+              <SubscriptionProvider>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/auth/callback" element={<AuthCallback />} />
+                  <Route path="/auth/welcome" element={<AuthWelcome />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/challenges" element={<Challenges />} />
+                  <Route path="/challenge/:slug" element={<ChallengePage />} />
+                  <Route path="/challenge/:slug/result" element={<ChallengeResult />} />
+                  <Route path="/profile/:username" element={<ProfilePage />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/stripe-test" element={<StripeTest />} />
+                  <Route path="/how-it-works" element={<HowItWorks />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/community" element={<Community />} />
+                  <Route path="/help" element={<Help />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </SubscriptionProvider>
+            </AuthProvider>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
