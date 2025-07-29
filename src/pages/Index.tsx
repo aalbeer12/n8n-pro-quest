@@ -20,20 +20,24 @@ const Index = () => {
     if (window.location.hash && window.location.hash.includes('access_token')) {
       console.log('🔗 Magic link detected on homepage, processing...');
       
-      // Check if there are redirect parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const redirectPath = urlParams.get('redirect');
+      // Check localStorage for redirect intent
+      const redirectIntent = localStorage.getItem('auth_redirect_intent');
       
-      if (redirectPath) {
-        console.log('📍 Redirect path found:', redirectPath);
-        // Let Supabase process the hash, then navigate
+      if (redirectIntent) {
+        console.log('💾 Found redirect intent in localStorage:', redirectIntent);
+        localStorage.removeItem('auth_redirect_intent'); // Clean up
+        
+        // Let Supabase process the hash, then navigate to intended destination
         setTimeout(() => {
-          navigate(redirectPath);
-        }, 100);
+          console.log('📍 Navigating to intended destination:', redirectIntent);
+          navigate(redirectIntent);
+        }, 500);
       } else {
-        // No redirect, go to regular auth callback
-        console.log('📍 No redirect path, going to auth callback');
-        navigate('/auth/callback');
+        // No redirect intent, go to regular auth callback
+        console.log('📍 No redirect intent, going to auth callback');
+        setTimeout(() => {
+          navigate('/auth/callback');
+        }, 500);
       }
     }
   }, [navigate]);
