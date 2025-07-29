@@ -114,7 +114,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 text-primary font-bold text-xl mb-4">
             <Sparkles className="w-6 h-6" />
-            Hack-Your-Flows
+            FlowForge
           </Link>
           <h1 className="text-3xl font-bold text-primary mb-2">{t('auth.title')}</h1>
           <p className="text-muted-foreground">

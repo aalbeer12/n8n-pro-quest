@@ -187,7 +187,7 @@ const Terms = () => {
                 <strong>{t('terms.questions.email')}:</strong> legal@hackyourflows.com
               </p>
               <p className="text-sm">
-                <strong>{t('terms.questions.address')}:</strong> Hack-Your-Flows, LLC<br />
+                <strong>{t('terms.questions.address')}:</strong> FlowForge, LLC<br />
                 123 Automation Street<br />
                 Tech City, TC 12345<br />
                 United States

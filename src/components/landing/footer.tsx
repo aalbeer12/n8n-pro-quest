@@ -45,7 +45,7 @@ export const Footer = () => {
             className="space-y-4"
           >
             <h3 className="text-xl md:text-2xl font-bold gradient-text">
-              Hack-Your-Flows
+              FlowForge
             </h3>
             <p className="text-foreground-secondary text-sm leading-relaxed">
               {t('footer.description')}

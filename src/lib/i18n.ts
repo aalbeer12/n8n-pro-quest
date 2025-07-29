@@ -39,7 +39,7 @@ const resources = {
       
       "landing.features.title": "Learn Automation the Right Way",
       "landing.features.subtitle": "Practice with real cases, get AI feedback, and compete with the community",
-      "landing.features.whyTitle": "Why Hack-Your-Flows?",
+      "landing.features.whyTitle": "Why FlowForge?",
       "landing.features.whySubtitle": "Traditional tutorials leave you with theory. We give you practical skills through hands-on challenges that mirror real automation work.",
       "landing.features.learnByDoing": "Learn by Doing",
       "landing.features.learnByDoingDesc": "Real-world automation scenarios that mirror what you'll face in production environments.",
@@ -115,14 +115,14 @@ const resources = {
           privacy: "Privacy Policy",
           terms: "Terms of Service"
         },
-        copyright: "© 2024 Hack-Your-Flows. All rights reserved."
+        copyright: "© 2024 FlowForge. All rights reserved."
       },
 
       // Pages
       pages: {
         about: {
           title: "About Us",
-          description: "Learn more about Hack-Your-Flows and our mission",
+          description: "Learn more about FlowForge and our mission",
           intro: "We believe in the power of automation to transform how we work.",
           mission: "Our mission is to make n8n automation accessible to everyone through practical challenges and AI-powered feedback.",
           team: "We're a team of automation enthusiasts dedicated to helping you master workflow automation skills."
@@ -164,7 +164,7 @@ const resources = {
           faq: {
             title: "Frequently Asked Questions",
             q1: {
-              question: "How do I get started with Hack-Your-Flows?",
+              question: "How do I get started with FlowForge?",
               answer: "Simply sign up for a free account and start with our beginner challenges. We'll guide you through the basics of n8n automation."
             },
             q2: {
@@ -184,7 +184,7 @@ const resources = {
       },
       
       // Auth
-      "auth.title": "Welcome to AutomationChallenge",
+      "auth.title": "Welcome to FlowForge",
       "auth.subtitle": "Enter your email to get started",
       "auth.email": "Email",
       "auth.emailPlaceholder": "your@email.com",
@@ -257,14 +257,14 @@ const resources = {
           privacy: "Política de Privacidad",
           terms: "Términos de Servicio"
         },
-        copyright: "© 2024 Hack-Your-Flows. Todos los derechos reservados."
+        copyright: "© 2024 FlowForge. Todos los derechos reservados."
       },
 
       // Pages
       pages: {
         about: {
           title: "Acerca de Nosotros",
-          description: "Conoce más sobre Hack-Your-Flows y nuestra misión",
+          description: "Conoce más sobre FlowForge y nuestra misión",
           intro: "Creemos en el poder de la automatización para transformar cómo trabajamos.",
           mission: "Nuestra misión es hacer la automatización n8n accesible para todos a través de desafíos prácticos y retroalimentación impulsada por IA.",
           team: "Somos un equipo de entusiastas de la automatización dedicados a ayudarte a dominar las habilidades de automatización de flujos de trabajo."
@@ -306,7 +306,7 @@ const resources = {
           faq: {
             title: "Preguntas Frecuentes",
             q1: {
-              question: "¿Cómo empiezo con Hack-Your-Flows?",
+              question: "¿Cómo empiezo con FlowForge?",
               answer: "Simplemente regístrate para una cuenta gratuita y comienza con nuestros desafíos para principiantes. Te guiaremos a través de los conceptos básicos de automatización n8n."
             },
             q2: {
@@ -326,7 +326,7 @@ const resources = {
       },
       
       // Auth
-      "auth.title": "Bienvenido a AutomationChallenge",
+      "auth.title": "Bienvenido a FlowForge",
       "auth.subtitle": "Ingresa tu email para comenzar",
       "auth.email": "Email",
       "auth.emailPlaceholder": "tu@email.com",

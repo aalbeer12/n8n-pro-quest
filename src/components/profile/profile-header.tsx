@@ -54,7 +54,7 @@ export const ProfileHeader = ({ profile, isOwnProfile }: ProfileHeaderProps) => 
     if (navigator.share) {
       navigator.share({
         title: `Perfil de ${profile.display_name || profile.username}`,
-        text: `Mira el perfil de ${profile.display_name || profile.username} en Hack-Your-Flows`,
+        text: `Mira el perfil de ${profile.display_name || profile.username} en FlowForge`,
         url: window.location.href
       })
     } else {

@@ -287,7 +287,7 @@ const Privacy = () => {
                 <strong>{t('privacy.contact.email')}:</strong> privacy@hackyourflows.com
               </p>
               <p className="text-sm">
-                <strong>{t('privacy.contact.address')}:</strong> Hack-Your-Flows, LLC<br />
+                <strong>{t('privacy.contact.address')}:</strong> FlowForge, LLC<br />
                 123 Automation Street<br />
                 Tech City, TC 12345<br />
                 United States

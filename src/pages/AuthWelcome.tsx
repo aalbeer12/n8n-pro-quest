@@ -141,7 +141,7 @@ const AuthWelcome = () => {
       <div className="w-full max-w-4xl space-y-8">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold text-primary">
-            ¡Bienvenido a AutomationChallenge!
+            ¡Bienvenido a FlowForge!
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             La plataforma definitiva para dominar la automatización con n8n. 

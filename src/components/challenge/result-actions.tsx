@@ -14,7 +14,7 @@ export const ResultActions = ({ slug, score, canRetry }: ResultActionsProps) => 
   const { toast } = useToast()
 
   const handleShare = async (platform: 'twitter' | 'linkedin' | 'copy') => {
-    const text = `¡Acabo de completar un reto de automatización en Hack-Your-Flows con una puntuación de ${score}/100! 🚀`
+    const text = `¡Acabo de completar un reto de automatización en FlowForge con una puntuación de ${score}/100! 🚀`
     const url = window.location.href
 
     switch (platform) {

@@ -45,7 +45,7 @@ export const FeatureCards = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            {t('landing.features.whyTitle')} <span className="gradient-text">Hack-Your-Flows</span>?
+            {t('landing.features.whyTitle')} <span className="gradient-text">FlowForge</span>?
           </h2>
           <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
             {t('landing.features.whySubtitle')}

@@ -87,7 +87,7 @@ const Dashboard = () => {
             <div className="flex items-center gap-3">
               <Sparkles className="w-8 h-8 text-primary" />
               <div>
-                <h1 className="text-xl font-bold text-primary">Hack-Your-Flows</h1>
+                <h1 className="text-xl font-bold text-primary">FlowForge</h1>
                 <p className="text-xs text-muted-foreground">Dashboard</p>
               </div>
             </div>

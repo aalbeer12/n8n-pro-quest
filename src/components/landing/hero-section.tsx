@@ -18,7 +18,7 @@ export const HeroSection = () => {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
             <Zap className="w-6 md:w-8 h-6 md:h-8 text-white" />
-            <span className="text-lg md:text-xl font-bold text-white">AutomationChallenge</span>
+            <span className="text-lg md:text-xl font-bold text-white">FlowForge</span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <LanguageSwitcher />

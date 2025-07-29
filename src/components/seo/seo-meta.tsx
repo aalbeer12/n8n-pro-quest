@@ -68,7 +68,7 @@ export const SEOMeta = ({ title, description, canonical }: SEOMetaProps) => {
     // Add Open Graph tags
     const ogTags = [
       { property: 'og:locale', content: i18n.language === 'es' ? 'es_ES' : 'en_US' },
-      { property: 'og:site_name', content: 'AutomationChallenge' },
+      { property: 'og:site_name', content: 'FlowForge' },
       { property: 'og:type', content: 'website' }
     ];
     
