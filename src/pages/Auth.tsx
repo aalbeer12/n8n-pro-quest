@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
+  const [firstName, setFirstName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const { signIn } = useAuth()
@@ -29,12 +30,12 @@ const Auth = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!email) return
+    if (!email || !firstName) return
 
     setIsLoading(true)
     
     try {
-      const { error } = await signIn(email)
+      const { error } = await signIn(email, firstName)
       
       if (error) {
         toast({
@@ -91,6 +92,7 @@ const Auth = () => {
                   onClick={() => {
                     setEmailSent(false)
                     setEmail('')
+                    setFirstName('')
                   }}
                   className="w-full"
                 >
@@ -125,6 +127,19 @@ const Auth = () => {
         <Card className="p-8 bg-surface/50 backdrop-blur-sm border-border">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
+              <Label htmlFor="firstName">¿Cómo te llamas?</Label>
+              <Input
+                id="firstName"
+                type="text"
+                placeholder="Tu nombre de pila"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                className="bg-background/50"
+              />
+            </div>
+            
+            <div className="space-y-2">
               <Label htmlFor="email">{t('auth.email')}</Label>
               <Input
                 id="email"
@@ -140,7 +155,7 @@ const Auth = () => {
             <Button 
               type="submit" 
               className="w-full"
-              disabled={isLoading || !email}
+              disabled={isLoading || !email || !firstName}
             >
               {isLoading ? (
                 <>

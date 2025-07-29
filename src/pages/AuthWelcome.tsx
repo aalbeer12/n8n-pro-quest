@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth';
 import { supabase } from '@/integrations/supabase/client';
-import { LevelAssessment } from '@/components/auth/level-assessment';
+import { OnboardingQuiz } from '@/components/auth/onboarding-quiz';
+import { LevelReveal } from '@/components/auth/level-reveal';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Trophy, Target, Users } from 'lucide-react';
@@ -12,7 +13,10 @@ const AuthWelcome = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [showAssessment, setShowAssessment] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [quizResult, setQuizResult] = useState<{ level: string; answers: Record<string, string> } | null>(null);
+  const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,13 +29,19 @@ const AuthWelcome = () => {
       try {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('onboarding_completed')
+          .select('onboarding_completed, display_name')
           .eq('id', user.id)
           .single();
 
         if (profile?.onboarding_completed) {
           navigate('/dashboard');
         } else {
+          // Extraer nombre del usuario
+          const firstName = user.user_metadata?.first_name || 
+                           profile?.display_name || 
+                           user.email?.split('@')[0] || 
+                           'Usuario';
+          setUserName(firstName);
           setLoading(false);
         }
       } catch (error) {
@@ -43,35 +53,42 @@ const AuthWelcome = () => {
     checkOnboardingStatus();
   }, [user, navigate]);
 
-  const handleStartAssessment = () => {
-    setShowAssessment(true);
+  const handleStartQuiz = () => {
+    setShowQuiz(true);
   };
 
-  const handleAssessmentComplete = async (level: string, answers: Record<string, string>) => {
-    if (!user) return;
+  const handleQuizComplete = (level: string, answers: Record<string, string>) => {
+    setQuizResult({ level, answers });
+    setShowQuiz(false);
+    setShowResult(true);
+  };
+
+  const handleResultContinue = async () => {
+    if (!user || !quizResult) return;
 
     try {
       // Save assessment and update profile
       await Promise.all([
         supabase.from('level_assessments').insert({
           user_id: user.id,
-          answers,
-          calculated_level: level
+          answers: quizResult.answers,
+          calculated_level: quizResult.level
         }),
         supabase.from('profiles').update({
           onboarding_completed: true,
-          assessment_answers: answers,
-          initial_level_assigned: true
+          assessment_answers: quizResult.answers,
+          initial_level_assigned: true,
+          current_level: quizResult.level
         }).eq('id', user.id),
         supabase.from('user_stats').upsert({
           user_id: user.id,
-          current_difficulty: level
+          current_difficulty: quizResult.level
         })
       ]);
 
       toast({
-        title: "¡Bienvenido!",
-        description: `Nivel asignado: ${level}. Ya puedes empezar con los retos.`
+        title: `¡Bienvenido ${userName}!`,
+        description: `Nivel asignado: ${quizResult.level}. Ya puedes empezar con los retos.`
       });
 
       navigate('/dashboard');
@@ -92,7 +109,8 @@ const AuthWelcome = () => {
       await Promise.all([
         supabase.from('profiles').update({
           onboarding_completed: true,
-          initial_level_assigned: false
+          initial_level_assigned: false,
+          current_level: 'beginner'
         }).eq('id', user.id),
         supabase.from('user_stats').upsert({
           user_id: user.id,
@@ -101,7 +119,7 @@ const AuthWelcome = () => {
       ]);
 
       toast({
-        title: "¡Bienvenido!",
+        title: `¡Bienvenido ${userName}!`,
         description: "Empezarás en nivel principiante. Puedes cambiar tu nivel más tarde."
       });
 
@@ -127,10 +145,21 @@ const AuthWelcome = () => {
     );
   }
 
-  if (showAssessment) {
+  if (showResult && quizResult) {
     return (
-      <LevelAssessment 
-        onComplete={handleAssessmentComplete}
+      <LevelReveal 
+        userName={userName}
+        level={quizResult.level as 'beginner' | 'intermediate' | 'advanced' | 'expert'}
+        onContinue={handleResultContinue}
+      />
+    );
+  }
+
+  if (showQuiz) {
+    return (
+      <OnboardingQuiz 
+        userName={userName}
+        onComplete={handleQuizComplete}
         onSkip={handleSkipAssessment}
       />
     );
@@ -141,8 +170,11 @@ const AuthWelcome = () => {
       <div className="w-full max-w-4xl space-y-8">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold text-primary">
-            ¡Bienvenido a FlowForge!
+            ¡Hola {userName}! 👋
           </h1>
+          <h2 className="text-2xl font-semibold text-muted-foreground">
+            Bienvenido a FlowForge
+          </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             La plataforma definitiva para dominar la automatización con n8n. 
             Mejora tus habilidades con retos prácticos y casos reales.
@@ -190,17 +222,17 @@ const AuthWelcome = () => {
         <Card className="border-primary/20 bg-primary/5">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-primary">
-              Evaluación de Nivel Inicial
+              Quiz Rápido de Personalización
             </CardTitle>
             <p className="text-muted-foreground">
-              Responde unas preguntas rápidas para que podamos personalizar tu experiencia
+              Solo 3 preguntas para adaptar FlowForge a tu nivel
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Solo 5 preguntas</span>
+                <span>Solo 3 preguntas rápidas</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-600" />
@@ -208,7 +240,7 @@ const AuthWelcome = () => {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Puedes cambiar nivel después</span>
+                <span>Experiencia personalizada</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-600" />
@@ -218,11 +250,11 @@ const AuthWelcome = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button 
-                onClick={handleStartAssessment}
+                onClick={handleStartQuiz}
                 size="lg"
                 className="min-w-48"
               >
-                Comenzar Evaluación
+                🚀 Empezar Quiz
               </Button>
               <Button 
                 variant="outline" 
