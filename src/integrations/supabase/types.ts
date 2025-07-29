@@ -89,6 +89,7 @@ export type Database = {
       challenges: {
         Row: {
           category: string
+          challenge_type: string | null
           created_at: string | null
           description: string
           difficulty: string
@@ -108,6 +109,7 @@ export type Database = {
         }
         Insert: {
           category: string
+          challenge_type?: string | null
           created_at?: string | null
           description: string
           difficulty: string
@@ -127,6 +129,7 @@ export type Database = {
         }
         Update: {
           category?: string
+          challenge_type?: string | null
           created_at?: string | null
           description?: string
           difficulty?: string
@@ -370,6 +373,7 @@ export type Database = {
           evaluated_at: string | null
           id: string
           points_earned: number | null
+          response_text: string | null
           score: number | null
           score_breakdown: Json | null
           status: string | null
@@ -387,6 +391,7 @@ export type Database = {
           evaluated_at?: string | null
           id?: string
           points_earned?: number | null
+          response_text?: string | null
           score?: number | null
           score_breakdown?: Json | null
           status?: string | null
@@ -404,6 +409,7 @@ export type Database = {
           evaluated_at?: string | null
           id?: string
           points_earned?: number | null
+          response_text?: string | null
           score?: number | null
           score_breakdown?: Json | null
           status?: string | null
