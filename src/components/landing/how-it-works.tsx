@@ -3,9 +3,6 @@
 import { motion } from "framer-motion";
 import { Calendar, Code2, Lightbulb, Trophy } from "lucide-react";
 import { useTranslation } from 'react-i18next';
-import workflowHero from '@/assets/workflow-automation-hero.jpg';
-import automationNodes from '@/assets/automation-nodes-bg.jpg';
-import workflowDiagram from '@/assets/workflow-diagram.jpg';
 
 export const HowItWorks = () => {
   const { t } = useTranslation();
@@ -108,17 +105,7 @@ export const HowItWorks = () => {
                   whileHover={{ scale: 1.05 }}
                   className="relative w-full max-w-md mx-auto"
                 >
-                  <div className="aspect-square rounded-2xl glass-elevated p-8 flex items-center justify-center relative overflow-hidden">
-                    {/* Background image for each step */}
-                    <div className="absolute inset-0 opacity-30">
-                      <img 
-                        src={index === 0 ? workflowHero : 
-                             index === 1 ? automationNodes : 
-                             workflowDiagram} 
-                        alt="" 
-                        className="w-full h-full object-cover rounded-2xl" 
-                      />
-                    </div>
+                  <div className="aspect-square rounded-2xl glass-elevated p-8 flex items-center justify-center">
                     <motion.div
                       animate={{
                         rotate: [0, 360],
@@ -128,9 +115,9 @@ export const HowItWorks = () => {
                         repeat: Infinity,
                         ease: "linear",
                       }}
-                      className="w-32 h-32 rounded-full bg-gradient-primary opacity-20 relative z-10"
+                      className="w-32 h-32 rounded-full bg-gradient-primary opacity-20"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="absolute inset-0 flex items-center justify-center">
                       <step.icon className="w-16 h-16 text-primary" />
                     </div>
                   </div>

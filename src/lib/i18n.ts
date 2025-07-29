@@ -103,11 +103,10 @@ const resources = {
         },
         resources: {
           community: "Community",
-          help: "Help Center",
           blog: "Blog"
         },
         company: {
-          about: "About",
+          about: "About Us",
           privacy: "Privacy Policy",
           terms: "Terms of Service"
         },
@@ -451,11 +450,10 @@ const resources = {
         },
         resources: {
           community: "Comunidad",
-          help: "Centro de Ayuda",
           blog: "Blog"
         },
         company: {
-          about: "Acerca de",
+          about: "Sobre nosotros",
           privacy: "Política de Privacidad",
           terms: "Términos de Servicio"
         },
@@ -469,7 +467,7 @@ const resources = {
       // Pages
       pages: {
         about: {
-          title: "Acerca de Nosotros",
+          title: "Sobre Nosotros",
           description: "Conoce más sobre FlowForge y nuestra misión",
           intro: "Creemos en el poder de la automatización para transformar cómo trabajamos.",
           mission: "Nuestra misión es hacer la automatización n8n accesible para todos a través de desafíos prácticos y retroalimentación impulsada por IA.",
