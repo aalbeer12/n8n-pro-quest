@@ -17,7 +17,7 @@ export const HeroSection = () => {
       <nav className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
-            <Zap className="w-6 md:w-8 h-6 md:h-8 text-white" />
+            <img src="/src/assets/flowforge-logo-new.png" alt="FlowForge" className="w-8 md:w-10 h-8 md:h-10" />
             <span className="text-lg md:text-xl font-bold text-white">FlowForge</span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
@@ -104,11 +104,11 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-shadow-lg text-white leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 text-shadow-lg text-white leading-tight px-2">
             {t('landing.hero.title')}
           </h1>
           
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
             {t('landing.hero.subtitle')}
           </p>
 
@@ -142,7 +142,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mb-4 md:mb-6"
           >
-            <Button asChild className="h-10 md:h-12 px-6 md:px-8 bg-gradient-primary hover:scale-105 transition-transform text-sm md:text-base">
+            <Button asChild className="h-12 md:h-14 px-6 md:px-8 bg-gradient-primary hover:scale-105 transition-transform text-sm md:text-base font-semibold">
               <Link to={`/auth?lang=${i18n.language}`}>
                 {t('landing.hero.cta')} <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
               </Link>

@@ -68,7 +68,7 @@ export const CTASection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-shadow-lg px-4">
             {t('landing.cta.startAutomation')}
             <span className="gradient-text block">{t('landing.cta.journeyToday')}</span>
           </h2>
