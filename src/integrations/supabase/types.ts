@@ -594,6 +594,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_total_challenges: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      get_user_completed_challenges: {
+        Args: { user_uuid: string }
+        Returns: number
+      }
       reset_weekly_challenges: {
         Args: Record<PropertyKey, never>
         Returns: undefined
