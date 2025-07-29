@@ -25,11 +25,12 @@ export const PaymentAuth = () => {
   const { createCheckout } = useSubscription()
 
   useEffect(() => {
-    // Si el usuario ya está autenticado y viene del proceso de auth, proceder con el checkout
-    if (user && authComplete) {
+    // Si el usuario ya está autenticado, proceder directamente con el checkout
+    if (user) {
+      console.log('Usuario ya autenticado, procediendo al pago directamente')
       handleProceedToPayment()
     }
-  }, [user, authComplete])
+  }, [user])
 
   const handleProceedToPayment = async () => {
     try {

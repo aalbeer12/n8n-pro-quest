@@ -48,18 +48,28 @@ export const SubscriptionBanner = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button 
-              onClick={() => {
+              onClick={async () => {
                 console.log('Clicking monthly plan button')
-                window.location.href = '/payment-auth?plan=monthly'
+                try {
+                  await createCheckout('monthly')
+                } catch (error) {
+                  console.error('Error creating checkout:', error)
+                  window.location.href = '/payment-auth?plan=monthly'
+                }
               }}
               className="min-w-[140px]"
             >
               Plan Mensual
             </Button>
             <Button 
-              onClick={() => {
+              onClick={async () => {
                 console.log('Clicking annual plan button')
-                window.location.href = '/payment-auth?plan=annual'
+                try {
+                  await createCheckout('annual')
+                } catch (error) {
+                  console.error('Error creating checkout:', error)
+                  window.location.href = '/payment-auth?plan=annual'
+                }
               }}
               variant="outline"
               className="min-w-[140px]"
@@ -89,9 +99,15 @@ export const SubscriptionBanner = () => {
         </div>
         <div className="flex gap-2">
           <Button 
-            onClick={() => {
-              console.log('Clicking premium upgrade button')
-              window.location.href = '/payment-auth?plan=monthly'
+            onClick={async () => {
+              console.log('Clicking premium upgrade button - proceding to checkout')
+              try {
+                await createCheckout('monthly')
+              } catch (error) {
+                console.error('Error creating checkout:', error)
+                // Fallback to payment-auth if checkout fails
+                window.location.href = '/payment-auth?plan=monthly'
+              }
             }}
             size="sm"
             className="bg-gradient-to-r from-primary to-primary-glow text-white shadow-lg hover:shadow-xl transition-all"
