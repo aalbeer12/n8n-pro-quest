@@ -72,6 +72,15 @@ serve(async (req) => {
     const customerId = customers.data[0].id;
     logStep("Found Stripe customer", { customerId });
 
+    // Check if user was already subscribed to avoid updating start date
+    const { data: existingSubscriber } = await supabaseClient
+      .from("subscribers")
+      .select("subscribed")
+      .eq("user_id", user.id)
+      .single();
+    
+    const alreadySubscribed = existingSubscriber?.subscribed || false;
+
     const subscriptions = await stripe.subscriptions.list({
       customer: customerId,
       status: "active",
@@ -94,7 +103,7 @@ serve(async (req) => {
       logStep("No active subscription found");
     }
 
-    // Update both tables
+    // Update both tables with subscription start date handling
     await supabaseClient.from("subscribers").upsert({
       email: user.email,
       user_id: user.id,
@@ -102,13 +111,21 @@ serve(async (req) => {
       subscribed: hasActiveSub,
       subscription_tier: hasActiveSub ? subscriptionTier : 'free',
       subscription_end: subscriptionEnd,
+      subscription_start_date: hasActiveSub && !alreadySubscribed ? new Date().toISOString() : undefined,
       updated_at: new Date().toISOString(),
     }, { onConflict: 'email' });
 
-    await supabaseClient.from("profiles").update({
+    // Update profiles table - only set start date if newly subscribed
+    const profileUpdate: any = {
       subscription_tier: hasActiveSub ? subscriptionTier : 'free',
       subscription_end: subscriptionEnd
-    }).eq('id', user.id);
+    };
+    
+    if (hasActiveSub && !alreadySubscribed) {
+      profileUpdate.subscription_start_date = new Date().toISOString();
+    }
+
+    await supabaseClient.from("profiles").update(profileUpdate).eq('id', user.id);
 
     logStep("Updated database with subscription info", { subscribed: hasActiveSub, subscriptionTier });
     return new Response(JSON.stringify({
