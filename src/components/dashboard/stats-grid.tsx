@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { useState, useEffect } from 'react'
+import { supabase } from '@/integrations/supabase/client'
 import { 
   Trophy, 
   Star, 
@@ -120,6 +122,38 @@ const StatCard = ({
 }
 
 export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
+  const [completedChallenges, setCompletedChallenges] = useState(0)
+  const [totalChallenges, setTotalChallenges] = useState(0)
+  const [statsLoading, setStatsLoading] = useState(true)
+
+  // Fetch real challenge completion data
+  useEffect(() => {
+    const fetchChallengeStats = async () => {
+      if (!profile?.id) return
+
+      try {
+        setStatsLoading(true)
+
+        // Get completed challenges count
+        const { data: completedData } = await supabase
+          .rpc('get_user_completed_challenges', { user_uuid: profile.id })
+
+        // Get total active challenges
+        const { data: totalData } = await supabase
+          .rpc('get_total_challenges')
+
+        setCompletedChallenges(completedData || 0)
+        setTotalChallenges(totalData || 0)
+      } catch (error) {
+        console.error('Error fetching challenge stats:', error)
+      } finally {
+        setStatsLoading(false)
+      }
+    }
+
+    fetchChallengeStats()
+  }, [profile?.id])
+
   if (!profile && !loading) return null
 
   const currentLevel = profile?.current_level || 'beginner'
@@ -132,6 +166,11 @@ export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
   const progressToNext = nextLevelXP ? Math.min((currentXP / nextLevelXP) * 100, 100) : 100
   const xpToNext = nextLevelXP ? Math.max(nextLevelXP - currentXP, 0) : 0
 
+  // Calculate completion percentage
+  const completionPercentage = totalChallenges > 0 ? Math.round((completedChallenges / totalChallenges) * 100) : 0
+
+  const isLoading = loading || statsLoading
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <StatCard
@@ -140,7 +179,7 @@ export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
         subtitle={nextLevelXP ? `${xpToNext} XP para ${levelConfig[levelInfo.nextLevel as keyof typeof levelConfig]?.label}` : 'Nivel máximo alcanzado'}
         icon={Zap}
         progress={progressToNext}
-        loading={loading}
+        loading={isLoading}
         delay={0}
       />
 
@@ -149,17 +188,17 @@ export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
         value={levelInfo.label}
         subtitle={`${profile?.current_level || 'beginner'}`}
         icon={LevelIcon}
-        loading={loading}
+        loading={isLoading}
         delay={0.1}
       />
 
       <StatCard
         title="Retos Completados"
-        value="0" // TODO: Calculate from submissions
-        subtitle="0% del total disponible"
+        value={completedChallenges.toString()}
+        subtitle={`${completionPercentage}% del total disponible`}
         icon={Target}
-        progress={0} // TODO: Calculate percentage
-        loading={loading}
+        progress={completionPercentage}
+        loading={isLoading}
         delay={0.2}
       />
 
@@ -168,7 +207,7 @@ export const StatsGrid = ({ profile, globalRank, loading }: StatsGridProps) => {
         value={globalRank ? `#${globalRank.toLocaleString()}` : '#---'}
         subtitle="Posición mundial"
         icon={TrendingUp}
-        loading={loading}
+        loading={isLoading}
         delay={0.3}
       />
     </div>

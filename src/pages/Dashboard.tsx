@@ -20,6 +20,7 @@ import { StreakSection } from '@/components/dashboard/streak-section'
 import { StatsGrid } from '@/components/dashboard/stats-grid'
 import { RecentActivity } from '@/components/dashboard/recent-activity'
 import { AchievementsShowcase } from '@/components/dashboard/achievements-showcase'
+import { SubscriptionBanner } from '@/components/dashboard/subscription-banner'
 
 const Dashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth()
@@ -127,6 +128,9 @@ const Dashboard = () => {
             </p>
           </div>
         </motion.div>
+
+        {/* Subscription Banner */}
+        <SubscriptionBanner />
 
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
