@@ -233,6 +233,7 @@ export type Database = {
           longest_streak: number | null
           onboarding_completed: boolean | null
           subscription_end: string | null
+          subscription_start_date: string | null
           subscription_tier: string | null
           updated_at: string | null
           username: string
@@ -258,6 +259,7 @@ export type Database = {
           longest_streak?: number | null
           onboarding_completed?: boolean | null
           subscription_end?: string | null
+          subscription_start_date?: string | null
           subscription_tier?: string | null
           updated_at?: string | null
           username: string
@@ -283,6 +285,7 @@ export type Database = {
           longest_streak?: number | null
           onboarding_completed?: boolean | null
           subscription_end?: string | null
+          subscription_start_date?: string | null
           subscription_tier?: string | null
           updated_at?: string | null
           username?: string
@@ -443,6 +446,7 @@ export type Database = {
           stripe_customer_id: string | null
           subscribed: boolean
           subscription_end: string | null
+          subscription_start_date: string | null
           subscription_tier: string | null
           updated_at: string
           user_id: string | null
@@ -454,6 +458,7 @@ export type Database = {
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_start_date?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null
@@ -465,6 +470,7 @@ export type Database = {
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_start_date?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null
@@ -594,6 +600,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_access_challenge_by_date: {
+        Args: { user_uuid: string; challenge_published_date: string }
+        Returns: boolean
+      }
       get_total_challenges: {
         Args: Record<PropertyKey, never>
         Returns: number
