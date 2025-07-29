@@ -99,9 +99,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const signIn = async (email: string, firstName?: string, redirectPath?: string) => {
+    // Si hay un redirectPath, enviamos los parámetros como query para que el email los preserve
     const redirectUrl = redirectPath ? 
       `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirectPath)}` : 
       `${window.location.origin}/auth/callback`;
+    
+    console.log('🚀 signIn called with:', { email, firstName, redirectPath, redirectUrl });
     
     const { error } = await supabase.auth.signInWithOtp({
       email,
