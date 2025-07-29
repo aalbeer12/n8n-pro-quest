@@ -94,6 +94,35 @@ export const ProblemSection = () => {
                 <p className="text-sm text-foreground-secondary">{t('landing.problem.testimonialRole')}</p>
               </div>
             </div>
+            
+            {/* Additional testimonials */}
+            <div className="grid md:grid-cols-2 gap-6 mt-8 pt-8 border-t border-white/10">
+              <div className="text-center">
+                <p className="text-sm italic text-foreground-secondary mb-3">
+                  "Como estudiante, los retos semanales gratuitos me ayudaron a aprender automatización. La actualización a premium valió la pena para la práctica diaria."
+                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-500" />
+                  <div>
+                    <p className="font-medium text-sm">Alex García</p>
+                    <p className="text-xs text-foreground-secondary">Estudiante de Informática</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-sm italic text-foreground-secondary mb-3">
+                  "FlowForge me enseñó a optimizar los procesos de mi negocio. Ahora ahorro 10 horas semanales en tareas manuales."
+                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-green-500" />
+                  <div>
+                    <p className="font-medium text-sm">Roberto Silva</p>
+                    <p className="text-xs text-foreground-secondary">Propietario de Pequeña Empresa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

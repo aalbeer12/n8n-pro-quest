@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { Calendar, Code2, Lightbulb, Trophy } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import workflowHero from '@/assets/workflow-automation-hero.jpg';
+import automationNodes from '@/assets/automation-nodes-bg.jpg';
+import workflowDiagram from '@/assets/workflow-diagram.jpg';
 
 export const HowItWorks = () => {
   const { t } = useTranslation();
@@ -39,16 +42,8 @@ export const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 opacity-5">
-        <img 
-          src="/src/assets/workflow-diagram.jpg" 
-          alt="" 
-          className="w-full h-full object-cover" 
-        />
-      </div>
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,7 +53,7 @@ export const HowItWorks = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            {t('landing.howItWorks.title')} <span className="gradient-text">Works</span>
+            {t('landing.howItWorks.title')} <span className="gradient-text">FlowForge</span>
           </h2>
           <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
             {t('landing.howItWorks.subtitle')}
@@ -113,7 +108,17 @@ export const HowItWorks = () => {
                   whileHover={{ scale: 1.05 }}
                   className="relative w-full max-w-md mx-auto"
                 >
-                  <div className="aspect-square rounded-2xl glass-elevated p-8 flex items-center justify-center">
+                  <div className="aspect-square rounded-2xl glass-elevated p-8 flex items-center justify-center relative overflow-hidden">
+                    {/* Background image for each step */}
+                    <div className="absolute inset-0 opacity-30">
+                      <img 
+                        src={index === 0 ? workflowHero : 
+                             index === 1 ? automationNodes : 
+                             workflowDiagram} 
+                        alt="" 
+                        className="w-full h-full object-cover rounded-2xl" 
+                      />
+                    </div>
                     <motion.div
                       animate={{
                         rotate: [0, 360],
@@ -123,9 +128,9 @@ export const HowItWorks = () => {
                         repeat: Infinity,
                         ease: "linear",
                       }}
-                      className="w-32 h-32 rounded-full bg-gradient-primary opacity-20"
+                      className="w-32 h-32 rounded-full bg-gradient-primary opacity-20 relative z-10"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center z-20">
                       <step.icon className="w-16 h-16 text-primary" />
                     </div>
                   </div>

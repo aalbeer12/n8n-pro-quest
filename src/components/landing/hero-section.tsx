@@ -28,15 +28,8 @@ export const HeroSection = () => {
         </div>
       </nav>
 
-      {/* Background gradient and images */}
+      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-primary" />
-      <div className="absolute inset-0 opacity-20">
-        <img 
-          src="/src/assets/workflow-automation-hero.jpg" 
-          alt="" 
-          className="w-full h-full object-cover mix-blend-overlay" 
-        />
-      </div>
       
       {/* Animated background nodes */}
       <div className="absolute inset-0">
