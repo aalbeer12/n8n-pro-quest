@@ -230,6 +230,18 @@ const resources = {
       "landing.hero.social_proof": "Únete a más de 500 ingenieros de automatización mejorando sus habilidades",
       "landing.hero.trial_info": "Prueba gratuita de 7 días, sin tarjeta de crédito requerida",
 
+      "landing.cta.startAutomation": "Comienza Tu Automatización",
+      "landing.cta.journeyToday": "Viaje Hoy",
+      "landing.cta.ctaSubtitle": "Únete a cientos de ingenieros de automatización que ya están dominando n8n a través de práctica diaria y retroalimentación impulsada por IA.",
+      "landing.cta.benefit1": "Prueba gratuita de 7 días",
+      "landing.cta.benefit2": "No se requiere tarjeta de crédito",
+      "landing.cta.benefit3": "Cancela en cualquier momento",
+      "landing.cta.benefit4": "Acceso a todos los desafíos",
+      "landing.cta.benefit5": "Retroalimentación de IA incluida",
+      "landing.cta.emailPlaceholder": "Ingresa tu email para comenzar",
+      "landing.cta.startLearning": "Comenzar a Aprender",
+      "landing.cta.trustedBy": "Confiado por ingenieros de automatización en las mejores empresas del mundo",
+
       // Footer
       footer: {
         description: "Domina la automatización n8n a través de desafíos diarios, retroalimentación de IA y una comunidad de expertos en automatización.",
