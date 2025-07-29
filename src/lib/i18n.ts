@@ -115,7 +115,7 @@ const resources = {
           privacy: "Privacy Policy",
           terms: "Terms of Service"
         },
-        copyright: "© 2024 FlowForge. All rights reserved."
+        copyright: "© 2025 FlowForge. All rights reserved."
       },
 
       // Pages
@@ -463,7 +463,7 @@ const resources = {
           privacy: "Política de Privacidad",
           terms: "Términos de Servicio"
         },
-        copyright: "© 2024 FlowForge. Todos los derechos reservados."
+        copyright: "© 2025 FlowForge. Todos los derechos reservados."
       },
 
       // Pages

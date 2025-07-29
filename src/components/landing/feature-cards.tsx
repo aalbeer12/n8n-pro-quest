@@ -35,8 +35,16 @@ export const FeatureCards = () => {
   ];
 
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 px-6 relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 opacity-10">
+        <img 
+          src="/src/assets/automation-nodes-bg.jpg" 
+          alt="" 
+          className="w-full h-full object-cover" 
+        />
+      </div>
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

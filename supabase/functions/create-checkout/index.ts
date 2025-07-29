@@ -37,50 +37,52 @@ serve(async (req) => {
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
 
-    const { priceId, planType } = await req.json();
-    if (!priceId && !planType) throw new Error("Either priceId or planType is required");
+    const { planType } = await req.json();
+    if (!planType || !['monthly', 'annual'].includes(planType)) {
+      throw new Error("Invalid plan type");
+    }
+    logStep("Plan type", { planType });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
-    
+
+    // Check if customer exists
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
     }
+    logStep("Stripe customer", { customerId });
 
-    let lineItems;
-    if (priceId) {
-      lineItems = [{ price: priceId, quantity: 1 }];
-    } else {
-      const pricing = {
-        basic: { amount: 999, name: "FlowForge Basic" },
-        premium: { amount: 1999, name: "FlowForge Premium" },
-        enterprise: { amount: 4999, name: "FlowForge Enterprise" }
-      };
-      
-      const plan = pricing[planType as keyof typeof pricing];
-      if (!plan) throw new Error("Invalid plan type");
-      
-      lineItems = [{
-        price_data: {
-          currency: "usd",
-          product_data: { name: plan.name },
-          unit_amount: plan.amount,
-          recurring: { interval: "month" },
+    // Set up pricing
+    const prices = {
+      monthly: { amount: 1900, interval: 'month' }, // €19
+      annual: { amount: 19000, interval: 'year' }   // €190
+    };
+
+    const selectedPrice = prices[planType as keyof typeof prices];
+
+    const lineItems = [{
+      price_data: {
+        currency: "eur",
+        product_data: { 
+          name: planType === 'monthly' ? "Plan Mensual Premium" : "Plan Anual Premium"
         },
-        quantity: 1,
-      }];
-    }
+        unit_amount: selectedPrice.amount,
+        recurring: { interval: selectedPrice.interval },
+      },
+      quantity: 1,
+    }];
 
-    const origin = req.headers.get("origin") || "https://flowforge.app";
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
       line_items: lineItems,
       mode: "subscription",
-      success_url: `${origin}/dashboard?success=true`,
-      cancel_url: `${origin}/dashboard?canceled=true`,
+      success_url: `${req.headers.get("origin")}/dashboard?success=true`,
+      cancel_url: `${req.headers.get("origin")}?canceled=true`,
     });
+
+    logStep("Checkout session created", { sessionId: session.id });
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

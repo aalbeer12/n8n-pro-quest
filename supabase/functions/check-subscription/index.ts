@@ -57,13 +57,11 @@ serve(async (req) => {
         updated_at: new Date().toISOString(),
       }, { onConflict: 'email' });
       
-      // Also update profiles table
-      await supabaseClient.from("profiles").update({
+      return new Response(JSON.stringify({ 
+        subscribed: false, 
         subscription_tier: 'free',
-        subscription_end: null
-      }).eq('id', user.id);
-
-      return new Response(JSON.stringify({ subscribed: false, subscription_tier: 'free' }), {
+        subscription_end: null 
+      }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       });
@@ -72,14 +70,6 @@ serve(async (req) => {
     const customerId = customers.data[0].id;
     logStep("Found Stripe customer", { customerId });
 
-    // Check if user was already subscribed to avoid updating start date
-    const { data: existingSubscriber } = await supabaseClient
-      .from("subscribers")
-      .select("subscribed")
-      .eq("user_id", user.id)
-      .single();
-    
-    const alreadySubscribed = existingSubscriber?.subscribed || false;
 
     const subscriptions = await stripe.subscriptions.list({
       customer: customerId,
@@ -95,42 +85,33 @@ serve(async (req) => {
       subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();
       logStep("Active subscription found", { subscriptionId: subscription.id, endDate: subscriptionEnd });
       
-      // Determine subscription tier from price interval
+      // Determine tier based on interval
       const interval = subscription.items.data[0].price.recurring?.interval;
       subscriptionTier = interval === 'year' ? 'annual' : 'monthly';
-      logStep("Determined subscription tier", { interval, subscriptionTier });
+      
+      logStep("Active subscription found", { 
+        subscriptionId: subscription.id, 
+        endDate: subscriptionEnd,
+        tier: subscriptionTier 
+      });
     } else {
       logStep("No active subscription found");
     }
 
-    // Update both tables with subscription start date handling
     await supabaseClient.from("subscribers").upsert({
       email: user.email,
       user_id: user.id,
       stripe_customer_id: customerId,
       subscribed: hasActiveSub,
-      subscription_tier: hasActiveSub ? subscriptionTier : 'free',
+      subscription_tier: subscriptionTier,
       subscription_end: subscriptionEnd,
-      subscription_start_date: hasActiveSub && !alreadySubscribed ? new Date().toISOString() : undefined,
       updated_at: new Date().toISOString(),
     }, { onConflict: 'email' });
 
-    // Update profiles table - only set start date if newly subscribed
-    const profileUpdate: any = {
-      subscription_tier: hasActiveSub ? subscriptionTier : 'free',
-      subscription_end: subscriptionEnd
-    };
-    
-    if (hasActiveSub && !alreadySubscribed) {
-      profileUpdate.subscription_start_date = new Date().toISOString();
-    }
-
-    await supabaseClient.from("profiles").update(profileUpdate).eq('id', user.id);
-
-    logStep("Updated database with subscription info", { subscribed: hasActiveSub, subscriptionTier });
+    logStep("Updated database", { subscribed: hasActiveSub, subscriptionTier });
     return new Response(JSON.stringify({
       subscribed: hasActiveSub,
-      subscription_tier: hasActiveSub ? subscriptionTier : 'free',
+      subscription_tier: subscriptionTier,
       subscription_end: subscriptionEnd
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

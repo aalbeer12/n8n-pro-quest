@@ -63,20 +63,19 @@ export const PricingSection = () => {
       onSelect: () => handlePlanSelect('monthly'),
       disabled: loading === 'monthly'
     },
-    {
-      title: "Plan Anual",
-      price: "€190",
-      period: "año",
-      description: "El mejor valor para learners serios",
-      features: [
-        "Todo del plan mensual",
-        "2 meses GRATIS (14 meses por 12)",
-        "Soporte premium",
-        "Acceso anticipado a nuevas funciones",
-        "Sesiones de mentoría mensuales",
-        "Certificado de finalización",
-        "Acceso de por vida a contenido creado"
-      ],
+      {
+        title: "Plan Anual",
+        price: "€190",
+        period: "año",
+        description: "El mejor valor para learners serios",
+        features: [
+          "Todo del plan mensual",
+          "2 meses GRATIS (14 meses por 12)",
+          "Soporte premium",
+          "Acceso anticipado a nuevas funciones",
+          "Certificado de finalización",
+          "Acceso de por vida a contenido creado"
+        ],
       isPopular: true,
       isPremium: true,
       onSelect: () => handlePlanSelect('annual'),
@@ -126,7 +125,7 @@ export const PricingSection = () => {
             className="text-center mt-12"
           >
             <div className="inline-flex items-center gap-6 text-sm text-muted-foreground">
-              <span>✓ Prueba gratuita de 7 días</span>
+              <span>✓ Un reto semanal gratis de por vida</span>
               <span>✓ Sin compromiso</span>
               <span>✓ Cancela cuando quieras</span>
             </div>

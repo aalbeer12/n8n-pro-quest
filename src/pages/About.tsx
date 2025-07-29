@@ -144,6 +144,21 @@ const About = () => {
                   name: "Emma Thompson",
                   role: "Freelance Consultant",
                   content: "Building my portfolio on FlowForge helped me land 3 new automation consulting clients. The certificates are recognized by employers."
+                },
+                {
+                  name: "Alex García",
+                  role: "Computer Science Student",
+                  content: "As a student, FlowForge's free weekly challenges helped me learn automation basics. The upgrade to premium was worth it for daily practice."
+                },
+                {
+                  name: "Jennifer Park",
+                  role: "Freelance Developer",
+                  content: "The flexible learning approach fits perfectly with my freelance schedule. I can practice automation skills between client projects."
+                },
+                {
+                  name: "Roberto Silva",
+                  role: "Small Business Owner",
+                  content: "FlowForge automation challenges taught me how to streamline my business processes. Now I save 10 hours per week on manual tasks."
                 }
               ].map((testimonial, index) => (
                 <div key={index} className="glass p-6 rounded-lg">
