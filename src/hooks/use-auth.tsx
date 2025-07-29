@@ -41,23 +41,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null)
         setLoading(false)
         
+        // Disabled custom email sending - let Supabase handle magic links
         // Send email for login/signup  
-        if (event === 'SIGNED_IN' && session?.user?.email) {
-          // Check if this is a new user by checking if they have a profile
-          setTimeout(async () => {
-            const { data: profile } = await supabase
-              .from('profiles')
-              .select('id, created_at')
-              .eq('id', session.user.id)
-              .single();
+        // if (event === 'SIGNED_IN' && session?.user?.email) {
+        //   setTimeout(async () => {
+        //     const { data: profile } = await supabase
+        //       .from('profiles')
+        //       .select('id, created_at')
+        //       .eq('id', session.user.id)
+        //       .single();
             
-            // If no profile exists or profile was just created (less than 5 minutes ago), it's a new user
-            const isNewUser = !profile || 
-              (profile.created_at && new Date(profile.created_at) > new Date(Date.now() - 5 * 60 * 1000));
+        //     const isNewUser = !profile || 
+        //       (profile.created_at && new Date(profile.created_at) > new Date(Date.now() - 5 * 60 * 1000));
             
-            sendWelcomeEmail(session.user.email!, isNewUser);
-          }, 1000);
-        }
+        //     sendWelcomeEmail(session.user.email!, isNewUser);
+        //   }, 1000);
+        // }
         
         // Handle redirect after successful authentication
         if (event === 'SIGNED_IN' && session) {
