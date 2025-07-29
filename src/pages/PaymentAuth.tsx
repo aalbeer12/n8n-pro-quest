@@ -54,8 +54,9 @@ export const PaymentAuth = () => {
     setIsLoading(true)
 
     try {
-      // Crear una URL de callback que incluye el plan como parámetro
+      // Crear una URL de callback que incluye el plan como parámetro para el email
       const callbackUrl = `/payment-auth?plan=${planType}&auth=complete`;
+      console.log('💳 PaymentAuth signIn with redirect:', callbackUrl);
       const { error } = await signIn(email, firstName, callbackUrl);
       
       if (error) {

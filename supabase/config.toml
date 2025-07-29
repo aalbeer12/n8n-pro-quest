@@ -9,9 +9,11 @@ max_rows = 1000
 
 [auth]
 enabled = true
-site_url = "http://localhost:3000"
+site_url = "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com"
 additional_redirect_urls = [
   "https://nhzspvllzlubturohass.supabase.co/**",
+  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/auth/callback",
+  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth**",
   "http://localhost:3000/auth/callback",
   "http://localhost:3000/payment-auth**"
 ]
