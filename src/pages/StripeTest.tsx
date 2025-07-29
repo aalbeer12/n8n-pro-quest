@@ -56,15 +56,15 @@ const StripeTest = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertCircle className="w-5 h-5 text-warning" />
-              Authentication Required
+              Autenticación Requerida
             </CardTitle>
             <CardDescription>
-              You need to be logged in to test Stripe integration.
+              Necesitas iniciar sesión para probar la integración de Stripe.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full">
-              <Link to="/auth">Sign In</Link>
+              <Link to="/auth">Iniciar Sesión</Link>
             </Button>
           </CardContent>
         </Card>

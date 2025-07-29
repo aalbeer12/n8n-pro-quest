@@ -84,7 +84,7 @@ const Auth = () => {
 
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Haz clic en el enlace de tu email para iniciar sesión. El enlace expira en 60 minutos.
+                  {t('auth.emailExpires')}
                 </p>
                 
                 <Button
@@ -127,11 +127,11 @@ const Auth = () => {
         <Card className="p-8 bg-surface/50 backdrop-blur-sm border-border">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="firstName">¿Cómo te llamas?</Label>
+              <Label htmlFor="firstName">{t('auth.firstName')}</Label>
               <Input
                 id="firstName"
                 type="text"
-                placeholder="Tu nombre de pila"
+                placeholder={t('auth.firstNamePlaceholder')}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
@@ -160,7 +160,7 @@ const Auth = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Enviando enlace mágico...
+                  {t('auth.sendingLink')}
                 </>
               ) : (
                 <>
@@ -171,7 +171,7 @@ const Auth = () => {
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              No se requieren contraseñas. Te enviaremos un enlace seguro para iniciar sesión.
+              {t('auth.noPasswordsRequired')}
             </div>
           </form>
         </Card>
@@ -181,7 +181,7 @@ const Auth = () => {
             to="/" 
             className="text-sm text-muted-foreground hover:text-primary transition-colors"
           >
-            ← Volver al inicio
+            {t('auth.backToHome')}
           </Link>
         </div>
       </motion.div>

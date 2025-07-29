@@ -186,13 +186,19 @@ const resources = {
       // Auth
       "auth.title": "Welcome to FlowForge",
       "auth.subtitle": "Enter your email to get started",
+      "auth.firstName": "What's your name?",
+      "auth.firstNamePlaceholder": "Your first name",
       "auth.email": "Email",
       "auth.emailPlaceholder": "your@email.com",
       "auth.continue": "Continue with Email",
+      "auth.sendingLink": "Sending magic link...",
+      "auth.noPasswordsRequired": "No passwords required. We'll send you a secure link to sign in.",
       "auth.checkEmail": "Check your email",
       "auth.checkEmailDesc": "We've sent you a magic link to sign in",
+      "auth.emailExpires": "Click the link in your email to sign in. The link expires in 60 minutes.",
       "auth.resend": "Resend email",
       "auth.backToEmail": "Back to email",
+      "auth.backToHome": "← Back to home",
       
       // Common
       "common.loading": "Loading...",
@@ -472,13 +478,19 @@ const resources = {
       // Auth
       "auth.title": "Bienvenido a FlowForge",
       "auth.subtitle": "Ingresa tu email para comenzar",
+      "auth.firstName": "¿Cómo te llamas?",
+      "auth.firstNamePlaceholder": "Tu nombre de pila",
       "auth.email": "Email",
       "auth.emailPlaceholder": "tu@email.com",
       "auth.continue": "Continuar con Email",
+      "auth.sendingLink": "Enviando enlace mágico...",
+      "auth.noPasswordsRequired": "No se requieren contraseñas. Te enviaremos un enlace seguro para iniciar sesión.",
       "auth.checkEmail": "Revisa tu email",
       "auth.checkEmailDesc": "Te hemos enviado un enlace mágico para iniciar sesión",
+      "auth.emailExpires": "Haz clic en el enlace de tu email para iniciar sesión. El enlace expira en 60 minutos.",
       "auth.resend": "Reenviar email",
       "auth.backToEmail": "Volver al email",
+      "auth.backToHome": "← Volver al inicio",
       
       // Common
       "common.loading": "Cargando...",
