@@ -19,11 +19,9 @@ export const Footer = () => {
     product: [
       { name: t('footer.product.challenges'), href: "/challenges" },
       { name: t('footer.product.leaderboard'), href: "/leaderboard" },
-      { name: t('footer.product.pricing'), href: "#pricing" },
+      { name: t('footer.product.pricing'), href: "/#pricing" },
     ],
     resources: [
-      { name: t('footer.resources.community'), href: "/community" },
-      { name: t('footer.resources.help'), href: "/help" },
       { name: t('footer.resources.blog'), href: "https://blog.hackyourflows.com", external: true },
     ],
     company: [

@@ -84,7 +84,7 @@ export const PricingSection = () => {
   ]
 
   return (
-    <section className="py-16 px-6">
+    <section id="pricing" className="py-16 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <motion.div

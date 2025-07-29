@@ -93,10 +93,12 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   const createCheckout = async (planType: 'monthly' | 'annual') => {
     if (!session?.access_token) {
       toast({
-        title: "Error",
+        title: "Autenticación Requerida",
         description: "Debes iniciar sesión para suscribirte",
         variant: "destructive"
       });
+      // Redirect to auth with return URL
+      window.location.href = '/auth?return=' + encodeURIComponent(window.location.pathname + '#pricing');
       return;
     }
 
