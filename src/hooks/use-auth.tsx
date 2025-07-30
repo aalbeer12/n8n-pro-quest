@@ -100,12 +100,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (email: string, firstName?: string, redirectPath?: string) => {
     console.log('🚀 signIn called with:', { email, firstName, redirectPath });
     
+    // Detectar si estamos en producción o desarrollo
+    const isProduction = window.location.hostname !== 'localhost';
+    const baseUrl = isProduction ? 
+      'https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com' : 
+      'http://localhost:3000';
+    
     // Usar el redirectPath correcto o callback por defecto
     const redirectUrl = redirectPath ? 
-      `${window.location.origin}${redirectPath}` : 
-      `${window.location.origin}/auth/callback`;
+      `${baseUrl}${redirectPath}` : 
+      `${baseUrl}/auth/callback`;
     
     console.log('📧 Email redirect URL:', redirectUrl);
+    console.log('🌍 Environment:', isProduction ? 'production' : 'development');
     
     const { error } = await supabase.auth.signInWithOtp({
       email,
