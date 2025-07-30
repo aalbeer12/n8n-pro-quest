@@ -16,14 +16,14 @@ additional_redirect_urls = [
   "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/",
   "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/auth/callback",
   "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth",
-  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth?plan=monthly&auth=complete",
-  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth?plan=yearly&auth=complete",
+  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth?plan=monthly",
+  "https://07dc8c76-e23d-4b0c-a41a-3f16d01f0993.lovableproject.com/payment-auth?plan=yearly",
   "http://localhost:3000",
   "http://localhost:3000/",
   "http://localhost:3000/auth/callback",
   "http://localhost:3000/payment-auth",
-  "http://localhost:3000/payment-auth?plan=monthly&auth=complete",
-  "http://localhost:3000/payment-auth?plan=yearly&auth=complete"
+  "http://localhost:3000/payment-auth?plan=monthly",
+  "http://localhost:3000/payment-auth?plan=yearly"
 ]
 jwt_expiry = 3600
 enable_signup = true
