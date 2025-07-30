@@ -19,7 +19,7 @@ export const PaymentAuth = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const planType = searchParams.get('plan') as 'monthly' | 'annual' || 'monthly'
-  const authComplete = searchParams.get('auth') === 'complete'
+  // No necesitamos auth=complete, detectamos autenticación con user
   const { signIn, user } = useAuth()
   const { toast } = useToast()
   const { createCheckout } = useSubscription()
@@ -54,8 +54,8 @@ export const PaymentAuth = () => {
     setIsLoading(true)
 
     try {
-      // Crear una URL de callback que incluye el plan como parámetro para el email
-      const callbackUrl = `/payment-auth?plan=${planType}&auth=complete`;
+      // La URL del callback debe ser exactamente igual que la del botón del dashboard
+      const callbackUrl = `/payment-auth?plan=${planType}`;
       console.log('💳 PaymentAuth signIn with redirect:', callbackUrl);
       const { error } = await signIn(email, firstName, callbackUrl);
       
