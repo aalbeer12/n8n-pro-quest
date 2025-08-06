@@ -8,7 +8,7 @@ export const useAuthNotifications = () => {
 
   const sendWelcomeEmail = async (email: string) => {
     try {
-      const { error } = await supabase.functions.invoke('send-auth-email', {
+      const { error } = await supabase.functions.invoke('send-custom-auth-email', {
         body: {
           to: email,
           type: 'welcome',
@@ -28,7 +28,7 @@ export const useAuthNotifications = () => {
 
   const sendPasswordResetEmail = async (email: string, resetUrl: string) => {
     try {
-      const { error } = await supabase.functions.invoke('send-auth-email', {
+      const { error } = await supabase.functions.invoke('send-custom-auth-email', {
         body: {
           to: email,
           type: 'password_reset',
@@ -48,7 +48,7 @@ export const useAuthNotifications = () => {
 
   const sendEmailConfirmation = async (email: string, confirmUrl: string) => {
     try {
-      const { error } = await supabase.functions.invoke('send-auth-email', {
+      const { error } = await supabase.functions.invoke('send-custom-auth-email', {
         body: {
           to: email,
           type: 'email_confirmation',
