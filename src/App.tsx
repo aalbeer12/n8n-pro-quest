@@ -25,6 +25,7 @@ import About from "./pages/About";
 import Community from "./pages/Community";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
+import { RedirectPage } from "./components/redirect-page";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,10 @@ const App = () => (
                   <Route path="/about" element={<About />} />
                   <Route path="/community" element={<Community />} />
                   <Route path="/blog" element={<Blog />} />
+                  
+                  {/* 301 Redirects */}
+                  <Route path="/sobre-nosotros" element={<RedirectPage to="/about" />} />
+                  
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </SubscriptionProvider>

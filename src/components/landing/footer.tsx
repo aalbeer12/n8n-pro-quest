@@ -22,8 +22,8 @@ export const Footer = () => {
       { name: t('footer.product.pricing'), href: "/#pricing" },
     ],
     resources: [
-      { name: t('footer.resources.community'), href: "https://discord.gg/flowforge", external: true },
-      { name: t('footer.resources.blog'), href: "https://blog.hackyourflows.com", external: true },
+      { name: t('footer.resources.howItWorks'), href: "/how-it-works" },
+      { name: t('footer.resources.about'), href: "/about" },
     ],
     company: [
       { name: t('footer.company.about'), href: "/about" },
