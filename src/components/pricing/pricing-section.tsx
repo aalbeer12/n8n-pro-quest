@@ -5,7 +5,7 @@ import { useSubscription } from '@/hooks/use-subscription'
 import { useToast } from '@/hooks/use-toast'
 
 export const PricingSection = () => {
-  const { createCheckout, subscribed } = useSubscription()
+  const { createCheckout, isPro } = useSubscription()
   const { toast } = useToast()
   const [loading, setLoading] = useState<string | null>(null)
 
@@ -116,7 +116,7 @@ export const PricingSection = () => {
           ))}
         </div>
 
-        {!subscribed && (
+        {!isPro && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

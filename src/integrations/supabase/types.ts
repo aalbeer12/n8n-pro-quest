@@ -226,6 +226,7 @@ export type Database = {
           github_url: string | null
           id: string
           initial_level_assigned: boolean | null
+          is_pro: boolean
           is_public: boolean | null
           last_activity_date: string | null
           last_weekly_reset: string | null
@@ -252,6 +253,7 @@ export type Database = {
           github_url?: string | null
           id: string
           initial_level_assigned?: boolean | null
+          is_pro?: boolean
           is_public?: boolean | null
           last_activity_date?: string | null
           last_weekly_reset?: string | null
@@ -278,6 +280,7 @@ export type Database = {
           github_url?: string | null
           id?: string
           initial_level_assigned?: boolean | null
+          is_pro?: boolean
           is_public?: boolean | null
           last_activity_date?: string | null
           last_weekly_reset?: string | null

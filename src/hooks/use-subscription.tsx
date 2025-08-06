@@ -5,6 +5,7 @@ import { useToast } from './use-toast';
 
 interface SubscriptionContextType {
   subscribed: boolean;
+  isPro: boolean;
   subscriptionTier: 'free' | 'monthly' | 'annual';
   subscriptionEnd: string | null;
   loading: boolean;
@@ -21,6 +22,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   const { user, session } = useAuth();
   const { toast } = useToast();
   const [subscribed, setSubscribed] = useState(false);
+  const [isPro, setIsPro] = useState(false);
   const [subscriptionTier, setSubscriptionTier] = useState<'free' | 'monthly' | 'annual'>('free');
   const [subscriptionEnd, setSubscriptionEnd] = useState<string | null>(null);
   const [weeklyFreeUsed, setWeeklyFreeUsed] = useState(0);
@@ -43,6 +45,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       if (error) throw error;
 
       setSubscribed(data.subscribed || false);
+      setIsPro(data.isPro || false);
       setSubscriptionTier(data.subscription_tier || 'free');
       setSubscriptionEnd(data.subscription_end || null);
 
@@ -86,7 +89,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const canAccessChallenge = () => {
-    if (subscribed) return true;
+    if (isPro) return true; // Use isPro instead of subscribed
     return weeklyFreeUsed < 1; // 1 free challenge per week
   };
 
@@ -128,6 +131,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setLoading(false);
       setSubscribed(false);
+      setIsPro(false);
       setSubscriptionTier('free');
       setSubscriptionEnd(null);
       setWeeklyFreeUsed(0);
@@ -137,6 +141,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SubscriptionContext.Provider value={{
       subscribed,
+      isPro,
       subscriptionTier,
       subscriptionEnd,
       loading,
