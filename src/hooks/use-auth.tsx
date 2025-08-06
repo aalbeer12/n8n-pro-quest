@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
@@ -19,17 +20,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
-  const sendWelcomeEmail = async (email: string, isNewUser: boolean = false) => {
+  const sendCustomWelcomeEmail = async (email: string, type: 'welcome' | 'magic_link', additionalData?: any) => {
     try {
-      await supabase.functions.invoke('send-auth-email', {
+      await supabase.functions.invoke('send-custom-auth-email', {
         body: {
           to: email,
-          type: isNewUser ? 'welcome' : 'login',
-          data: { appUrl: window.location.origin }
+          type: type,
+          data: { 
+            appUrl: window.location.origin,
+            ...additionalData
+          }
         }
       });
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error sending custom email:', error);
     }
   };
 
@@ -41,22 +45,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null)
         setLoading(false)
         
-        // Disabled custom email sending - let Supabase handle magic links
-        // Send email for login/signup  
-        // if (event === 'SIGNED_IN' && session?.user?.email) {
-        //   setTimeout(async () => {
-        //     const { data: profile } = await supabase
-        //       .from('profiles')
-        //       .select('id, created_at')
-        //       .eq('id', session.user.id)
-        //       .single();
+        // Send welcome email for new users
+        if (event === 'SIGNED_IN' && session?.user?.email) {
+          setTimeout(async () => {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('id, created_at')
+              .eq('id', session.user.id)
+              .single();
             
-        //     const isNewUser = !profile || 
-        //       (profile.created_at && new Date(profile.created_at) > new Date(Date.now() - 5 * 60 * 1000));
+            const isNewUser = !profile || 
+              (profile.created_at && new Date(profile.created_at) > new Date(Date.now() - 5 * 60 * 1000));
             
-        //     sendWelcomeEmail(session.user.email!, isNewUser);
-        //   }, 1000);
-        // }
+            if (isNewUser) {
+              sendCustomWelcomeEmail(session.user.email!, 'welcome');
+            }
+          }, 1000);
+        }
         
         // Handle redirect after successful authentication
         if (event === 'SIGNED_IN' && session) {
@@ -121,6 +126,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         data: firstName ? { first_name: firstName } : undefined
       }
     })
+
+    // Si es para payment-auth, enviar email personalizado
+    if (!error && redirectPath?.includes('payment-auth')) {
+      const planMatch = redirectPath.match(/plan=(\w+)/);
+      const planType = planMatch ? planMatch[1] : 'monthly';
+      
+      // Crear el magic link personalizado
+      const magicLinkUrl = `${baseUrl}${redirectPath}`;
+      
+      // Enviar email personalizado
+      setTimeout(() => {
+        sendCustomWelcomeEmail(email, 'magic_link', {
+          magicLink: magicLinkUrl,
+          planType: planType
+        });
+      }, 2000); // Esperar un poco para que Supabase procese el OTP
+    }
     
     return { error }
   }

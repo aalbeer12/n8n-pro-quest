@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -5,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/hooks/use-auth'
 import { useToast } from '@/hooks/use-toast'
 import { useSubscription } from '@/hooks/use-subscription'
@@ -16,31 +16,31 @@ export const PaymentAuth = () => {
   const [firstName, setFirstName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
+  const [processingPayment, setProcessingPayment] = useState(false)
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const planType = searchParams.get('plan') as 'monthly' | 'annual' || 'monthly'
-  // No necesitamos auth=complete, detectamos autenticación con user
-  const { signIn, user } = useAuth()
+  const { signIn, user, loading: authLoading } = useAuth()
   const { toast } = useToast()
   const { createCheckout } = useSubscription()
 
   useEffect(() => {
     // Si el usuario ya está autenticado, proceder directamente con el checkout
-    if (user) {
-      console.log('Usuario ya autenticado, procediendo al pago directamente')
+    if (user && !authLoading && !processingPayment) {
+      console.log('Usuario autenticado, procediendo al pago automáticamente')
+      setProcessingPayment(true)
       handleProceedToPayment()
     }
-  }, [user])
+  }, [user, authLoading])
 
   const handleProceedToPayment = async () => {
     try {
+      console.log(`Iniciando checkout para plan: ${planType}`)
       await createCheckout(planType)
-      toast({
-        title: "Redirigiendo a Stripe",
-        description: "Te estamos llevando al checkout seguro..."
-      })
+      // No mostramos toast aquí porque el usuario será redirigido
     } catch (error) {
       console.error('Error creating checkout:', error)
+      setProcessingPayment(false)
       toast({
         title: "Error",
         description: "No se pudo iniciar el proceso de pago. Inténtalo de nuevo.",
@@ -54,7 +54,6 @@ export const PaymentAuth = () => {
     setIsLoading(true)
 
     try {
-      // La URL del callback debe ser exactamente igual que la del botón del dashboard
       const callbackUrl = `/payment-auth?plan=${planType}`;
       console.log('💳 PaymentAuth signIn with redirect:', callbackUrl);
       const { error } = await signIn(email, firstName, callbackUrl);
@@ -110,6 +109,33 @@ export const PaymentAuth = () => {
 
   const currentPlan = planDetails[planType]
 
+  // Mostrar loading mientras se procesa el pago automático
+  if (processingPayment) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md mx-auto text-center"
+        >
+          <Card className="border-primary/20">
+            <CardHeader className="text-center">
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <CreditCard className="w-6 h-6 text-primary animate-pulse" />
+              </div>
+              <CardTitle className="text-xl">Redirigiendo al pago...</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-muted-foreground">
+                Te estamos llevando al checkout seguro de Stripe para completar tu suscripción.
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    )
+  }
+
   if (emailSent) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-6">
@@ -130,7 +156,7 @@ export const PaymentAuth = () => {
                 Hemos enviado un enlace de acceso a <strong>{email}</strong>
               </p>
               <p className="text-sm text-muted-foreground">
-                Una vez que confirmes tu cuenta desde el email, regresarás aquí y serás redirigido automáticamente al pago seguro de Stripe para completar tu suscripción al plan {planType === 'monthly' ? 'mensual' : 'anual'}.
+                Una vez que confirmes tu cuenta desde el email, serás redirigido automáticamente al pago seguro de Stripe para completar tu suscripción al plan {planType === 'monthly' ? 'mensual' : 'anual'}.
               </p>
               <Button 
                 variant="outline" 
@@ -256,9 +282,7 @@ export const PaymentAuth = () => {
                     ))}
                   </div>
 
-                  <Separator />
-
-                  <div className="space-y-4">
+                  <div className="space-y-4 pt-4 border-t">
                     <h4 className="font-semibold text-center">¿Por qué elegir FlowForge?</h4>
                     
                     <div className="grid grid-cols-3 gap-4 text-center">
