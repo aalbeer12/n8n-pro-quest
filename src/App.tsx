@@ -16,6 +16,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Leaderboard from "./pages/Leaderboard";
 import Settings from "./pages/Settings";
 import { PaymentAuth } from "./pages/PaymentAuth";
+import { Pricing } from "./pages/Pricing";
 
 import HowItWorks from "./pages/HowItWorks";
 import Terms from "./pages/Terms";
@@ -40,6 +41,7 @@ const App = () => (
                   <Route path="/auth/callback" element={<AuthCallback />} />
                   <Route path="/auth/welcome" element={<AuthWelcome />} />
                   <Route path="/payment-auth" element={<PaymentAuth />} />
+                  <Route path="/pricing" element={<Pricing />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/challenges" element={<Challenges />} />
                   <Route path="/challenge/:slug" element={<ChallengePage />} />

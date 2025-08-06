@@ -127,19 +127,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     })
 
-    // Si es para payment-auth, enviar email personalizado
+    // Si es para payment-auth, crear el magic link correcto que va directo al pago
     if (!error && redirectPath?.includes('payment-auth')) {
       const planMatch = redirectPath.match(/plan=(\w+)/);
       const planType = planMatch ? planMatch[1] : 'monthly';
       
-      // Crear el magic link personalizado
-      const magicLinkUrl = `${baseUrl}${redirectPath}`;
+      // Crear el magic link que va directo al checkout de Stripe
+      console.log('📧 Creating magic link for payment plan:', planType);
       
-      // Enviar email personalizado
+      // Enviar email personalizado con el plan específico
       setTimeout(() => {
         sendCustomWelcomeEmail(email, 'magic_link', {
-          magicLink: magicLinkUrl,
-          planType: planType
+          planType: planType,
+          redirectPath: redirectPath
         });
       }, 2000); // Esperar un poco para que Supabase procese el OTP
     }

@@ -16,6 +16,7 @@ interface AuthEmailRequest {
     appUrl?: string;
     magicLink?: string;
     planType?: string;
+    redirectPath?: string;
   };
 }
 
@@ -96,7 +97,7 @@ const getEmailContent = (type: string, data: any) => {
             <p>Haz clic en el botón de abajo para acceder a tu cuenta y completar tu suscripción al <strong>plan ${data.planType === 'monthly' ? 'mensual (€19/mes)' : 'anual (€190/año)'}</strong>:</p>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${data.magicLink}" class="button">
+              <a href="${data.appUrl}${data.redirectPath}" class="button">
                 🔑 Acceder y Continuar al Pago
               </a>
             </div>

@@ -63,7 +63,7 @@ export const PricingSection = () => {
       onSelect: () => handlePlanSelect('monthly'),
       disabled: loading === 'monthly'
     },
-      {
+    {
         title: "Plan Anual",
         price: "€190",
         period: "año",
