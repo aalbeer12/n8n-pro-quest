@@ -261,7 +261,7 @@ const Privacy = () => {
             </div>
             <div className="mt-6 p-4 rounded-lg bg-primary/10">
               <p className="text-sm">
-                <strong>{t('privacy.gdprRights.exercise')}:</strong> privacy@hackyourflows.com
+                <strong>{t('privacy.gdprRights.exercise')}:</strong> privacy@flowforge.com
               </p>
             </div>
           </CardContent>
@@ -284,7 +284,7 @@ const Privacy = () => {
                 <strong>{t('privacy.contact.dpo')}:</strong> Data Protection Officer
               </p>
               <p className="text-sm">
-                <strong>{t('privacy.contact.email')}:</strong> privacy@hackyourflows.com
+                <strong>{t('privacy.contact.email')}:</strong> privacy@flowforge.com
               </p>
               <p className="text-sm">
                 <strong>{t('privacy.contact.address')}:</strong> FlowForge, LLC<br />

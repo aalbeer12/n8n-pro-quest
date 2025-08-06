@@ -6,10 +6,10 @@ import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/hackyourflows", label: "GitHub" },
-  { icon: Twitter, href: "https://twitter.com/hackyourflows", label: "Twitter" },
-  { icon: Linkedin, href: "https://linkedin.com/company/hackyourflows", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:hola@hackyourflows.com", label: "Email" },
+  { icon: Github, href: "https://github.com/flowforge", label: "GitHub" },
+  { icon: Twitter, href: "https://twitter.com/flowforge", label: "Twitter" },
+  { icon: Linkedin, href: "https://linkedin.com/company/flowforge", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:soporte@flowforge.com", label: "Email" },
 ];
 
 export const Footer = () => {

@@ -184,7 +184,7 @@ const Terms = () => {
             </p>
             <div className="space-y-2">
               <p className="text-sm">
-                <strong>{t('terms.questions.email')}:</strong> legal@hackyourflows.com
+                <strong>{t('terms.questions.email')}:</strong> legal@flowforge.com
               </p>
               <p className="text-sm">
                 <strong>{t('terms.questions.address')}:</strong> FlowForge, LLC<br />

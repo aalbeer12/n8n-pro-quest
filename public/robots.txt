@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /
 
-Sitemap: https://automationchallenge.com/sitemap.xml
+Sitemap: https://flowforge.com/sitemap.xml
