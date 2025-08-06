@@ -95,23 +95,12 @@ export const Footer = () => {
                       delay: categoryIndex * 0.1 + linkIndex * 0.05 
                     }}
                   >
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-foreground-secondary hover:text-primary transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-foreground-secondary hover:text-primary transition-colors text-sm"
-                      >
-                        {link.name}
-                      </Link>
-                    )}
+                    <Link
+                      to={link.href}
+                      className="text-foreground-secondary hover:text-primary transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
