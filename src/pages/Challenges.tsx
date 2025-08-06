@@ -7,16 +7,20 @@ import { ChallengeCard } from '@/components/challenges/challenge-card'
 import { ChallengeFilters } from '@/components/challenges/challenge-filters'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '@/hooks/use-auth'
+import { useSubscription } from '@/hooks/use-subscription'
 import { useDashboardData } from '@/hooks/use-dashboard-data'
+import { UpgradeModal } from '@/components/challenges/upgrade-modal'
 
 const Challenges = () => {
   const { user } = useAuth()
+  const { isPro, canAccessChallenge, weeklyFreeUsed } = useSubscription()
   const { profile } = useDashboardData()
   const userLevel = profile?.current_level || 'beginner'
   const { challenges, loading, error } = useChallenges(userLevel)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState('all')
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   const filteredChallenges = useMemo(() => {
     return challenges.filter(challenge => {
@@ -29,6 +33,58 @@ const Challenges = () => {
     })
   }, [challenges, searchTerm, selectedDifficulty, selectedCategory])
 
+  // Create fake challenges for free users to show what they're missing
+  const createFakeChallenges = () => {
+    return [
+      {
+        id: 'fake-1',
+        title: 'Automatización de Email Marketing',
+        description: 'Aprende a crear flujos automatizados de email marketing con segmentación avanzada y triggers personalizados.',
+        difficulty: 'intermediate',
+        category: 'automation',
+        points: 150,
+        time_estimate_minutes: 45,
+        slug: 'fake-1',
+        is_daily_challenge: false
+      },
+      {
+        id: 'fake-2', 
+        title: 'Integración CRM Avanzada',
+        description: 'Conecta múltiples sistemas CRM y sincroniza datos en tiempo real con validación automática.',
+        difficulty: 'advanced',
+        category: 'integration',
+        points: 200,
+        time_estimate_minutes: 60,
+        slug: 'fake-2',
+        is_daily_challenge: false
+      },
+      {
+        id: 'fake-3',
+        title: 'Procesamiento de Datos en Lote',
+        description: 'Maneja grandes volúmenes de datos con técnicas de procesamiento paralelo y optimización.',
+        difficulty: 'expert',
+        category: 'data-processing',
+        points: 300,
+        time_estimate_minutes: 90,
+        slug: 'fake-3',
+        is_daily_challenge: false
+      },
+      {
+        id: 'fake-4',
+        title: 'API Gateway Personalizado',
+        description: 'Construye un gateway API completo con autenticación, rate limiting y monitoreo.',
+        difficulty: 'expert',
+        category: 'api',
+        points: 250,
+        time_estimate_minutes: 75,
+        slug: 'fake-4',
+        is_daily_challenge: false
+      }
+    ]
+  }
+
+  const fakeChallenges = !isPro ? createFakeChallenges() : []
+  
   const dailyChallenges = filteredChallenges.filter(c => c.is_daily_challenge)
   const regularChallenges = filteredChallenges.filter(c => !c.is_daily_challenge)
 
@@ -85,6 +141,11 @@ const Challenges = () => {
               <p className="text-muted-foreground">
                 Descubre todos los retos disponibles para mejorar tus habilidades
               </p>
+              {!isPro && (
+                <div className="mt-2 text-sm text-muted-foreground">
+                  Plan Gratuito: {weeklyFreeUsed}/1 retos usados esta semana
+                </div>
+              )}
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3">
@@ -116,20 +177,25 @@ const Challenges = () => {
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-primary mb-4">Retos Diarios</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {dailyChallenges.map((challenge) => (
-                <ChallengeCard
-                  key={challenge.id}
-                  id={challenge.id}
-                  title={challenge.title}
-                  description={challenge.description}
-                  difficulty={challenge.difficulty}
-                  category={challenge.category}
-                  points={challenge.points}
-                  timeEstimate={challenge.time_estimate_minutes}
-                  slug={challenge.slug}
-                  isDailyChallenge={challenge.is_daily_challenge}
-                />
-              ))}
+              {dailyChallenges.map((challenge) => {
+                const hasAccess = isPro || canAccessChallenge()
+                return (
+                  <ChallengeCard
+                    key={challenge.id}
+                    id={challenge.id}
+                    title={challenge.title}
+                    description={challenge.description}
+                    difficulty={challenge.difficulty}
+                    category={challenge.category}
+                    points={challenge.points}
+                    timeEstimate={challenge.time_estimate_minutes}
+                    slug={challenge.slug}
+                    isDailyChallenge={challenge.is_daily_challenge}
+                    isLocked={!hasAccess}
+                    onUpgradeClick={() => setShowUpgradeModal(true)}
+                  />
+                )
+              })}
             </div>
           </div>
         )}
@@ -156,7 +222,8 @@ const Challenges = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regularChallenges.map((challenge) => (
+              {/* Regular challenges - limit to 1 for free users */}
+              {regularChallenges.slice(0, isPro ? regularChallenges.length : 1).map((challenge) => (
                 <ChallengeCard
                   key={challenge.id}
                   id={challenge.id}
@@ -170,10 +237,53 @@ const Challenges = () => {
                   isDailyChallenge={challenge.is_daily_challenge}
                 />
               ))}
+              
+              {/* Show locked challenges for free users */}
+              {!isPro && regularChallenges.length > 1 && 
+                regularChallenges.slice(1, 5).map((challenge) => (
+                  <ChallengeCard
+                    key={`locked-${challenge.id}`}
+                    id={challenge.id}
+                    title={challenge.title}
+                    description={challenge.description}
+                    difficulty={challenge.difficulty}
+                    category={challenge.category}
+                    points={challenge.points}
+                    timeEstimate={challenge.time_estimate_minutes}
+                    slug={challenge.slug}
+                    isDailyChallenge={challenge.is_daily_challenge}
+                    isLocked={true}
+                    onUpgradeClick={() => setShowUpgradeModal(true)}
+                  />
+                ))
+              }
+              
+              {/* Show fake challenges for free users */}
+              {!isPro && fakeChallenges.map((challenge) => (
+                <ChallengeCard
+                  key={challenge.id}
+                  id={challenge.id}
+                  title={challenge.title}
+                  description={challenge.description}
+                  difficulty={challenge.difficulty}
+                  category={challenge.category}
+                  points={challenge.points}
+                  timeEstimate={challenge.time_estimate_minutes}
+                  slug={challenge.slug}
+                  isDailyChallenge={challenge.is_daily_challenge}
+                  isFake={true}
+                  onUpgradeClick={() => setShowUpgradeModal(true)}
+                />
+              ))}
             </div>
           )}
         </div>
       </div>
+      
+      <UpgradeModal 
+        open={showUpgradeModal}
+        onOpenChange={setShowUpgradeModal}
+      />
     </div>
   )
 }

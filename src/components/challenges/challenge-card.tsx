@@ -2,9 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import { Clock, Star, Zap } from 'lucide-react'
+import { Clock, Star, Zap, Lock, Crown } from 'lucide-react'
 import { TranslationBadge } from '@/components/ui/translation-badge'
 import { useAutoTranslate } from '@/hooks/use-auto-translate'
+import { useSubscription } from '@/hooks/use-subscription'
 import { useState } from 'react'
 
 interface ChallengeCardProps {
@@ -17,6 +18,9 @@ interface ChallengeCardProps {
   timeEstimate: number | null
   slug: string
   isDailyChallenge: boolean
+  isLocked?: boolean
+  isFake?: boolean
+  onUpgradeClick?: () => void
 }
 
 const getDifficultyColor = (difficulty: string) => {
@@ -58,9 +62,13 @@ export const ChallengeCard = ({
   points,
   timeEstimate,
   slug,
-  isDailyChallenge
+  isDailyChallenge,
+  isLocked = false,
+  isFake = false,
+  onUpgradeClick
 }: ChallengeCardProps) => {
   const { translateText } = useAutoTranslate();
+  const { isPro } = useSubscription();
   const [translatedTitle, setTranslatedTitle] = useState(title);
   const [translatedDescription, setTranslatedDescription] = useState(description);
   const [isTranslated, setIsTranslated] = useState(false);
@@ -77,8 +85,15 @@ export const ChallengeCard = ({
       console.error('Translation failed:', error);
     }
   };
+  
+  const shouldShowProBadge = !isPro && (isLocked || isFake);
+  
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
+    <Card className={`group transition-all duration-300 border-border/50 ${
+      isLocked || isFake 
+        ? 'opacity-75 hover:opacity-90' 
+        : 'hover:shadow-lg hover:border-primary/20'
+    }`}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
@@ -89,10 +104,30 @@ export const ChallengeCard = ({
                   Reto Diario
                 </Badge>
               )}
+              {!isPro && (
+                <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-500/20">
+                  Gratis
+                </Badge>
+              )}
+              {shouldShowProBadge && (
+                <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                  <Crown className="w-3 h-3 mr-1" />
+                  Pro
+                </Badge>
+              )}
             </div>
             <div className="flex items-center justify-between gap-2">
-              <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                {translatedTitle}
+              <CardTitle className={`text-lg transition-colors ${
+                isLocked || isFake ? 'text-muted-foreground' : 'group-hover:text-primary'
+              }`}>
+                {isLocked || isFake ? (
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-4 h-4" />
+                    {translatedTitle}
+                  </div>
+                ) : (
+                  translatedTitle
+                )}
               </CardTitle>
               <TranslationBadge 
                 onTranslate={handleTranslate}
@@ -132,15 +167,28 @@ export const ChallengeCard = ({
       </CardHeader>
       
       <CardContent className="pt-0">
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+        <p className={`text-sm mb-4 line-clamp-3 ${
+          isLocked || isFake ? 'text-muted-foreground/60' : 'text-muted-foreground'
+        }`}>
           {translatedDescription}
         </p>
         
-        <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
-          <Link to={`/challenge/${slug}`}>
-            Comenzar Reto
-          </Link>
-        </Button>
+        {isLocked || isFake ? (
+          <Button 
+            onClick={onUpgradeClick}
+            variant="outline"
+            className="w-full border-primary/50 text-primary hover:bg-primary/10"
+          >
+            <Crown className="w-4 h-4 mr-2" />
+            Actualizar a Pro
+          </Button>
+        ) : (
+          <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
+            <Link to={`/challenge/${slug}`}>
+              Comenzar Reto
+            </Link>
+          </Button>
+        )}
       </CardContent>
     </Card>
   )

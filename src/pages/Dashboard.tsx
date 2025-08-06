@@ -1,17 +1,24 @@
 import { useEffect } from 'react'
 import { useAuth } from '@/hooks/use-auth'
+import { useSubscription } from '@/hooks/use-subscription'
 import { useDashboardData } from '@/hooks/use-dashboard-data'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { 
   LogOut, 
   Sparkles, 
   MessageSquare, 
   Users, 
   Trophy,
-  ExternalLink
+  ExternalLink,
+  Crown,
+  Target,
+  BarChart3,
+  BookOpen,
+  Zap
 } from 'lucide-react'
 
 // Dashboard components
@@ -24,6 +31,7 @@ import { SubscriptionBanner } from '@/components/dashboard/subscription-banner'
 
 const Dashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth()
+  const { isPro, weeklyFreeUsed, canAccessChallenge } = useSubscription()
   const navigate = useNavigate()
   const {
     profile,
@@ -99,7 +107,17 @@ const Dashboard = () => {
                 <p className="text-sm font-medium text-primary">
                   {profile?.display_name || profile?.username}
                 </p>
-                <p className="text-xs text-muted-foreground">{user.email}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                  {isPro ? (
+                    <Badge className="bg-primary/10 text-primary border-primary/20">
+                      <Crown className="w-3 h-3 mr-1" />
+                      Pro
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline">Gratuito</Badge>
+                  )}
+                </div>
               </div>
               
               <Button onClick={signOut} variant="outline" size="sm">
@@ -159,30 +177,74 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Right Sidebar - Streak + Achievements */}
+          {/* Right Sidebar - Streak + Achievements + Progress */}
           <div className="lg:col-span-3 space-y-6 order-2 lg:order-3">
             <StreakSection profile={profile} loading={loading} />
             <AchievementsShowcase 
               achievements={recentAchievements} 
               loading={loading} 
             />
+            
+            {/* Progress Overview */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Progreso Semanal
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span>Retos Completados</span>
+                      <span>{weeklyFreeUsed}/{isPro ? '∞' : '1'}</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className="bg-primary h-2 rounded-full transition-all duration-300"
+                        style={{ 
+                          width: isPro ? '100%' : `${Math.min((weeklyFreeUsed / 1) * 100, 100)}%` 
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {!isPro && (
+                    <div className="text-center pt-4">
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Actualiza a Pro para retos ilimitados
+                      </p>
+                      <Button asChild size="sm" className="w-full">
+                        <Link to="/pricing">
+                          <Crown className="w-4 h-4 mr-2" />
+                          Actualizar Ahora
+                        </Link>
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Enhanced Quick Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           className="mt-12"
         >
-          <Card className="p-6 bg-surface/50 backdrop-blur-sm border-border">
-            <h3 className="text-lg font-semibold text-primary mb-4">Acciones Rápidas</h3>
+          <Card className="p-6 bg-gradient-to-r from-primary/5 via-background to-background border-primary/20">
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <Target className="w-5 h-5" />
+              Acciones Rápidas
+            </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Button asChild variant="outline" className="h-12">
                 <Link to="/challenges">
-                  <Trophy className="w-4 h-4 mr-2" />
+                  <BookOpen className="w-4 h-4 mr-2" />
                   Explorar Retos
                 </Link>
               </Button>
@@ -194,15 +256,24 @@ const Dashboard = () => {
                 </Link>
               </Button>
               
+              {!isPro && (
+                <Button asChild className="h-12" variant="default">
+                  <Link to="/pricing">
+                    <Crown className="w-4 h-4 mr-2" />
+                    Actualizar a Pro
+                  </Link>
+                </Button>
+              )}
+              
               <Button asChild variant="outline" className="h-12">
                 <a 
-                  href="https://discord.gg/hackyourflows" 
+                  href="https://discord.gg/flowforge" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center justify-center"
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
-                  Unirse a Discord
+                  Discord
                   <ExternalLink className="w-3 h-3 ml-1" />
                 </a>
               </Button>
