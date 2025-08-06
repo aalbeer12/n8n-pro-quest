@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { PricingCard } from './pricing-card'
 import { useSubscription } from '@/hooks/use-subscription'
 import { useToast } from '@/hooks/use-toast'
+import { PRICING_CONFIG } from '@/lib/pricing-config'
 
 export const PricingSection = () => {
   const { createCheckout, isPro } = useSubscription()
@@ -36,7 +37,7 @@ export const PricingSection = () => {
       period: "siempre",
       description: "Ideal para empezar con la automatización",
       features: [
-        "1 reto semanal",
+        `${PRICING_CONFIG.FREE_CHALLENGES_PER_WEEK} reto semanal`,
         "Retroalimentación básica",
         "Acceso a la comunidad",
         "Progreso básico",
@@ -47,7 +48,7 @@ export const PricingSection = () => {
     },
     {
       title: "Plan Mensual",
-      price: "€19",
+      price: PRICING_CONFIG.MONTHLY_DISPLAY,
       period: "mes",
       description: "Acceso completo para usuarios activos",
       features: [
@@ -65,12 +66,12 @@ export const PricingSection = () => {
     },
     {
         title: "Plan Anual",
-        price: "€190",
+        price: PRICING_CONFIG.ANNUAL_DISPLAY,
         period: "año",
         description: "El mejor valor para learners serios",
         features: [
           "Todo del plan mensual",
-          "2 meses GRATIS (14 meses por 12)",
+          `${PRICING_CONFIG.SAVINGS_MONTHS} meses GRATIS (${12 + PRICING_CONFIG.SAVINGS_MONTHS} meses por 12)`,
           "Soporte premium",
           "Acceso anticipado a nuevas funciones",
           "Certificado de finalización",
