@@ -261,7 +261,7 @@ const Privacy = () => {
             </div>
             <div className="mt-6 p-4 rounded-lg bg-primary/10">
               <p className="text-sm">
-                <strong>{t('privacy.gdprRights.exercise')}:</strong> privacy@flowforge.com
+                <strong>{t('privacy.gdprRights.exercise')}:</strong> legal@flowforge.com
               </p>
             </div>
           </CardContent>
@@ -284,13 +284,13 @@ const Privacy = () => {
                 <strong>{t('privacy.contact.dpo')}:</strong> Data Protection Officer
               </p>
               <p className="text-sm">
-                <strong>{t('privacy.contact.email')}:</strong> privacy@flowforge.com
+                <strong>{t('privacy.contact.email')}:</strong> legal@flowforge.com
               </p>
               <p className="text-sm">
-                <strong>{t('privacy.contact.address')}:</strong> FlowForge, LLC<br />
-                123 Automation Street<br />
-                Tech City, TC 12345<br />
-                United States
+                <strong>{t('privacy.contact.address')}:</strong> FlowForge SL<br />
+                Calle Ejemplo 12<br />
+                48000 Bilbao, España<br />
+                España / UE
               </p>
             </div>
           </CardContent>

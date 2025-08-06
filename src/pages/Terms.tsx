@@ -187,10 +187,10 @@ const Terms = () => {
                 <strong>{t('terms.questions.email')}:</strong> legal@flowforge.com
               </p>
               <p className="text-sm">
-                <strong>{t('terms.questions.address')}:</strong> FlowForge, LLC<br />
-                123 Automation Street<br />
-                Tech City, TC 12345<br />
-                United States
+                <strong>{t('terms.questions.address')}:</strong> FlowForge SL<br />
+                Calle Ejemplo 12<br />
+                48000 Bilbao, España<br />
+                España / UE
               </p>
             </div>
           </CardContent>
