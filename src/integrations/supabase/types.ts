@@ -607,6 +607,16 @@ export type Database = {
         Args: { user_uuid: string; challenge_published_date: string }
         Returns: boolean
       }
+      get_sample_leaderboard: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          rank_position: number
+          display_name: string
+          xp_total: number
+          current_level: string
+          current_streak: number
+        }[]
+      }
       get_total_challenges: {
         Args: Record<PropertyKey, never>
         Returns: number
