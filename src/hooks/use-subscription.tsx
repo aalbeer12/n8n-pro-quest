@@ -92,8 +92,12 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const canAccessChallenge = () => {
-    if (isPro) return true; // Use isPro instead of subscribed
-    return weeklyFreeUsed < 1; // 1 free challenge per week
+    if (isPro) return true;
+    // Rolling 7-day gating using unlock timestamp
+    if (!weeklyUnlockAt) return true; // first free challenge
+    const unlockMs = new Date(weeklyUnlockAt).getTime();
+    const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+    return Date.now() - unlockMs >= sevenDaysMs;
   };
 
   const createCheckout = async (planType: 'monthly' | 'annual') => {

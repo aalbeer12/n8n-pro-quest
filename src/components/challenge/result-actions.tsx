@@ -13,6 +13,18 @@ interface ResultActionsProps {
 
 export const ResultActions = ({ slug, score, canRetry }: ResultActionsProps) => {
   const { toast } = useToast()
+  const { isPro, weeklyUnlockAt, createCheckout } = useSubscription()
+
+  const getNextFreeText = () => {
+    if (!weeklyUnlockAt) return null
+    const unlockMs = new Date(weeklyUnlockAt).getTime()
+    const nextFreeMs = unlockMs + 7 * 24 * 60 * 60 * 1000
+    const diffMs = nextFreeMs - Date.now()
+    if (diffMs <= 0) return null
+    const days = Math.floor(diffMs / (24 * 60 * 60 * 1000))
+    const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
+    return `${days} días ${hours} horas`
+  }
 
   const handleShare = async (platform: 'twitter' | 'linkedin' | 'copy') => {
     const text = `¡Acabo de completar un reto de automatización en FlowForge con una puntuación de ${score}/100! 🚀`
@@ -115,6 +127,44 @@ export const ResultActions = ({ slug, score, canRetry }: ResultActionsProps) => 
           </div>
         </CardContent>
       </Card>
+
+      {/* Upgrade CTA for Free users */}
+      {!isPro && (
+        <Card className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border-amber-500/20">
+          <CardContent className="p-6">
+            <div className="text-center space-y-3">
+              <div className="inline-flex items-center gap-2 text-primary font-semibold">
+                <Crown className="w-4 h-4" />
+                ¡Hazte Premium y desbloquea todos los retos!
+              </div>
+              {getNextFreeText() && (
+                <p className="text-sm text-muted-foreground">
+                  Próximo reto gratuito disponible en {getNextFreeText()}
+                </p>
+              )}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
+                <Button
+                  onClick={async () => {
+                    try { await createCheckout('monthly') } catch { window.location.href = '/payment-auth?plan=monthly' }
+                  }}
+                  className="min-w-[160px]"
+                >
+                  €19/mes
+                </Button>
+                <Button
+                  onClick={async () => {
+                    try { await createCheckout('annual') } catch { window.location.href = '/payment-auth?plan=annual' }
+                  }}
+                  variant="outline"
+                  className="min-w-[160px]"
+                >
+                  €190/año (2 meses gratis)
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Community Section */}
       <Card className="bg-card/50 backdrop-blur-sm border-border">
