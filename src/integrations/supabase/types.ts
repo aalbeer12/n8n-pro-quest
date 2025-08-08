@@ -239,6 +239,7 @@ export type Database = {
           updated_at: string | null
           username: string
           website_url: string | null
+          weekly_challenge_unlocked_at: string | null
           weekly_free_challenges_used: number | null
           xp_total: number | null
         }
@@ -266,6 +267,7 @@ export type Database = {
           updated_at?: string | null
           username: string
           website_url?: string | null
+          weekly_challenge_unlocked_at?: string | null
           weekly_free_challenges_used?: number | null
           xp_total?: number | null
         }
@@ -293,6 +295,7 @@ export type Database = {
           updated_at?: string | null
           username?: string
           website_url?: string | null
+          weekly_challenge_unlocked_at?: string | null
           weekly_free_challenges_used?: number | null
           xp_total?: number | null
         }
