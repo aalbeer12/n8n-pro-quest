@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
-import { RefreshCcw, ArrowRight, Grid3X3, Share2, Twitter, Linkedin, Copy } from 'lucide-react'
+import { RefreshCcw, ArrowRight, Grid3X3, Share2, Twitter, Linkedin, Copy, Crown } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useSubscription } from '@/hooks/use-subscription'
 
 interface ResultActionsProps {
   slug: string

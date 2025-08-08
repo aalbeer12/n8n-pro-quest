@@ -14,6 +14,7 @@ import {
   Camera
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useSubscription } from '@/hooks/use-subscription'
 
 interface ProfileHeaderProps {
   profile: {
@@ -33,6 +34,7 @@ interface ProfileHeaderProps {
 
 export const ProfileHeader = ({ profile, isOwnProfile }: ProfileHeaderProps) => {
   const { toast } = useToast()
+  const { isPro } = useSubscription()
 
   const handleCopyProfile = async () => {
     try {
@@ -110,9 +112,16 @@ export const ProfileHeader = ({ profile, isOwnProfile }: ProfileHeaderProps) => 
               </h1>
               <p className="text-muted-foreground">@{profile.username}</p>
               
-              <Badge className={getLevelColor(profile.current_level)}>
-                {profile.current_level}
-              </Badge>
+              <div className="flex items-center justify-center gap-2">
+                <Badge className={getLevelColor(profile.current_level)}>
+                  {profile.current_level}
+                </Badge>
+                {isPro ? (
+                  <Badge className="bg-primary/10 text-primary border-primary/20">PRO</Badge>
+                ) : (
+                  <Badge variant="outline">FREE</Badge>
+                )}
+              </div>
             </div>
           </div>
 

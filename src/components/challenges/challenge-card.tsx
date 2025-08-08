@@ -21,6 +21,7 @@ interface ChallengeCardProps {
   isLocked?: boolean
   isFake?: boolean
   onUpgradeClick?: () => void
+  nextFreeText?: string
 }
 
 const getDifficultyColor = (difficulty: string) => {
@@ -65,7 +66,8 @@ export const ChallengeCard = ({
   isDailyChallenge,
   isLocked = false,
   isFake = false,
-  onUpgradeClick
+  onUpgradeClick,
+  nextFreeText
 }: ChallengeCardProps) => {
   const { translateText } = useAutoTranslate();
   const { isPro } = useSubscription();
@@ -174,14 +176,33 @@ export const ChallengeCard = ({
         </p>
         
         {isLocked || isFake ? (
-          <Button 
-            onClick={onUpgradeClick}
-            variant="outline"
-            className="w-full border-primary/50 text-primary hover:bg-primary/10"
-          >
-            <Crown className="w-4 h-4 mr-2" />
-            Actualizar a Pro
-          </Button>
+          <div className="space-y-2">
+            <Button 
+              onClick={onUpgradeClick}
+              variant="outline"
+              className="w-full border-primary/50 text-primary hover:bg-primary/10"
+            >
+              <Crown className="w-4 h-4 mr-2" />
+              Actualizar a Pro
+            </Button>
+            {/* Countdown for free users */}
+            {!isPro && (
+              <p className="text-xs text-muted-foreground text-center">
+                {/** Show provided nextFreeText if any */}
+                {/* eslint-disable-next-line react/prop-types */}
+                {(() => {
+                  try {
+                    // @ts-ignore - nextFreeText is part of props
+                    return (typeof nextFreeText !== 'undefined' && nextFreeText)
+                      ? `Próximo reto gratis en ${nextFreeText}`
+                      : ''
+                  } catch {
+                    return ''
+                  }
+                })()}
+              </p>
+            )}
+          </div>
         ) : (
           <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
             <Link to={`/challenge/${slug}`}>

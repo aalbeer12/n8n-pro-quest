@@ -22,6 +22,25 @@ const Challenges = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
+  const getNextFreeText = () => {
+    if (isPro) return null
+    try {
+      const used = (weeklyFreeUsed || 0) >= 1
+      const unlockedAt = (profile as any)?.weekly_challenge_unlocked_at as string | null
+      if (!used || !unlockedAt) return null
+      const unlockMs = new Date(unlockedAt).getTime()
+      const nextFreeMs = unlockMs + 7 * 24 * 60 * 60 * 1000
+      const diffMs = nextFreeMs - Date.now()
+      if (diffMs <= 0) return null
+      const days = Math.floor(diffMs / (24 * 60 * 60 * 1000))
+      const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
+      return `${days} días ${hours} horas`
+    } catch {
+      return null
+    }
+  }
+  const nextFreeText = getNextFreeText()
+
   const filteredChallenges = useMemo(() => {
     return challenges.filter(challenge => {
       const matchesSearch = challenge.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -193,6 +212,7 @@ const Challenges = () => {
                     isDailyChallenge={challenge.is_daily_challenge}
                     isLocked={!hasAccess}
                     onUpgradeClick={() => setShowUpgradeModal(true)}
+                    nextFreeText={nextFreeText || undefined}
                   />
                 )
               })}
@@ -254,6 +274,7 @@ const Challenges = () => {
                     isDailyChallenge={challenge.is_daily_challenge}
                     isLocked={true}
                     onUpgradeClick={() => setShowUpgradeModal(true)}
+                    nextFreeText={nextFreeText || undefined}
                   />
                 ))
               }
@@ -273,6 +294,7 @@ const Challenges = () => {
                   isDailyChallenge={challenge.is_daily_challenge}
                   isFake={true}
                   onUpgradeClick={() => setShowUpgradeModal(true)}
+                  nextFreeText={nextFreeText || undefined}
                 />
               ))}
             </div>
