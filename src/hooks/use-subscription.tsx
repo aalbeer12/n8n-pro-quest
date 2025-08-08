@@ -11,6 +11,7 @@ interface SubscriptionContextType {
   loading: boolean;
   canAccessChallenge: () => boolean;
   weeklyFreeUsed: number;
+  weeklyUnlockAt: string | null;
   checkSubscription: () => Promise<void>;
   createCheckout: (planType: 'monthly' | 'annual') => Promise<void>;
   refreshSubscription: () => Promise<void>;
@@ -26,6 +27,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   const [subscriptionTier, setSubscriptionTier] = useState<'free' | 'monthly' | 'annual'>('free');
   const [subscriptionEnd, setSubscriptionEnd] = useState<string | null>(null);
   const [weeklyFreeUsed, setWeeklyFreeUsed] = useState(0);
+  const [weeklyUnlockAt, setWeeklyUnlockAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const checkSubscription = async () => {
@@ -52,12 +54,12 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       // Get weekly free usage from profile
       const { data: profile } = await supabase
         .from('profiles')
-        .select('weekly_free_challenges_used, last_weekly_reset')
+        .select('weekly_free_challenges_used, last_weekly_reset, weekly_challenge_unlocked_at')
         .eq('id', user.id)
         .single();
 
       if (profile) {
-        // Check if week needs to be reset
+        // Check if week needs to be reset (legacy weekly counter)
         const lastReset = new Date(profile.last_weekly_reset);
         const weekAgo = new Date();
         weekAgo.setDate(weekAgo.getDate() - 7);
@@ -75,6 +77,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
         } else {
           setWeeklyFreeUsed(profile.weekly_free_challenges_used || 0);
         }
+        setWeeklyUnlockAt(profile.weekly_challenge_unlocked_at || null);
       }
     } catch (error) {
       console.error('Error checking subscription:', error);
@@ -147,6 +150,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       loading,
       canAccessChallenge,
       weeklyFreeUsed,
+      weeklyUnlockAt,
       checkSubscription,
       createCheckout,
       refreshSubscription
