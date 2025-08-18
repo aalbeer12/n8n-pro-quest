@@ -26,7 +26,6 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
 
     const { planType } = await req.json();
-    console.log('Creating checkout for plan:', planType);
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
       apiVersion: "2023-10-16" 
@@ -83,8 +82,6 @@ serve(async (req) => {
       success_url: `${req.headers.get("origin")}/dashboard?success=true`,
       cancel_url: `${req.headers.get("origin")}/pricing?canceled=true`,
     });
-
-    console.log('Checkout session created:', session.id);
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

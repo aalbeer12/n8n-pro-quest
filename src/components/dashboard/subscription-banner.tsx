@@ -115,14 +115,10 @@ export const SubscriptionBanner = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button 
               onClick={async () => {
-                console.log('🚀 Clicking monthly plan button')
                 try {
-                  console.log('Attempting monthly checkout...')
                   const result = await createCheckout('monthly')
-                  console.log('Monthly checkout result:', result)
                 } catch (error) {
-                  console.error('❌ Error creating monthly checkout:', error)
-                  console.log('📍 Fallback: Redirecting to payment-auth')
+                  console.error('Error creating monthly checkout:', error)
                   window.location.href = '/payment-auth?plan=monthly'
                 }
               }}
@@ -133,14 +129,10 @@ export const SubscriptionBanner = () => {
             </Button>
             <Button 
               onClick={async () => {
-                console.log('🚀 Clicking annual plan button')
                 try {
-                  console.log('Attempting annual checkout...')
                   const result = await createCheckout('annual')
-                  console.log('Annual checkout result:', result)
                 } catch (error) {
-                  console.error('❌ Error creating annual checkout:', error)
-                  console.log('📍 Fallback: Redirecting to payment-auth')
+                  console.error('Error creating annual checkout:', error)
                   window.location.href = '/payment-auth?plan=annual'
                 }
               }}
@@ -176,14 +168,10 @@ export const SubscriptionBanner = () => {
         </div>
         <Button 
           onClick={async () => {
-            console.log('🚀 Clicking premium upgrade button')
             try {
-              console.log('Attempting createCheckout...')
               const result = await createCheckout('monthly')
-              console.log('Checkout result:', result)
             } catch (error) {
-              console.error('❌ Error creating checkout:', error)
-              console.log('📍 Fallback: Redirecting to payment-auth')
+              console.error('Error creating checkout:', error)
               window.location.href = '/payment-auth?plan=monthly'
             }
           }}

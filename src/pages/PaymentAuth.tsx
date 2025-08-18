@@ -27,7 +27,6 @@ export const PaymentAuth = () => {
   useEffect(() => {
     // Si el usuario ya está autenticado, proceder directamente con el checkout
     if (user && !authLoading && !processingPayment) {
-      console.log('Usuario autenticado, procediendo al pago automáticamente')
       setProcessingPayment(true)
       handleProceedToPayment()
     }
@@ -35,7 +34,6 @@ export const PaymentAuth = () => {
 
   const handleProceedToPayment = async () => {
     try {
-      console.log(`Iniciando checkout para plan: ${planType}`)
       await createCheckout(planType)
       // No mostramos toast aquí porque el usuario será redirigido
     } catch (error) {

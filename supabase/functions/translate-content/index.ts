@@ -109,7 +109,6 @@ serve(async (req) => {
     // Check cache first
     const cachedTranslation = await getCachedTranslation(text, sourceLanguage, targetLanguage);
     if (cachedTranslation) {
-      console.log('Returning cached translation');
       return new Response(
         JSON.stringify({ 
           translatedText: cachedTranslation, 
@@ -121,7 +120,6 @@ serve(async (req) => {
     }
 
     // Translate with DeepL
-    console.log(`Translating from ${sourceLanguage} to ${targetLanguage}: ${text.substring(0, 50)}...`);
     const translatedText = await translateWithDeepL(text, sourceLanguage, targetLanguage);
 
     // Save to cache

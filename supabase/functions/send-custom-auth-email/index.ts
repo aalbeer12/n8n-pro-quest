@@ -225,7 +225,6 @@ serve(async (req) => {
         .single();
       
       if (existingProfile) {
-        console.log('Profile already exists, skipping welcome email');
         return new Response(JSON.stringify({ skipped: true }), {
           status: 200,
           headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -239,8 +238,6 @@ serve(async (req) => {
       subject: getSubject(type, data),
       html: getEmailContent(type, data),
     });
-
-    console.log("Email enviado correctamente:", emailResponse);
 
     return new Response(JSON.stringify(emailResponse), {
       status: 200,

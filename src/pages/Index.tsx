@@ -18,7 +18,6 @@ const Index = () => {
   useEffect(() => {
     // Check if there's a hash with auth tokens (magic link redirect)
     if (window.location.hash && window.location.hash.includes('access_token')) {
-      console.log('🔗 Magic link detected on homepage, redirecting to auth callback');
       // Clean redirect - let AuthCallback handle everything
       navigate('/auth/callback');
     }
