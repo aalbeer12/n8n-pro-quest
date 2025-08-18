@@ -9,22 +9,14 @@ const AuthCallback = () => {
 
   useEffect(() => {
     const handleAuthCallback = async () => {
-      console.log('AuthCallback: Iniciando manejo del callback')
-      console.log('AuthCallback: URL actual:', window.location.href)
-      console.log('AuthCallback: Hash:', window.location.hash)
-      
       try {
         // Primero intentar procesar el hash si existe
         if (window.location.hash) {
-          console.log('AuthCallback: Procesando hash de la URL')
           const { data, error } = await supabase.auth.getSession()
-          console.log('AuthCallback: Resultado después del hash', { data, error })
         }
         
         // Obtener la sesión actual
         const { data, error } = await supabase.auth.getSession()
-        
-        console.log('AuthCallback: Sesión obtenida', { data, error })
         
         if (error) {
           console.error('AuthCallback: Error en callback:', error)
@@ -33,14 +25,11 @@ const AuthCallback = () => {
         }
 
         if (data.session) {
-          console.log('AuthCallback: Sesión válida, verificando perfil')
-          
           // Verificar si hay un redirect específico en los parámetros
           const urlParams = new URLSearchParams(window.location.search)
           const redirectPath = urlParams.get('redirect')
           
           if (redirectPath) {
-            console.log('AuthCallback: Redirect específico encontrado:', redirectPath)
             navigate(redirectPath)
             return
           }
@@ -52,20 +41,15 @@ const AuthCallback = () => {
             .eq('id', data.session.user.id)
             .maybeSingle()
 
-          console.log('AuthCallback: Resultado de perfil', { profile, profileError })
-
           if (profileError) {
             console.error('AuthCallback: Error al obtener perfil:', profileError)
             navigate('/auth/welcome')
           } else if (!profile || !profile.username) {
-            console.log('AuthCallback: Perfil no encontrado o sin username, redirigiendo a welcome')
             navigate('/auth/welcome')
           } else {
-            console.log('AuthCallback: Perfil completo, redirigiendo a dashboard')
             navigate('/dashboard')
           }
         } else {
-          console.log('AuthCallback: No hay sesión, redirigiendo a auth')
           navigate('/auth')
         }
       } catch (error) {

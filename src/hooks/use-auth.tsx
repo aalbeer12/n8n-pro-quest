@@ -103,8 +103,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const signIn = async (email: string, firstName?: string, redirectPath?: string) => {
-    console.log('🚀 signIn called with:', { email, firstName, redirectPath });
-    
     // ⏱ Rate-limit: un OTP por minuto
     const last = localStorage.getItem(`lastOtp-${email}`);
     if (last && Date.now() - Number(last) < 60_000) {
@@ -116,8 +114,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const redirectUrl = redirectPath
       ? `${baseUrl}${redirectPath}`
       : `${baseUrl}/auth/callback`;
-    
-    console.log('📧 Email redirect URL:', redirectUrl);
     
     const { error } = await supabase.auth.signInWithOtp({
       email,
@@ -133,7 +129,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const planType = planMatch ? planMatch[1] : 'monthly';
       
       // Crear el magic link que va directo al checkout de Stripe
-      console.log('📧 Creating magic link for payment plan:', planType);
       
       // Enviar email personalizado con el plan específico
       setTimeout(() => {

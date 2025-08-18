@@ -55,7 +55,7 @@ export const PaymentAuth = () => {
 
     try {
       const callbackUrl = `/payment-auth?plan=${planType}`;
-      console.log('💳 PaymentAuth signIn with redirect:', callbackUrl);
+      
       const { error } = await signIn(email, firstName, callbackUrl);
       
       if (error) {
