@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.4"
@@ -607,17 +607,17 @@ export type Database = {
     }
     Functions: {
       can_access_challenge_by_date: {
-        Args: { user_uuid: string; challenge_published_date: string }
+        Args: { challenge_published_date: string; user_uuid: string }
         Returns: boolean
       }
       get_sample_leaderboard: {
         Args: Record<PropertyKey, never>
         Returns: {
-          rank_position: number
-          display_name: string
-          xp_total: number
           current_level: string
           current_streak: number
+          display_name: string
+          rank_position: number
+          xp_total: number
         }[]
       }
       get_total_challenges: {
