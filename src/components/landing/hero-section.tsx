@@ -149,7 +149,7 @@ export const HeroSection = () => {
             className="mb-4 md:mb-6"
           >
             <Button asChild className="h-12 md:h-14 px-6 md:px-8 bg-gradient-primary hover:scale-105 transition-transform text-sm md:text-base font-semibold">
-              <Link to={`/auth?lang=${i18n.language}`}>
+              <Link to={`/register?lang=${i18n.language}`}>
                 {t('landing.hero.cta')} <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
               </Link>
             </Button>

@@ -21,7 +21,7 @@ const resources = {
       "landing.hero.cta": "Start Free",
       "landing.hero.demo": "View Demo",
       "landing.hero.social_proof": "Join 500+ automation engineers improving their skills",
-      "landing.hero.trial_info": "7-day free trial, no credit card required",
+      "landing.hero.trial_info": "1 weekly free challenge, no credit card required",
       
       "landing.problem.title": "Tired of Learning Without Doing?",
       "landing.problem.subtitle": "Most automation education is broken. You watch tutorials, read docs, but when it's time to build something real, you're lost.",
@@ -79,7 +79,7 @@ const resources = {
       "landing.cta.startAutomation": "Start Your Automation Journey Today",
       "landing.cta.journeyToday": "Start Learning Now",
       "landing.cta.ctaSubtitle": "Join hundreds of automation engineers who are already mastering n8n through daily practice and AI-powered feedback.",
-      "landing.cta.benefit1": "7-day free trial",
+      "landing.cta.benefit1": "1 weekly free challenge",
       "landing.cta.benefit2": "No credit card required",
       "landing.cta.benefit3": "Cancel anytime",
       "landing.cta.benefit4": "Access to all challenges",
@@ -176,7 +176,7 @@ const resources = {
             },
             q4: {
               question: "Do you offer refunds?",
-              answer: "We offer a 7-day free trial. If you're not satisfied within the first 7 days of your paid subscription, contact us for a full refund."
+              answer: "We offer a weekly free challenge forever. If you're not satisfied within the first 7 days of your paid subscription, contact us for a full refund."
             }
           }
         }
@@ -367,7 +367,7 @@ const resources = {
       "landing.hero.cta": "Empezar Gratis",
       "landing.hero.demo": "Ver Demo",
       "landing.hero.social_proof": "Únete a más de 500 ingenieros de automatización mejorando sus habilidades",
-      "landing.hero.trial_info": "Prueba gratuita de 7 días, sin tarjeta de crédito requerida",
+      "landing.hero.trial_info": "1 reto gratis semanal, sin tarjeta de crédito requerida",
 
       "landing.problem.title": "¿Cansado de Aprender Sin Hacer?",
       "landing.problem.subtitle": "La mayoría de la educación en automatización está rota. Ves tutoriales, lees documentación, pero cuando llega el momento de construir algo real, estás perdido.",
@@ -425,7 +425,7 @@ const resources = {
       "landing.cta.startAutomation": "Comienza Tu Viaje de Automatización Hoy",
       "landing.cta.journeyToday": "Comienza a Aprender Ahora",
       "landing.cta.ctaSubtitle": "Únete a cientos de ingenieros de automatización que ya están dominando n8n a través de práctica diaria y retroalimentación impulsada por IA.",
-      "landing.cta.benefit1": "Prueba gratuita de 7 días",
+      "landing.cta.benefit1": "1 reto gratis semanal",
       "landing.cta.benefit2": "No se requiere tarjeta de crédito",
       "landing.cta.benefit3": "Cancela en cualquier momento",
       "landing.cta.benefit4": "Acceso a todos los desafíos",
@@ -523,7 +523,7 @@ const resources = {
             },
             q4: {
               question: "¿Ofrecen reembolsos?",
-              answer: "Ofrecemos una prueba gratuita de 7 días. Si no estás satisfecho dentro de los primeros 7 días de tu suscripción paga, contáctanos para un reembolso completo."
+              answer: "Ofrecemos 1 reto gratis semanal de por vida. Si no estás satisfecho dentro de los primeros 7 días de tu suscripción paga, contáctanos para un reembolso completo."
             }
           }
         }

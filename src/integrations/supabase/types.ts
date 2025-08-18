@@ -219,6 +219,7 @@ export type Database = {
           assessment_answers: Json | null
           avatar_url: string | null
           bio: string | null
+          converted_to_premium_at: string | null
           created_at: string | null
           current_level: string | null
           current_streak: number | null
@@ -226,6 +227,7 @@ export type Database = {
           github_url: string | null
           id: string
           initial_level_assigned: boolean | null
+          initial_plan_intent: string | null
           is_pro: boolean
           is_public: boolean | null
           last_activity_date: string | null
@@ -233,6 +235,7 @@ export type Database = {
           linkedin_url: string | null
           longest_streak: number | null
           onboarding_completed: boolean | null
+          registration_source: string | null
           subscription_end: string | null
           subscription_start_date: string | null
           subscription_tier: string | null
@@ -247,6 +250,7 @@ export type Database = {
           assessment_answers?: Json | null
           avatar_url?: string | null
           bio?: string | null
+          converted_to_premium_at?: string | null
           created_at?: string | null
           current_level?: string | null
           current_streak?: number | null
@@ -254,6 +258,7 @@ export type Database = {
           github_url?: string | null
           id: string
           initial_level_assigned?: boolean | null
+          initial_plan_intent?: string | null
           is_pro?: boolean
           is_public?: boolean | null
           last_activity_date?: string | null
@@ -261,6 +266,7 @@ export type Database = {
           linkedin_url?: string | null
           longest_streak?: number | null
           onboarding_completed?: boolean | null
+          registration_source?: string | null
           subscription_end?: string | null
           subscription_start_date?: string | null
           subscription_tier?: string | null
@@ -275,6 +281,7 @@ export type Database = {
           assessment_answers?: Json | null
           avatar_url?: string | null
           bio?: string | null
+          converted_to_premium_at?: string | null
           created_at?: string | null
           current_level?: string | null
           current_streak?: number | null
@@ -282,6 +289,7 @@ export type Database = {
           github_url?: string | null
           id?: string
           initial_level_assigned?: boolean | null
+          initial_plan_intent?: string | null
           is_pro?: boolean
           is_public?: boolean | null
           last_activity_date?: string | null
@@ -289,6 +297,7 @@ export type Database = {
           linkedin_url?: string | null
           longest_streak?: number | null
           onboarding_completed?: boolean | null
+          registration_source?: string | null
           subscription_end?: string | null
           subscription_start_date?: string | null
           subscription_tier?: string | null

@@ -6,29 +6,8 @@ import { useToast } from '@/hooks/use-toast'
 import { PRICING_CONFIG } from '@/lib/pricing-config'
 
 export const PricingSection = () => {
-  const { createCheckout, isPro } = useSubscription()
+  const { isPro } = useSubscription()
   const { toast } = useToast()
-  const [loading, setLoading] = useState<string | null>(null)
-
-  const handlePlanSelect = async (planType: 'monthly' | 'annual') => {
-    setLoading(planType)
-    try {
-      await createCheckout(planType)
-      toast({
-        title: "Redirigiendo a Stripe",
-        description: "Te estamos llevando al checkout seguro..."
-      })
-    } catch (error) {
-      console.error('Error creating checkout:', error)
-      toast({
-        title: "Error",
-        description: "No se pudo iniciar el proceso de pago. Inténtalo de nuevo.",
-        variant: "destructive"
-      })
-    } finally {
-      setLoading(null)
-    }
-  }
 
   const plans = [
     {
@@ -43,8 +22,8 @@ export const PricingSection = () => {
         "Progreso básico",
         "Perfil público"
       ],
-      onSelect: () => {},
-      disabled: true
+      onSelect: () => window.location.href = '/register?plan=free',
+      disabled: false
     },
     {
       title: "Plan Mensual",
@@ -61,8 +40,8 @@ export const PricingSection = () => {
         "Soporte prioritario"
       ],
       isPremium: true,
-      onSelect: () => handlePlanSelect('monthly'),
-      disabled: loading === 'monthly'
+      onSelect: () => window.location.href = '/register?plan=premium_monthly',
+      disabled: false
     },
     {
         title: "Plan Anual",
@@ -79,8 +58,8 @@ export const PricingSection = () => {
         ],
       isPopular: true,
       isPremium: true,
-      onSelect: () => handlePlanSelect('annual'),
-      disabled: loading === 'annual'
+      onSelect: () => window.location.href = '/register?plan=premium_yearly',
+      disabled: false
     }
   ]
 

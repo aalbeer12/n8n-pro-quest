@@ -17,6 +17,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Settings from "./pages/Settings";
 import { PaymentAuth } from "./pages/PaymentAuth";
 import { Pricing } from "./pages/Pricing";
+import Register from "./pages/Register";
 
 import HowItWorks from "./pages/HowItWorks";
 import Terms from "./pages/Terms";
@@ -41,6 +42,7 @@ const App = () => (
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/auth" element={<Auth />} />
+                  <Route path="/register" element={<Register />} />
                   <Route path="/auth/callback" element={<AuthCallback />} />
                   <Route path="/auth/welcome" element={<AuthWelcome />} />
                   <Route path="/payment-auth" element={<PaymentAuth />} />

@@ -19,13 +19,34 @@ serve(async (req) => {
   );
 
   try {
-    const authHeader = req.headers.get("Authorization")!;
-    const token = authHeader.replace("Bearer ", "");
-    const { data } = await supabaseClient.auth.getUser(token);
-    const user = data.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
+    const requestBody = await req.json();
+    const { plan, userId, email, planType } = requestBody;
 
-    const { planType } = await req.json();
+    // Support both new format (plan, userId, email) and legacy format (planType with auth header)
+    let userEmail = email;
+    let finalPlan = plan;
+    
+    if (!userEmail && !userId) {
+      // Legacy format - use auth header
+      const authHeader = req.headers.get("Authorization");
+      if (!authHeader) {
+        throw new Error("Missing authentication or user data");
+      }
+      
+      const token = authHeader.replace("Bearer ", "");
+      const { data } = await supabaseClient.auth.getUser(token);
+      const user = data.user;
+      if (!user?.email) {
+        throw new Error("User not authenticated or email not available");
+      }
+      
+      userEmail = user.email;
+      finalPlan = planType === 'monthly' ? 'premium_monthly' : 'premium_yearly';
+    }
+
+    if (!finalPlan || !userEmail) {
+      throw new Error("Missing required fields: plan and email");
+    }
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
       apiVersion: "2023-10-16" 
@@ -33,7 +54,7 @@ serve(async (req) => {
 
     // Check if customer exists
     const customers = await stripe.customers.list({ 
-      email: user.email, 
+      email: userEmail, 
       limit: 1 
     });
     
@@ -43,44 +64,52 @@ serve(async (req) => {
     }
 
     // Define pricing based on plan type
-    const priceData = {
-      monthly: {
+    let priceData;
+    let planName;
+    
+    if (finalPlan === "premium_monthly" || finalPlan === "monthly") {
+      priceData = {
         currency: "eur",
+        product_data: { 
+          name: "FlowForge Premium - Mensual",
+          description: "Plan mensual de FlowForge con acceso completo"
+        },
         unit_amount: 1900, // €19.00
         recurring: { interval: "month" as const }
-      },
-      annual: {
-        currency: "eur", 
+      };
+      planName = "Premium Monthly";
+    } else if (finalPlan === "premium_yearly" || finalPlan === "annual") {
+      priceData = {
+        currency: "eur",
+        product_data: { 
+          name: "FlowForge Premium - Anual",
+          description: "Plan anual de FlowForge con acceso completo y descuento"
+        },
         unit_amount: 19000, // €190.00
         recurring: { interval: "year" as const }
-      }
-    };
-
-    const selectedPrice = priceData[planType as keyof typeof priceData];
-    if (!selectedPrice) {
-      throw new Error("Invalid plan type");
+      };
+      planName = "Premium Annual";
+    } else {
+      throw new Error(`Invalid plan type: ${finalPlan}`);
     }
 
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      customer_email: customerId ? undefined : user.email,
+      customer_email: customerId ? undefined : userEmail,
       line_items: [
         {
-          price_data: {
-            currency: selectedPrice.currency,
-            product_data: { 
-              name: `FlowForge ${planType === 'monthly' ? 'Mensual' : 'Anual'}`,
-              description: `Plan ${planType === 'monthly' ? 'mensual' : 'anual'} de FlowForge`
-            },
-            unit_amount: selectedPrice.unit_amount,
-            recurring: selectedPrice.recurring,
-          },
+          price_data: priceData,
           quantity: 1,
         },
       ],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/dashboard?success=true`,
-      cancel_url: `${req.headers.get("origin")}/pricing?canceled=true`,
+      success_url: `${req.headers.get("origin")}/dashboard?subscription=success`,
+      cancel_url: `${req.headers.get("origin")}/dashboard?subscription=canceled`,
+      metadata: {
+        userId: userId || "unknown",
+        plan: finalPlan,
+        planName: planName
+      }
     });
 
     return new Response(JSON.stringify({ url: session.url }), {

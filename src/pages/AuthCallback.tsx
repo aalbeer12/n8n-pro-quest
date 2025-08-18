@@ -25,6 +25,58 @@ const AuthCallback = () => {
         }
 
         if (data.session) {
+          const user = data.session.user
+          
+          // Recuperar el plan que el usuario quería
+          const intendedPlan = localStorage.getItem('intended_plan') || 'free'
+          const registrationSource = localStorage.getItem('registration_source') || 'organic'
+          
+          // Limpiar localStorage
+          localStorage.removeItem('intended_plan')
+          localStorage.removeItem('registration_source')
+          
+          // Actualizar perfil con datos de tracking
+          try {
+            await supabase
+              .from('profiles')
+              .update({
+                initial_plan_intent: intendedPlan,
+                registration_source: registrationSource
+              })
+              .eq('id', user.id)
+          } catch (error) {
+            console.warn('Error updating profile tracking data:', error)
+          }
+          
+          // Si eligió premium, crear sesión de Stripe
+          if (intendedPlan === 'premium_monthly' || intendedPlan === 'premium_yearly') {
+            try {
+              const { data: checkoutData, error: checkoutError } = await supabase.functions.invoke('create-checkout', {
+                body: {
+                  plan: intendedPlan,
+                  userId: user.id,
+                  email: user.email
+                }
+              })
+              
+              if (checkoutError) {
+                console.error('Error creating checkout:', checkoutError)
+                navigate('/dashboard?error=payment_setup_failed')
+                return
+              }
+              
+              // Redirect a Stripe Checkout
+              if (checkoutData?.url) {
+                window.location.href = checkoutData.url
+                return
+              }
+            } catch (error) {
+              console.error('Error in checkout flow:', error)
+              navigate('/dashboard?error=payment_setup_failed')
+              return
+            }
+          }
+          
           // Verificar si hay un redirect específico en los parámetros
           const urlParams = new URLSearchParams(window.location.search)
           const redirectPath = urlParams.get('redirect')
@@ -38,7 +90,7 @@ const AuthCallback = () => {
           const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select('username')
-            .eq('id', data.session.user.id)
+            .eq('id', user.id)
             .maybeSingle()
 
           if (profileError) {
